@@ -17,10 +17,16 @@ export default function App() {
     "/assets/projects/polar-1.png",
     "/assets/projects/polar-2.png",
   ];
-  const taskifyImages: string[] = [
+  const r4cImages: string[] = [
     "/assets/projects/r4c-1.png",
     "/assets/projects/r4c-2.png",
   ];
+  const kiranaImages: string[] = [
+    "/assets/projects/kirana-1.png",
+    "/assets/projects/kirana-2.png",
+    "/assets/projects/kirana-3.png",
+  ];
+
   return (
     <div className="pt-6.5">
       <Header />
@@ -60,6 +66,7 @@ export default function App() {
           images={tishyImages}
           demoLink="https://tishyandco.com.au/"
         />
+
         <Project
           title="Polar Treks"
           number="2"
@@ -76,9 +83,26 @@ export default function App() {
           images={polarImages}
           demoLink="https://polartreks.com/"
         />
+
+        <Project
+          title="Kirana Pasal"
+          number="3"
+          description="Kirana Pasal is a fully functional e-commerce platform built on WordPress and WooCommerce, specializing in South Asian groceries. I was responsible for the end-to-end development, including responsive front-end design using Elementor, integrating secure Stripe payments, optimizing performance with Nginx, and implementing Yoast SEO for organic growth."
+          technologies={[
+            "Wordpress",
+            "WooCommerce",
+            "Elementor",
+            "Yoast SEO",
+            "Stripe",
+            "Nginx",
+          ]}
+          images={kiranaImages}
+          demoLink="https://www.kiranapasal.shop"
+        />
+        
         <Project
           title="Right4Children"
-          number="3"
+          number="4"
           description="Right4Children is a child- and youth-focused organization dedicated to empowering young people by helping them access their rights through impactful programs and services. During my time at Aarambha IT, I worked as a full-stack developer on this project, building and integrating both frontend and backend features using Django and Next.js. My contributions included developing core APIs, managing database models, and implementing dynamic, responsive UI components to ensure a seamless user experience."
           technologies={[
             "Next.js",
@@ -89,7 +113,7 @@ export default function App() {
             "Nginx",
             "Oracle",
           ]}
-          images={taskifyImages}
+          images={r4cImages}
           demoLink="https://right4children.org/"
         />
       </div>
