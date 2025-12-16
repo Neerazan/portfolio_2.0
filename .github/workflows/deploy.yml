@@ -80,6 +80,13 @@ jobs:
             # Go to project folder
             cd ${{ secrets.REMOTE_APP_PATH }}
 
+            # Stop the app first to free up memory for pnpm install
+            # 1GB RAM is often not enough for both the app and the install process
+            if pm2 describe portfolio > /dev/null 2>&1; then
+                echo "Stopping application to free up memory..."
+                pm2 stop portfolio
+            fi
+
             # Check if pnpm is installed, if not install it
             if ! command -v pnpm &> /dev/null; then
                 echo "pnpm not found, installing..."
@@ -87,13 +94,15 @@ jobs:
             fi
 
             # Install PRODUCTION dependencies only (faster, less space)
+            echo "Installing dependencies..."
             pnpm install --prod --frozen-lockfile
 
             # Start or restart PM2
             if pm2 describe portfolio > /dev/null 2>&1; then
+              echo "Restarting application..."
               pm2 restart portfolio --update-env
             else
-              # Assuming 'pnpm start' runs 'next start'
+              echo "Starting application..."
               pm2 start pnpm --name "portfolio" -- start
             fi
 
