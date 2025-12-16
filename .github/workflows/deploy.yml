@@ -1,0 +1,102 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy to EC2
+    runs-on: ubuntu-latest
+    steps:
+      # --------------------------
+      # 1. Checkout the repo
+      # --------------------------
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # --------------------------
+      # 2. Setup pnpm
+      # --------------------------
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      # --------------------------
+      # 3. Setup Node.js
+      # --------------------------
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # --------------------------
+      # 4. Install Dependencies & Build Locally
+      # --------------------------
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint project
+        run: pnpm run lint
+
+      - name: Build project
+        run: pnpm run build
+
+      # --------------------------
+      # 5. Copy Files to Server
+      # --------------------------
+      - name: Copy files via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "package.json,pnpm-lock.yaml,next.config.ts,public,.next"
+          target: ${{ secrets.REMOTE_APP_PATH }}
+          strip_components: 0
+
+      # --------------------------
+      # 6. Deploy on Server
+      # --------------------------
+      - name: Deploy on EC2 server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            echo "Deploying to ${{ secrets.REMOTE_APP_PATH }}"
+
+            # Go to project folder
+            cd ${{ secrets.REMOTE_APP_PATH }}
+
+            # Check if pnpm is installed, if not install it
+            if ! command -v pnpm &> /dev/null; then
+                echo "pnpm not found, installing..."
+                npm install -g pnpm
+            fi
+
+            # Install PRODUCTION dependencies only (faster, less space)
+            pnpm install --prod --frozen-lockfile
+
+            # Start or restart PM2
+            if pm2 describe portfolio > /dev/null 2>&1; then
+              pm2 restart portfolio --update-env
+            else
+              # Assuming 'pnpm start' runs 'next start'
+              pm2 start pnpm --name "portfolio" -- start
+            fi
+
+            # Save PM2 process list
+            pm2 save
+
+            # Reload Nginx (optional, mainly if static assets location changed or nginx config updated)
+            sudo systemctl reload nginx
+
+            echo "✅ Deployment completed successfully!"
