@@ -1,13 +1,13 @@
 "use client";
 
-import { Righteous } from "next/font/google";
+import { Satisfy } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import Button from "./ui/Button";
 import { NavButton } from "./ui/NavButton";
 
-const righteous = Righteous({ subsets: ["latin"], weight: ["400"] });
+const satisfy = Satisfy({ subsets: ["latin"], weight: ["400"] });
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,9 +17,9 @@ export default function Header() {
       <div className="mx-auto px-4 py-4 flex items-center justify-between lg:w-15/20">
         <div className="flex items-center justify-center gap-x-2">
           <h1
-            className={`px-2 text-2xl bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent ${righteous.className}`}
+            className={`px-2 text-[35px] bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent ${satisfy.className}`}
           >
-            Neerajan
+            Neerajan .
           </h1>
         </div>
 
