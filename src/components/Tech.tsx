@@ -1,111 +1,132 @@
 "use client";
 import { motion } from 'framer-motion';
-import { 
-  FaReact, 
-  FaNode, 
-  FaGitAlt, 
-  FaDocker, 
-  FaAws 
-} from 'react-icons/fa';
-import { 
-  SiNextdotjs, 
-  SiTailwindcss, 
-  SiTypescript, 
-  SiRedux,
-  SiDjango, 
-  SiNestjs, 
-  SiPostgresql,
-  SiFastapi,
-  SiGithubactions
-} from 'react-icons/si';
 import { DiRedis } from "react-icons/di";
+import {
+  FaAws,
+  FaDocker,
+  FaGitAlt,
+  FaNode,
+  FaReact
+} from 'react-icons/fa';
+import {
+  SiDjango,
+  SiFastapi,
+  SiGithubactions,
+  SiNestjs,
+  SiNextdotjs,
+  SiPostgresql,
+  SiRedux,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
 
 interface Skill {
   name: string;
   icon: React.ComponentType<{ className?: string }>;
-  type: 'primary' | 'secondary';
+  version: string; // Mock version for aesthetic
 }
 
-interface Tech {
-  category: string;
-  description: string;
+interface DependencyGroup {
+  category: string; // "dependencies", "devDependencies", etc.
   skills: Skill[];
 }
 
-const technologies : Tech[] = [
+const techStack: DependencyGroup[] = [
   {
-    category: "Frontend",
-    description: "Building responsive and interactive user interfaces",
+    category: "dependencies", // Frontend
     skills: [
-      { name: "React", icon: FaReact, type: "primary" },
-      { name: "Next.js", icon: SiNextdotjs, type: "primary" },
-      { name: "TailwindCSS", icon: SiTailwindcss, type: "primary" },
-      { name: "TypeScript", icon: SiTypescript, type: "secondary" },
-      { name: "Redux", icon: SiRedux, type: "secondary" },
+      { name: "react", icon: FaReact, version: "^18.3.1" },
+      { name: "next", icon: SiNextdotjs, version: "^14.2.0" },
+      { name: "typescript", icon: SiTypescript, version: "^5.4.0" },
+      { name: "tailwindcss", icon: SiTailwindcss, version: "^3.4.1" },
+      { name: "redux", icon: SiRedux, version: "^9.1.0" },
     ]
   },
   {
-    category: "Backend",
-    description: "Developing scalable server-side applications",
+    category: "peerDependencies", // Backend
     skills: [
-      { name: "Node.js", icon: FaNode, type: "primary" },
-      { name: "Django", icon: SiDjango, type: "primary" },
-      { name: "FastAPI", icon: SiFastapi, type: "primary" },
-      { name: "Nest.js", icon: SiNestjs, type: "primary" },
-      { name: "PostgreSQL", icon: SiPostgresql, type: "secondary" },
+      { name: "node", icon: FaNode, version: "^20.12.0" },
+      { name: "django", icon: SiDjango, version: "^5.0.3" },
+      { name: "fastapi", icon: SiFastapi, version: "^0.110.0" },
+      { name: "nestjs", icon: SiNestjs, version: "^10.3.0" },
+      { name: "postgresql", icon: SiPostgresql, version: "^16.2" },
+      { name: "redis", icon: DiRedis, version: "^7.2.0" },
     ]
   },
   {
-    category: "Tools & DevOps",
-    description: "Streamlining development and deployment workflows",
+    category: "devDependencies", // Tools
     skills: [
-      { name: "Git", icon: FaGitAlt, type: "primary" },
-      { name: "Docker", icon: FaDocker, type: "primary" },
-      { name: "AWS", icon: FaAws, type: "secondary" },
-      { name: "CI/CD", icon: SiGithubactions, type: "secondary" },
-      { name: "Redis", icon: DiRedis, type: "secondary" },
+      { name: "git", icon: FaGitAlt, version: "^2.44.0" },
+      { name: "docker", icon: FaDocker, version: "^26.0.0" },
+      { name: "aws-sdk", icon: FaAws, version: "^3.5.0" },
+      { name: "github-actions", icon: SiGithubactions, version: "^4.0.0" },
     ]
   }
 ];
 
 export default function TechStack() {
   return (
-    <div className="mx-auto my-12 sm:my-20 w-full px-4 sm:px-6 sm:w-15/20">
-      <div className="grid gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {technologies.map((tech, index) => (
-          <motion.div
-            key={tech.category}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="group rounded-xl sm:rounded-3xl bg-linear-to-r from-purple-600 to-cyan-600 p-px hover:shadow-lg hover:shadow-[#7A87FB]/20"
-          >
-            <div className="h-full rounded-xl sm:rounded-3xl bg-[#151515] p-3 sm:p-6 transition-all duration-300">
-              <h3 className="mb-2 text-base sm:text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-cyan-400">
-                {tech.category}
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-6">{tech.description}</p>
-              
-              <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
-                {tech.skills.map((skill) => (
-                  <motion.div
-                    key={skill.name}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-[#292929] hover:brightness-125 transition-all duration-200"
-                  >
-                    <skill.icon className="w-6 h-6 sm:w-8 sm:h-8 mb-1 sm:mb-2 text-gray-300" />
-                    <span className="text-[10px] sm:text-xs text-gray-300 text-center">
-                      {skill.name}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+    <div className="mx-auto w-full max-w-5xl px-6 py-20 bg-[#0a0a0a]">
+      <div className="flex items-center gap-4 mb-10">
+        <div className="h-px w-10 bg-purple-500" />
+        <h2 className="text-xl font-mono text-purple-400">package.json</h2>
+      </div>
+
+      <div className="bg-[#151515] rounded-xl border border-white/5 p-6 sm:p-10 font-mono text-sm shadow-2xl overflow-hidden relative">
+        {/* Line Numbers Decoration */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-white/2 border-r border-white/5 flex flex-col items-end pr-3 pt-6 text-gray-700 select-none hidden sm:flex">
+          {Array.from({ length: 25 }).map((_, i) => (
+            <span key={i} className="leading-7">{i + 1}</span>
+          ))}
+        </div>
+
+        <div className="sm:pl-12 relative z-10">
+          <span className="text-gray-500">{"{"}</span>
+          <div className="pl-4 sm:pl-8 space-y-6 mt-2">
+
+            <div className="mb-4">
+              <span className="text-green-400">"name"</span>: <span className="text-yellow-300">"nirajan-dhakal-portfolio"</span>,
+              <br />
+              <span className="text-green-400">"version"</span>: <span className="text-yellow-300">"2.0.0"</span>,
+              <br />
+              <span className="text-green-400">"author"</span>: <span className="text-yellow-300">"Nirajan Dhakal"</span>,
             </div>
-          </motion.div>
-        ))}
+
+            {techStack.map((group, groupIndex) => (
+              <motion.div
+                key={group.category}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: groupIndex * 0.2 }}
+              >
+                <span className="text-green-400">"{group.category}"</span>: <span className="text-yellow-300">{"{"}</span>
+
+                <div className="pl-4 sm:pl-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-8 py-2">
+                  {group.skills.map((skill, index) => (
+                    <motion.div
+                      key={skill.name}
+                      whileHover={{ x: 5 }}
+                      className="flex items-center gap-2 group cursor-default"
+                    >
+                      <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors">"{skill.name}"</span>
+                      <span className="text-white">:</span>
+                      <span className="text-orange-300">"{skill.version}"</span>
+                      <span className="text-gray-600">,</span>
+
+                      {/* Hover Icon Reveal */}
+                      <skill.icon className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100" />
+                    </motion.div>
+                  ))}
+                </div>
+
+                <span className="text-yellow-300">{"}"}</span><span className="text-gray-500">,</span>
+              </motion.div>
+            ))}
+
+          </div>
+          <span className="text-gray-500">{"}"}</span>
+        </div>
       </div>
     </div>
   );
 }
-
-

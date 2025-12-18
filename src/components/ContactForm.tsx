@@ -29,7 +29,6 @@ export default function ContactForm() {
     script.async = true;
     script.defer = true;
     script.onload = () => {
-      // Render Turnstile widget once script is loaded
       if (turnstileRef.current && (window as any).turnstile) {
         widgetIdRef.current = (window as any).turnstile.render(turnstileRef.current, {
           sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
@@ -41,7 +40,6 @@ export default function ContactForm() {
     script.onerror = () => console.error('Failed to load Turnstile script');
     document.head.appendChild(script);
     return () => {
-      // Cleanup
       if (widgetIdRef.current && (window as any).turnstile) {
         (window as any).turnstile.remove(widgetIdRef.current);
       }
@@ -51,7 +49,6 @@ export default function ContactForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Get Turnstile token from the widget
     let turnstileToken = '';
     if (widgetIdRef.current && (window as any).turnstile) {
       turnstileToken = (window as any).turnstile.getResponse(widgetIdRef.current);
@@ -82,12 +79,9 @@ export default function ContactForm() {
       setSubmitStatus('success');
       setFormState({ name: '', email: '', message: '' });
 
-      // Reset Turnstile widget
       if (widgetIdRef.current && (window as any).turnstile) {
         (window as any).turnstile.reset(widgetIdRef.current);
       }
-
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     } catch (error) {
       setSubmitStatus('error');
       console.error('Form submission error:', error);
@@ -102,75 +96,112 @@ export default function ContactForm() {
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const inputClass = "w-full p-2.5 sm:p-3 text-sm sm:text-base bg-[#151515] rounded-lg border border-purple-600/20 focus:border-purple-600 outline-none transition-colors text-white/90 placeholder:text-white/40 disabled:opacity-50";
+  const inputClass = "w-full bg-transparent border-none outline-none text-green-400 placeholder:text-gray-700 font-mono text-sm sm:text-base p-0 focus:ring-0";
+  const containerClass = "flex items-center gap-2 bg-[#0d1117] border border-gray-800 rounded px-3 py-2 focus-within:border-green-500/50 transition-colors";
 
   return (
-    <motion.form
-      onSubmit={handleSubmit}
-      className="space-y-2 sm:space-y-5 w-full max-w-2xl"
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
       viewport={{ once: true }}
+      className="w-full max-w-2xl bg-[#010409] rounded-lg border border-gray-800 shadow-2xl overflow-hidden"
     >
-      <input
-        type="text"
-        name="name"
-        value={formState.name}
-        onChange={handleChange}
-        placeholder="Your Name"
-        required
-        disabled={isSubmitting}
-        className={inputClass}
-      />
-
-      <input
-        type="email"
-        name="email"
-        value={formState.email}
-        onChange={handleChange}
-        placeholder="Your Email"
-        required
-        disabled={isSubmitting}
-        className={inputClass}
-      />
-
-      <textarea
-        name="message"
-        value={formState.message}
-        onChange={handleChange}
-        placeholder="Type your message here..."
-        required
-        rows={4}
-        disabled={isSubmitting}
-        className={`${inputClass} resize-y min-h-[100px]`}
-      />
-
-      <div className="flex justify-center">
-        <div ref={turnstileRef}></div>
+      {/* Terminal Header */}
+      <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+        </div>
+        <div className="ml-4 font-mono text-xs text-gray-500 flex-1 text-center">
+          bash — 80x24
+        </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="cursor-pointer w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-linear-to-r from-purple-600 to-cyan-600 rounded-lg font-medium text-sm sm:text-base text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
-      </button>
+      <div className="p-6 font-mono text-sm">
+        <div className="mb-6 text-gray-400">
+          Last login: {new Date().toDateString()} on ttys000 <br />
+          <span className="text-green-500">➜</span> <span className="text-cyan-400">~</span> <span className="text-white">./contact_me.sh</span>
+          <br />
+          Initializing secure connection... <span className="text-green-500">Done</span>.
+        </div>
 
-      {submitStatus && (
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className={`text-sm sm:text-base text-center mt-4 ${submitStatus === 'success' ? 'text-green-400' : 'text-red-400'
-            }`}
-        >
-          {submitStatus === 'success'
-            ? 'Message sent successfully!'
-            : 'Failed to send message. Please try again.'}
-        </motion.p>
-      )}
-    </motion.form>
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+          <div>
+            <label className="block text-gray-500 mb-1 text-xs">name:</label>
+            <div className={containerClass}>
+              <span className="text-purple-500">$</span>
+              <input
+                type="text"
+                name="name"
+                value={formState.name}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                required
+                disabled={isSubmitting}
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-gray-500 mb-1 text-xs">email:</label>
+            <div className={containerClass}>
+              <span className="text-purple-500">$</span>
+              <input
+                type="email"
+                name="email"
+                value={formState.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+                disabled={isSubmitting}
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-gray-500 mb-1 text-xs">message:</label>
+            <div className={`${containerClass} items-start`}>
+              <span className="text-purple-500 mt-0.5">&gt;</span>
+              <textarea
+                name="message"
+                value={formState.message}
+                onChange={handleChange}
+                placeholder="Type your message..."
+                required
+                rows={4}
+                disabled={isSubmitting}
+                className={`${inputClass} resize-y min-h-[80px]`}
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-center py-2">
+            <div ref={turnstileRef}></div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-[#238636] hover:bg-[#2ea043] text-white font-mono rounded border border-[rgba(240,246,252,0.1)] transition-all disabled:opacity-50 disabled:grayscale"
+          >
+            {isSubmitting ? '[ TRANSMITTING... ]' : '[ EXECUTE_SEND ]'}
+          </button>
+
+          {submitStatus && (
+            <div className={`mt-4 p-3 border rounded ${submitStatus === 'success' ? 'bg-green-500/10 border-green-500/30 text-green-400' : 'bg-red-500/10 border-red-500/30 text-red-400'
+              }`}>
+              <span className="font-bold">{submitStatus === 'success' ? 'SUCCESS:' : 'ERROR:'}</span> {
+                submitStatus === 'success' ? 'Packet transmission complete. Protocol closed.' : 'Transmission failed. Check connection.'
+              }
+            </div>
+          )}
+
+        </form>
+      </div>
+    </motion.div>
   );
 }

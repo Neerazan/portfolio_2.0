@@ -55,8 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="prefetch" href="/assets/Portal.svg" />
         <link rel="prefetch" href="/assets/Home Icom.svg" />
       </head>
-      <body className="bg-[#101111] text-white min-h-screen">
-        {children}
+      <body className="bg-[#0a0a0a] text-white min-h-screen relative overflow-x-hidden">
+        {/* Global Grid Texture */}
+        <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-grid-white bg-grid-small-white z-0" />
+        <div className="relative z-10">
+          {children}
+        </div>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){

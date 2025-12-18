@@ -1,26 +1,23 @@
 "use client";
 
-import { Satisfy } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import Button from "./ui/Button";
 import { NavButton } from "./ui/NavButton";
 
-const satisfy = Satisfy({ subsets: ["latin"], weight: ["400"] });
+const satisfy = { className: "font-mono font-bold tracking-tighter" }; // Using system font for now
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#101111]/80 backdrop-blur-md border-b border-[#7A87FB]/10" role="banner">
-      <div className="mx-auto px-4 py-4 flex items-center justify-between lg:w-15/20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5" role="banner">
+      <div className="mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
         <div className="flex items-center justify-center gap-x-2">
-          <h1
-            className={`px-2 text-[35px] bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent ${satisfy.className}`}
-          >
-            Neerajan .
-          </h1>
+          <Link href="/" className={`text-2xl text-white ${satisfy.className}`}>
+            <span className="text-cyan-400">root</span>@<span className="text-purple-400">portfolio</span>:~#
+          </Link>
         </div>
 
         <Navbar />

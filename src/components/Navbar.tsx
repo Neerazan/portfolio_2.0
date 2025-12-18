@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -75,90 +74,80 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
-      <div className="hidden rounded-full bg-linear-to-r from-purple-600 to-cyan-600 p-0.5 lg:block">
-        <nav className="flex items-center justify-between gap-x-10 rounded-full bg-[#1C1C1C] transition-all duration-300" aria-label="Main navigation">
-          <Navitem
-            href="#home"
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setActiveSection("home");
-            }}
-            isActive={activeSection === "home"}
-            aria-label="Home"
-          >
-            <div className="m-1 rounded-full bg-[#292929] px-4 transition-all duration-300 hover:scale-105">
-              <Image
-                width={37}
-                height={37}
-                src={"/assets/Home Icom.svg"}
-                alt="Home"
-                className="transition-all duration-300"
-                style={activeSection === "home" ? { filter: "hue-rotate(245deg) saturate(1.5) brightness(1.2)" } : {}}
-              />
-            </div>
-          </Navitem>
-          <Navitem
-            href="#about"
-            isActive={activeSection === "about"}
-            className="transition-all duration-300 hover:scale-105 hover:text-purple-400"
-            onClick={(event) => handleScroll(event, 'about')}
-            aria-label="About section"
-          >
-            About
-          </Navitem>
-          <Navitem
-            href="#skills"
-            isActive={activeSection === "skills"}
-            className="transition-all duration-300 hover:scale-105 hover:text-purple-400"
-            onClick={(event) => handleScroll(event, 'skills')}
-            aria-label="Skills section"
-          >
-            Skills
-          </Navitem>
-          <Navitem
-            href="#work"
-            isActive={activeSection === "work"}
-            className="transition-all duration-300 hover:scale-105 hover:text-purple-400"
-            onClick={(event) => handleScroll(event, 'work')}
-            aria-label="Work experience section"
-          >
-            Experiences
-          </Navitem>
-          <Navitem
-            href="#projects"
-            isActive={activeSection === "projects"}
-            className="transition-all duration-300 hover:scale-105 hover:text-purple-400"
-            onClick={(event) => handleScroll(event, 'projects')}
-            aria-label="Projects section"
-          >
-            Projects
-          </Navitem>
-          <Navitem
-            href="#contact"
-            isActive={activeSection === "contact"}
-            className="mr-8 transition-all duration-300 hover:scale-105 hover:text-purple-400"
-            onClick={(event) => handleScroll(event, 'contact')}
-            aria-label="Contact section"
-          >
-            Contact
-          </Navitem>
-        </nav>
-      </div>
-    </>
+    <div className="hidden lg:block">
+      <nav className="flex items-center justify-between gap-x-8 bg-black/40 px-6 py-2 rounded-full border border-white/5 backdrop-blur-md shadow-2xl" aria-label="Main navigation">
+        <Navitem
+          href="#home"
+          className="font-mono text-sm"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setActiveSection("home");
+          }}
+          isActive={activeSection === "home"}
+          aria-label="Home"
+        >
+          ~/
+        </Navitem>
+        <Navitem
+          href="#about"
+          isActive={activeSection === "about"}
+          className="font-mono text-sm"
+          onClick={(event) => handleScroll(event, 'about')}
+          aria-label="About section"
+        >
+          /system
+        </Navitem>
+        <Navitem
+          href="#skills"
+          isActive={activeSection === "skills"}
+          className="font-mono text-sm"
+          onClick={(event) => handleScroll(event, 'skills')}
+          aria-label="Skills section"
+        >
+          /dependencies
+        </Navitem>
+        <Navitem
+          href="#work"
+          isActive={activeSection === "work"}
+          className="font-mono text-sm"
+          onClick={(event) => handleScroll(event, 'work')}
+          aria-label="Work experience section"
+        >
+          /var/log
+        </Navitem>
+        <Navitem
+          href="#projects"
+          isActive={activeSection === "projects"}
+          className="font-mono text-sm"
+          onClick={(event) => handleScroll(event, 'projects')}
+          aria-label="Projects section"
+        >
+          /deployments
+        </Navitem>
+        <Navitem
+          href="#contact"
+          isActive={activeSection === "contact"}
+          className="font-mono text-sm text-green-400 hover:text-green-300"
+          onClick={(event) => handleScroll(event, 'contact')}
+          aria-label="Contact section"
+        >
+          ./connect_ssh.sh
+        </Navitem>
+      </nav>
+    </div>
   );
 }
 
 export function Navitem({ children, className, href, onClick, isActive }: NavItemProps) {
-  const activeClass = isActive ? "scale-105 text-purple-400" : "text-white";
+  const activeClass = isActive ? "text-cyan-400 font-bold" : "text-gray-400 hover:text-white";
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`${activeClass} ${className} text-shadow`}
+      className={`${activeClass} ${className} transition-colors duration-200 flex items-center`}
     >
+      {isActive && <span className="mr-1 text-purple-400">&gt;</span>}
       {children}
     </Link>
   );

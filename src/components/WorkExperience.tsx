@@ -1,126 +1,99 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { FaGitAlt } from "react-icons/fa";
 
 const workExperiences = [
   {
-    title: "3P Trades LLC (Remote)",
-    position: "Software Engineer",
-    period: "February 2025 - Present",
+    company: "3P Trades LLC",
+    role: "Software Engineer",
+    period: "Feb 2025 - Present",
+    commitHash: "3p-8a2f9c",
+    type: "feat",
     details: [
-      "Contributed to Materiel Insights, a platform for BOM and Aircraft lifecycle management.",
-      "Developed and optimized full-stack applications using Next.js, TypeScript, Node.js, ZenStack, and Vercel AI SDK.",
-      "Implemented RAG (Retrieval-Augmented Generation) for AI-powered natural language database querying.",
-      "Deployed and managed infrastructure on AWS EC2, RDS, and DynamoDB using a Serverless architecture.",
-      "Configured CloudFront for efficient content delivery and enhanced system performance.",
+      "Contributed to Materiel Insights platform",
+      "Developed full-stack Next.js/Node.js apps",
+      "Implemented RAG for AI querying",
+      "Deployed Serverless architecture on AWS",
     ],
-    icon: (
-      <Image
-        src={"/assets/projects/3p-logo.png"}
-        alt="3P Logo"
-        width={300}
-        height={300}       
-        className="bg-clip-text h-32 w-32 object-contain"
-        style={{ filter: 'brightness(0) invert(1)' }}
-      />
-    ),
   },
   {
-    title: "Aarambha IT Research Center",
-    position: "Full Stack Developer",
-    period: "June 2024 - February 2025",
+    company: "Aarambha IT Research Center",
+    role: "Full Stack Developer",
+    period: "Jun 2024 - Feb 2025",
+    commitHash: "airc-7b3d1",
+    type: "fix",
     details: [
-      "Developed RESTful APIs using Django and DRF, integrating Stripe payments with Celery and Redis.",
-      "Improved API performance and backend infrastructure for multiple projects.",
-      "Implemented lab report system and analytics dashboard using PostgreSQL.",
-      "Deployed applications on Oracle Cloud with Nginx, systemd, and Cloudflare.",
-      "Configured AWS S3, Cloudflare R2, and automated deployments via GitHub Actions CI/CD.",
+      "Developed RESTful APIs with Django/DRF",
+      "Integrated Stripe payments & Celery tasks",
+      "Optimized backend infrastructure",
+      "Configured CI/CD with GitHub Actions",
     ],
-    icon: (
-      <Image
-        src={"/assets/projects/aarambha-logo.png"}
-        alt="Aarambha Logo"
-        width={300}
-        height={300}
-        className="bg-clip-text h-32 w-32 object-contain"
-      />
-    ),
   },
   {
-    title: "Pine Softwares Pvt. Ltd.",
-    position: "Full Stack Developer Intern",
-    period: "April 2023 - August 2023",
+    company: "Pine Softwares",
+    role: "Full Stack Intern",
+    period: "Apr 2023 - Aug 2023",
+    commitHash: "pine-1c9e2",
+    type: "init",
     details: [
-      "Developed full-stack web applications using Laravel and MySQL for multiple clients",
-      "Implemented responsive UI designs using Bootstrap"
+      "Built Laravel & MySQL web apps",
+      "Implemented responsive Bootstrap UIs",
     ],
-    icon: (
-      <Image
-        src={"/assets/projects/pine.png"}
-        alt="Pine Softwares Logo"
-        width={300}
-        height={300}
-        className="bg-clip-text h-32 w-32 object-contain p-8"
-        style={{ filter: 'brightness(0) invert(1)' }}
-      />
-    ),
   },
 ];
 
 function WorkExperience() {
   return (
-    <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
-      <div className="absolute left-4 h-full w-0.5 transform bg-linear-to-b from-purple-600 to-cyan-600 opacity-30 sm:left-1/2 sm:-translate-x-1/2"></div>
+    <div className="mx-auto max-w-4xl px-6 py-20">
+      <div className="flex items-center gap-3 mb-12 font-mono text-gray-400">
+        <FaGitAlt className="text-orange-500 text-xl" />
+        <span>git log --pretty=format:"%h - %an, %ar : %s"</span>
+      </div>
 
-      <div className="space-y-8 sm:space-y-16">
-        {workExperiences.map((item, index) => (
+      <div className="relative border-l-2 border-gray-800 ml-3 md:ml-6 space-y-12">
+        {workExperiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: 0, y: 30 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className={`relative flex flex-col sm:flex-row ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-              } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="relative pl-8 md:pl-12"
           >
-            <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
-              <div className="h-4 w-4 rounded-full bg-linear-to-r from-purple-600 to-cyan-600 sm:h-5 sm:w-5"></div>
+            {/* Git Node Dot */}
+            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-purple-500" />
+
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
+              <span className="font-mono text-yellow-500 text-sm">
+                {exp.commitHash}
+              </span>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                <span className="text-purple-400">{exp.type}:</span> {exp.role} @ {exp.company}
+              </h3>
             </div>
 
-            <div className="group relative w-full rounded-xl border border-transparent bg-[#151515] p-4 shadow-md transition-all duration-300 hover:border-purple-600 sm:w-[calc(50%-3rem)] sm:p-6">
-              <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
-                <span className="text-xl sm:text-2xl">{item.icon}</span>
-                <div>
-                  <h3 className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
-                    {item.title}
-                  </h3>
-                  {/* position */}
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm text-gray-400 sm:text-base">
-                      {item.position}
-                    </p>
-                    <span className="h-1 w-1 rounded-full bg-gray-500"></span>
-                  </div>
-                  <p className="text-sm text-gray-400 sm:text-base">
-                    {item.period}
-                  </p>
+            <div className="font-mono text-xs text-gray-500 mb-4 flex items-center gap-2">
+              <span>Date: {exp.period}</span>
+            </div>
+
+            <div className="bg-[#101111] border border-white/5 rounded-lg p-4 font-mono text-sm text-gray-300">
+              {/* Simulating Diff */}
+              {exp.details.map((detail, i) => (
+                <div key={i} className="flex gap-2">
+                  <span className="text-green-500 select-none">+</span>
+                  <span>{detail}</span>
                 </div>
-              </div>
-              <ul className="space-y-1 sm:space-y-2">
-                {item.details.map((detail, detailIndex) => (
-                  <li key={detailIndex} className="flex items-start gap-2">
-                    <span className="bg-linear-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                      ▹
-                    </span>
-                    <span className="text-sm text-gray-300 sm:text-base">
-                      {detail}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              ))}
             </div>
           </motion.div>
         ))}
+
+        {/* Origin Node */}
+        <div className="relative pl-8 md:pl-12 pt-4 opacity-50">
+          <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-gray-600" />
+          <div className="font-mono text-sm text-gray-500">
+            Initial commit
+          </div>
+        </div>
       </div>
     </div>
   );

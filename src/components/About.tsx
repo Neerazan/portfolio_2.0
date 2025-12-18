@@ -1,88 +1,103 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaBolt, FaCode, FaCubes, FaGraduationCap, FaRocket, FaUsers } from "react-icons/fa";
-import Portal from "./ui/Portal";
+import { FaBolt, FaCode, FaDatabase, FaNetworkWired, FaServer, FaShieldAlt } from "react-icons/fa";
+import { HiChip } from "react-icons/hi";
 
 export default function About() {
+  const systemSpecs = [
+    { label: "OS", value: "NirajanOS v2.4" },
+    { label: "KERNEL", value: "JavaScript / Python / Go" },
+    { label: "ROLE", value: "Full Stack Engineer" },
+    { label: "LOCATION", value: "Kathmandu, Nepal" },
+    { label: "UPTIME", value: "Always Learning" },
+    { label: "ARCHITECTURE", value: "Microservices / Serverless" }
+  ];
+
   return (
-    <div className="mx-auto max-w-6xl px-6 bg-[#101111] text-gray-300 relative">
+    <div className="mx-auto max-w-7xl px-6 py-20 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
+      {/* Background Code Texture */}
+      <div className="absolute top-0 right-0 p-10 opacity-5 font-mono text-xs hidden lg:block pointer-events-none select-none">
+        {`
+class Engineer {
+  constructor() {
+    this.name = "Nirajan";
+    this.passion = "Building";
+  }
+}
+         `}
+      </div>
 
-      <Portal
-        src={"/assets/Portal.svg"}
-        className="absolute w-20 -top-4 right-2 md:top-10 md:right-25 md:w-20 opacity-10 rotate-50 pointer-events-none"
-      />
-      <Portal
-        src={"/assets/Portal.svg"}
-        className="absolute w-20 -bottom-10 left-0 md:bottom-10 md:left-25 md:w-20 opacity-10 -rotate-50 pointer-events-none"
-      />
-
-      <div className="max-w-4xl mx-auto sm:px-6 mb-12 sm:mb-24 z-10">
+      <div className="grid lg:grid-cols-2 gap-16 items-start">
+        {/* Left Col: System Specs (Bio) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="p-6 sm:p-8 md:p-10 bg-[#151515] rounded-xl shadow-lg border border-transparent hover:border-purple-600 transition-all duration-300"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="mb-8 sm:mb-12">
-            <p className="text-base sm:text-lg text-gray-300">
-              I&apos;m <span className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
-                Nirajan Dhakal
-              </span>, a software engineer focused on full-stack development, cloud computing, and system design.
-              I enjoy building scalable applications, optimizing performance, and solving complex problems.
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="space-y-4 mt-6"
-            >
-              <p className="text-gray-300">
-                I graduated from <span className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">Asia Pacific University of Innovation and Technology</span> with a BSc in Information Technology, where I built real-world projects and gained experience in system design, performance optimization, and developing scalable applications.
-              </p>
-            </motion.div>
+          <div className="flex items-center gap-4 mb-8">
+            <HiChip className="text-4xl text-cyan-400" />
+            <h2 className="text-3xl font-bold tracking-tighter text-white">
+              SYSTEM <span className="text-purple-400">SPECS</span>
+            </h2>
           </div>
 
+          <div className="bg-[#111] border border-white/5 rounded-xl p-6 font-mono text-sm relative overflow-hidden group">
+            {/* Gloss effect */}
+            <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4 sm:mb-6">
-              What Drives Me
-            </h2>
-            <p className="text-sm sm:text-base text-gray-300 mb-6 sm:mb-8">
-              I believe in writing clean, maintainable code and building systems that not only work today but scale for tomorrow. My approach combines technical excellence with a user-first mindset.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { name: "Clean Code", desc: "Writing maintainable, scalable solutions", icon: FaCode },
-                { name: "Innovation", desc: "Exploring new technologies", icon: FaRocket },
-                { name: "Performance", desc: "Optimizing for speed & efficiency", icon: FaBolt },
-                { name: "User Focus", desc: "Building intuitive experiences", icon: FaUsers },
-                { name: "System Design", desc: "Architecting robust systems", icon: FaCubes },
-                { name: "Continuous Learning", desc: "Always improving my craft", icon: FaGraduationCap },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="p-3 sm:p-4 bg-[#101111] rounded-lg border border-transparent hover:border-purple-600 transition-all duration-300 group flex items-center gap-4"
-                >
-                  <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-300" />
-                  <div>
-                    <h3 className="text-base sm:text-lg font-medium bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent group-hover:text-[#7A87FB] transition-colors">
-                      {item.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
+            <div className="space-y-4 relative z-10">
+              {systemSpecs.map((spec, index) => (
+                <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                  <span className="text-gray-500">{spec.label}</span>
+                  <span className="text-cyan-400">{spec.value}</span>
+                </div>
               ))}
             </div>
-          </div>
 
+            <div className="mt-8 pt-6 border-t border-white/10 text-gray-400 leading-relaxed font-sans">
+              <p className="mb-4">
+                <span className="text-purple-400 font-mono">&gt; info:</span> I am a software engineer focused on <span className="text-white">backend architecture</span> and <span className="text-white">cloud infrastructure</span>.
+              </p>
+              <p>
+                My system is optimized for building scalable applications. I blend technical precision with creative problem-solving to deliver high-performance digital solutions.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Right Col: Modules (What Drives Me) */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h3 className="text-xl font-mono text-gray-500 mb-8 flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            INSTALLED_MODULES
+          </h3>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { name: "Backend Logic", icon: FaServer, color: "text-green-400" },
+              { name: "Database Design", icon: FaDatabase, color: "text-yellow-400" },
+              { name: "Cloud Native", icon: FaNetworkWired, color: "text-cyan-400" },
+              { name: "System Security", icon: FaShieldAlt, color: "text-red-400" },
+              { name: "clean_code.js", icon: FaCode, color: "text-purple-400" },
+              { name: "Optimization", icon: FaBolt, color: "text-orange-400" },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                className="bg-[#151515] p-4 rounded-lg border border-white/5 hover:border-white/20 transition-colors flex items-center gap-3"
+              >
+                <div className={`p-2 bg-white/5 rounded ${item.color}`}>
+                  <item.icon />
+                </div>
+                <span className="font-mono text-sm text-gray-300">{item.name}</span>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </div>
