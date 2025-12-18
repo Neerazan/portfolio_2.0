@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="relative mt-20 border-t border-white/5 bg-black/20 backdrop-blur-sm">
       <div className="mx-auto w-13/14 lg:w-15/20 px-4 py-10">
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className={`bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-[35px] text-transparent ${satisfy.className}`}>
+          <h1 className={`text-[35px] text-white ${satisfy.className}`}>
             Neerajan .
           </h1>
 

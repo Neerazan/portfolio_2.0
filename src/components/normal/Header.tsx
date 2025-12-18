@@ -18,7 +18,7 @@ export default function Header() {
         <div className="flex items-center justify-center gap-x-2">
           <Link href="/" className="px-2">
             <h1
-              className={`text-[35px] bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent ${satisfy.className}`}
+              className={`text-[35px] text-white ${satisfy.className}`}
             >
               Neerajan .
             </h1>

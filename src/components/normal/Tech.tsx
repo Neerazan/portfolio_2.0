@@ -81,7 +81,7 @@ export default function TechStack() {
             className="group rounded-xl sm:rounded-3xl bg-white/5 backdrop-blur-sm p-px hover:shadow-2xl hover:shadow-cyan-500/10 border border-white/5 hover:border-cyan-500/30 transition-all duration-300"
           >
             <div className="h-full rounded-xl sm:rounded-3xl bg-transparent p-3 sm:p-6 transition-all duration-300">
-              <h3 className="mb-2 text-base sm:text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-cyan-400">
+              <h3 className="mb-2 text-base sm:text-xl font-bold text-cyan-400">
                 {tech.category}
               </h3>
               <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-6">{tech.description}</p>

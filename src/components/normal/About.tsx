@@ -19,7 +19,7 @@ export default function About() {
         >
           <div className="mb-8 sm:mb-12">
             <p className="text-base sm:text-lg text-gray-300">
-              I&apos;m <span className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
+              I&apos;m <span className="text-cyan-400 font-semibold">
                 Nirajan Dhakal
               </span>, a software engineer focused on full-stack development, cloud computing, and system design.
               I enjoy building scalable applications, optimizing performance, and solving complex problems.
@@ -32,14 +32,14 @@ export default function About() {
               className="space-y-4 mt-6"
             >
               <p className="text-gray-300">
-                I graduated from <span className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">Asia Pacific University of Innovation and Technology</span> with a BSc in Information Technology, where I built real-world projects and gained experience in system design, performance optimization, and developing scalable applications.
+                I graduated from <span className="text-cyan-400 font-semibold">Asia Pacific University of Innovation and Technology</span> with a BSc in Information Technology, where I built real-world projects and gained experience in system design, performance optimization, and developing scalable applications.
               </p>
             </motion.div>
           </div>
 
 
           <div>
-            <h2 className="text-xl sm:text-2xl font-semibold bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">
               What Drives Me
             </h2>
             <p className="text-sm sm:text-base text-gray-300 mb-6 sm:mb-8">
