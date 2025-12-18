@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import ModeToggle from "../shared/ModeToggle";
+import Button from "../ui/Button";
+import { NavButton } from "./NavButton";
 import Navbar from "./Navbar";
-import Button from "./ui/Button";
-import { NavButton } from "./ui/NavButton";
 
 const satisfy = { className: "font-mono font-bold tracking-tighter" }; // Using system font for now
 
@@ -23,6 +24,7 @@ export default function Header() {
         <Navbar />
 
         <div className="flex items-center gap-4">
+          <ModeToggle />
           <NavButton
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}

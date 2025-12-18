@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Navitem } from "../Navbar";
+import { Navitem } from "./Navbar";
 
 interface NabButtonProps {
   className?: string;

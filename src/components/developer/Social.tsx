@@ -1,4 +1,4 @@
-import { Icone } from "./ui/Icone";
+import { Icone } from "../ui/Icone";
 
 export function Socials() {
   return (

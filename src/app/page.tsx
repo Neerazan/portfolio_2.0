@@ -1,14 +1,45 @@
-import About from "@/src/components/About";
-import Contact from "@/src/components/Contact";
-import Header from "@/src/components/Header";
-import Hero from "@/src/components/Hero";
-import Project from "@/src/components/Project";
-import TechStack from "@/src/components/Tech";
-import Title from "@/src/components/ui/Title";
-import WorkExperience from "@/src/components/WorkExperience";
-import Footer from "../components/Footer";
+"use client";
 
-export default function App() {
+import SharedHero from "@/src/components/shared/Hero";
+import { DisplayModeProvider, useDisplayMode } from "@/src/context/DisplayModeContext";
+
+import DeveloperHeader from "@/src/components/developer/Header";
+import NormalHeader from "@/src/components/normal/Header";
+
+import DeveloperAbout from "@/src/components/developer/About";
+import NormalAbout from "@/src/components/normal/About";
+
+import DeveloperContact from "@/src/components/developer/Contact";
+import NormalContact from "@/src/components/normal/Contact";
+
+import DeveloperProject from "@/src/components/developer/Project";
+import NormalProject from "@/src/components/normal/Project";
+
+import DeveloperTechStack from "@/src/components/developer/Tech";
+import NormalTechStack from "@/src/components/normal/Tech";
+
+import DeveloperWorkExperience from "@/src/components/developer/WorkExperience";
+import NormalWorkExperience from "@/src/components/normal/WorkExperience";
+
+import DeveloperFooter from "@/src/components/developer/Footer";
+import NormalFooter from "@/src/components/normal/Footer";
+
+import DeveloperTitle from "@/src/components/developer/Title";
+import NormalTitle from "@/src/components/normal/Title";
+
+function PageContent() {
+  const { mode } = useDisplayMode();
+  const isDev = mode === "developer";
+
+  const Header = isDev ? DeveloperHeader : NormalHeader;
+  const About = isDev ? DeveloperAbout : NormalAbout;
+  const Contact = isDev ? DeveloperContact : NormalContact;
+  const Project = isDev ? DeveloperProject : NormalProject;
+  const TechStack = isDev ? DeveloperTechStack : NormalTechStack;
+  const WorkExperience = isDev ? DeveloperWorkExperience : NormalWorkExperience;
+  const Footer = isDev ? DeveloperFooter : NormalFooter;
+  const Title = isDev ? DeveloperTitle : NormalTitle;
+
   const tishyImages: string[] = [
     "/assets/projects/tishy-1.png",
     "/assets/projects/tishy-2.png",
@@ -30,7 +61,7 @@ export default function App() {
   return (
     <div className="pt-6.5">
       <Header />
-    <Hero />
+      <SharedHero />
 
       {/* About Section */}
       <Title title="About Me" id="about" className={undefined} />
@@ -62,7 +93,6 @@ export default function App() {
             "Cloudflare",
             "R2"
           ]}
-
           images={tishyImages}
           demoLink="https://tishyandco.com.au/"
         />
@@ -99,7 +129,7 @@ export default function App() {
           images={kiranaImages}
           demoLink="https://www.kiranapasal.shop"
         />
-        
+
         <Project
           title="Right4Children"
           number="4"
@@ -120,5 +150,13 @@ export default function App() {
       <Contact />
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <DisplayModeProvider>
+      <PageContent />
+    </DisplayModeProvider>
   );
 }
