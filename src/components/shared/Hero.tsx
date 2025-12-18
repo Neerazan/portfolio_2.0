@@ -141,14 +141,14 @@ export default function Hero() {
               <div className="flex flex-wrap gap-6">
                 <button
                   onClick={handleScroll}
-                  className="group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm rounded-none hover:bg-cyan-300 transition-colors duration-300 flex items-center gap-3 overflow-hidden"
+                  className="cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm rounded-none hover:bg-cyan-300 transition-colors duration-300 flex items-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10">Get in Touch</span>
                   <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                 </button>
 
-                <button className="px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 transition-colors">
+                <button className="cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 transition-colors">
                   View Projects
                 </button>
               </div>

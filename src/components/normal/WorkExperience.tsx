@@ -19,7 +19,7 @@ const workExperiences = [
         src={"/assets/projects/3p-logo.png"}
         alt="3P Logo"
         width={300}
-        height={300}       
+        height={300}
         className="bg-clip-text h-32 w-32 object-contain"
         style={{ filter: 'brightness(0) invert(1)' }}
       />
@@ -87,7 +87,7 @@ function WorkExperience() {
               <div className="h-4 w-4 rounded-full bg-linear-to-r from-purple-600 to-cyan-600 sm:h-5 sm:w-5"></div>
             </div>
 
-            <div className="group relative w-full rounded-xl border border-transparent bg-[#151515] p-4 shadow-md transition-all duration-300 hover:border-purple-600 sm:w-[calc(50%-3rem)] sm:p-6">
+            <div className="group relative w-full rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm p-4 shadow-xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10 sm:w-[calc(50%-3rem)] sm:p-6">
               <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
                 <span className="text-xl sm:text-2xl">{item.icon}</span>
                 <div>

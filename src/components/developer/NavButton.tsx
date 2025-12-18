@@ -107,7 +107,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
             href="/nirajan_dhakal_cv.pdf"
             download="/nirajan_dhakal_cv.pdf"
             onClick={() => setIsMenuOpen(false)}
-            className="flex w-full rounded-full bg-linear-to-r from-purple-600 to-cyan-600 px-4 py-3 text-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/50 min-h-11 items-center justify-center"
+            className="cursor-pointer flex w-full rounded-full bg-linear-to-r from-purple-600 to-cyan-600 px-4 py-3 text-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/50 min-h-11 items-center justify-center"
           >
             Download CV
           </Link>

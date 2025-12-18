@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export interface ProjectProps {
   title: string;
@@ -53,7 +53,7 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-linear-to-br from-[#151515] to-[#1c1c1c] p-5 sm:p-8 rounded-lg border border-purple-600/20 md:flex-row hover:border-purple-600 transition-all duration-300">
+      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-sm p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-cyan-500/30 transition-all duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group">
           <motion.div
             initial={false}
@@ -132,14 +132,15 @@ export default function Project({
                 <div className="absolute bottom-4 left-4 flex gap-2 sm:gap-3">
                   {
                     demoLink && (
-                      <div className="group relative rounded-md bg-linear-to-r from-purple-600 to-cyan-600 p-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-purple-600/50">
+                      <div className="group relative">
                         <Link
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block px-3 py-1.5 sm:px-4 sm:py-2 rounded-md bg-[#101111] from-cyan-600 to-purple-600 text-sm sm:text-base font-medium text-white hover:bg-linear-to-r"
+                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-cyan-300 transition-colors duration-300 rounded-none group"
                         >
                           Live Demo
+                          <span className="block h-0.5 max-w-0 group-hover:max-w-full transition-all duration-300 bg-black"></span>
                         </Link>
                       </div>
                     )
@@ -150,7 +151,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[#151515] text-white rounded-md text-sm sm:text-base font-medium hover:bg-[#1c1c1c] transition-all border border-[#7A87FB]/20 hover:border-purple-600"
+                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded-none"
                       >
                         GitHub
                       </Link>
@@ -178,7 +179,7 @@ export default function Project({
             {technologies?.map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-[#151515] rounded-md text-gray-300 border border-purple-600/20 hover:border-purple-600 transition-all"
+                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-white/5 rounded-full text-gray-300 border border-white/10 hover:border-cyan-500/30 transition-all"
               >
                 {tech}
               </span>

@@ -4,7 +4,6 @@ import { Satisfy } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
 import ModeToggle from "../shared/ModeToggle";
-import Button from "../ui/Button";
 import { NavButton } from "./NavButton";
 import Navbar from "./Navbar";
 
@@ -38,10 +37,12 @@ export default function Header() {
           <Link
             href="/nirajan_dhakal_cv.pdf"
             target="_blank"
-            className="hidden lg:block"
+            className="hidden lg:block group cursor-pointer"
             aria-label="Download CV - PDF document"
           >
-            <Button title="Download CV" />
+            <button className="px-6 py-2.5 border border-white/20 text-white font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded-none">
+              Download CV
+            </button>
           </Link>
         </div>
       </div>

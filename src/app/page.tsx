@@ -58,8 +58,8 @@ function PageContent() {
     "/assets/projects/kirana-3.png",
   ];
 
-  return (
-    <div className="pt-6.5">
+  const content = (
+    <>
       <Header />
       <SharedHero />
 
@@ -145,10 +145,49 @@ function PageContent() {
           ]}
           images={r4cImages}
           demoLink="https://right4children.org/"
+          githubLink="https://github.com/nirajan-dhakal/right4children"
         />
       </div>
       <Contact />
       <Footer />
+    </>
+  );
+
+  if (isDev) {
+    return (
+      <div className="pt-6.5">
+        {content}
+      </div>
+    );
+  }
+
+  // Normal Mode with Aurora Background
+  return (
+    <div className="relative min-h-screen bg-[#0a0a0a] text-white">
+      <div
+        className="fixed inset-0 pointer-events-none opacity-30 animate-aurora z-0"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 18% 20%, rgba(76, 29, 149, 0.4) 0%, transparent 40%),
+            radial-gradient(circle at 80% 10%, rgba(6, 182, 212, 0.3) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.3) 0%, transparent 40%),
+            radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)
+          `,
+          filter: "blur(60px)",
+          backgroundSize: "200% 200%"
+        }}
+      />
+      <div
+        className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-0"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px"
+        }}
+      />
+
+      <div className="relative z-10">
+        {content}
+      </div>
     </div>
   );
 }
@@ -160,3 +199,4 @@ export default function App() {
     </DisplayModeProvider>
   );
 }
+                                                                                                    

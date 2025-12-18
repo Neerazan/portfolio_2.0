@@ -33,7 +33,7 @@ export default function Header() {
           <Link
             href="/nirajan_dhakal_cv.pdf"
             target="_blank"
-            className="hidden lg:block"
+            className="hidden lg:block cursor-pointer"
             aria-label="Download CV - PDF document"
           >
             <Button title="Download CV" />
