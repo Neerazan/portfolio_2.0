@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 const siteUrl = 'https://dhakalnirajan.com.np';
@@ -54,7 +55,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="prefetch" href="/assets/Portal.svg" />
         <link rel="prefetch" href="/assets/Home Icom.svg" />
       </head>
-      <body className="bg-[#101111] text-white min-h-screen">{children}</body>
+      <body className="bg-[#101111] text-white min-h-screen">
+        {children}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "uncwcvbrj0");
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
