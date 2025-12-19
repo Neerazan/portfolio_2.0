@@ -15,15 +15,14 @@ const DisplayModeContext = createContext<DisplayModeContextType | undefined>(und
 export function DisplayModeProvider({ children }: { children: React.ReactNode }) {
   // Always initialize with a safe default "normal" for SSR matching
   const [mode, setModeState] = useState<DisplayMode>("normal");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Check localStorage for saved mode
     const savedMode = localStorage.getItem("site-display-mode") as DisplayMode;
     if (savedMode && (savedMode === "normal" || savedMode === "developer")) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setModeState(savedMode);
     }
-    setMounted(true);
   }, []);
 
   const setMode = (newMode: DisplayMode) => {

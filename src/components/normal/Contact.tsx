@@ -28,7 +28,7 @@ export default function Contact() {
           <div className="flex flex-2 flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-500"></div>
             <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
-              "Great things are not done by impulse, but by a series of small things brought together."
+              &quot;Great things are not done by impulse, but by a series of small things brought together.&quot;
             </blockquote>
             <p className="mt-4 text-sm text-gray-500">- Vincent van Gogh</p>
           </div>
@@ -37,7 +37,7 @@ export default function Contact() {
           <div className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 group-hover:bg-cyan-500/20 transition-all duration-500"></div>
             <div className="relative z-10">
-              <p className="text-2xl font-bold text-white mb-2">Let's Buitld</p>
+              <p className="text-2xl font-bold text-white mb-2">Let&apos;s Build</p>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="text-sm text-gray-400">Available for work</span>

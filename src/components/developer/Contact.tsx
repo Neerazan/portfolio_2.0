@@ -12,8 +12,8 @@ export default function Contact() {
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
           Establish <span className="text-green-500">Connection</span>
         </h2>
-        <p className="text-gray-400 max-w-lg mx-auto font-mono text-sm leading-relaxed">
-          Ready to start a new session? Initialize a handshake below and I'll respond with an ACK as soon as possible.
+        <p className="text-gray-400 font-mono text-sm max-w-lg mx-auto mb-10 leading-relaxed">
+          &gt; Ready to start a new session? Initialize a handshake below and I&apos;ll respond with an ACK as soon as possible.
         </p>
       </div>
 

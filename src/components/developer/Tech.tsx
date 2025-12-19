@@ -85,11 +85,11 @@ export default function TechStack() {
           <div className="pl-4 sm:pl-8 space-y-6 mt-2">
 
             <div className="mb-4">
-              <span className="text-green-400">"name"</span>: <span className="text-yellow-300">"nirajan-dhakal-portfolio"</span>,
+              <span className="text-green-400">&quot;name&quot;</span>: <span className="text-yellow-300">&quot;nirajan-dhakal-portfolio&quot;</span>,
               <br />
-              <span className="text-green-400">"version"</span>: <span className="text-yellow-300">"2.0.0"</span>,
+              <span className="text-green-400">&quot;version&quot;</span>: <span className="text-yellow-300">&quot;2.0.0&quot;</span>,
               <br />
-              <span className="text-green-400">"author"</span>: <span className="text-yellow-300">"Nirajan Dhakal"</span>,
+              <span className="text-green-400">&quot;author&quot;</span>: <span className="text-yellow-300">&quot;Nirajan Dhakal&quot;</span>,
             </div>
 
             {techStack.map((group, groupIndex) => (
@@ -99,18 +99,18 @@ export default function TechStack() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: groupIndex * 0.2 }}
               >
-                <span className="text-green-400">"{group.category}"</span>: <span className="text-yellow-300">{"{"}</span>
+                <span className="text-green-400">&quot;{group.category}&quot;</span>: <span className="text-yellow-300">{"{"}</span>
 
                 <div className="pl-4 sm:pl-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-8 py-2">
-                  {group.skills.map((skill, index) => (
+                  {group.skills.map((skill) => (
                     <motion.div
                       key={skill.name}
                       whileHover={{ x: 5 }}
                       className="flex items-center gap-2 group cursor-default"
                     >
-                      <span className="text-blue-400 group-hover:text-blue-300 transition-colors">"{skill.name}"</span>
+                      <span className="text-blue-400 group-hover:text-blue-300 transition-colors">&quot;{skill.name}&quot;</span>
                       <span className="text-white">:</span>
-                      <span className="text-orange-300">"{skill.version}"</span>
+                      <span className="text-orange-300">&quot;{skill.version}&quot;</span>
                       <span className="text-gray-600">,</span>
 
                       {/* Hover Icon Reveal */}

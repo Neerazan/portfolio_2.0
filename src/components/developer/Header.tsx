@@ -6,7 +6,6 @@ import ModeToggle from "../shared/ModeToggle";
 import { NavButton } from "./NavButton";
 import Navbar from "./Navbar";
 
-const satisfy = { className: "font-mono font-bold tracking-tighter" }; // Using system font for now
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

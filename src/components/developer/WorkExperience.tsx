@@ -47,7 +47,7 @@ function WorkExperience() {
     <div className="mx-auto max-w-4xl px-6 py-20">
       <div className="flex items-center gap-3 mb-12 font-mono text-gray-400">
         <FaGitAlt className="text-orange-500 text-xl" />
-        <span>git log --pretty=format:"%h - %an, %ar : %s"</span>
+        <span>git log --pretty=format:&quot;%h - %an, %ar : %s&quot;</span>
       </div>
 
       <div className="relative border-l-2 border-gray-800 ml-3 md:ml-6 space-y-12">

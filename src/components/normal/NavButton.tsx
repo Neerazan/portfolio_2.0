@@ -46,6 +46,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -129,7 +130,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
                 }}
                 className="relative z-10 flex flex-col items-center gap-8 w-full max-w-md px-6 max-h-[85vh] overflow-y-auto py-10 no-scrollbar"
               >
-                {menuItems.map((item, index) => (
+                {menuItems.map((item) => (
                   <motion.div key={item.label} variants={itemVariants} className="w-full text-center shrink-0">
                     <button
                       onClick={() => {

@@ -29,7 +29,10 @@ export default function Hero() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
+    // Initial size update
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+
     const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -61,10 +64,6 @@ export default function Hero() {
       />
 
       <div className="flex flex-col lg:flex-row flex-1 relative z-10 container mx-auto px-0 lg:px-0">
-        {/* 
-          LEFT SIDEBAR - Social Links
-          Fixed on desktop to stay efficient
-        */}
         {/* 
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
@@ -238,19 +237,19 @@ export default function Hero() {
                     <span className="text-purple-400">try</span> <span className="text-yellow-300">{"{"}</span>
                   </div>
                   <div className="pl-8">
-                    <span className="text-gray-400">// Establish high-performance connection</span>
+                    {/* Establish high-performance connection */}
                   </div>
                   <div className="pl-8">
                     <span className="text-purple-400">await</span> <span className="text-blue-300">db</span>.<span className="text-blue-400">connect</span>(<span className="text-green-300">process.env.DB_URI</span>);
                   </div>
                   <div className="pl-8">
-                    <span className="text-blue-300">console</span>.<span className="text-blue-400">log</span>(<span className="text-green-300">"🚀 Database Synchronized"</span>);
+                    <span className="text-blue-300">console</span>.<span className="text-blue-400">log</span>(<span className="text-green-300">&quot;🚀 Database Synchronized&quot;</span>);
                   </div>
                   <div className="pl-4">
                     <span className="text-yellow-300">{"}"}</span> <span className="text-purple-400">catch</span> (<span className="text-red-400">err</span>) <span className="text-yellow-300">{"{"}</span>
                   </div>
                   <div className="pl-8 w-full bg-red-500/10 rounded">
-                    <span className="text-gray-400">// Error handling logic...</span>
+                    {/* Error handling logic... */}
                   </div>
                   <div className="text-yellow-300">{"}"}</div>
                 </div>
