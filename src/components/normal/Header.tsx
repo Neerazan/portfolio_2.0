@@ -37,11 +37,27 @@ export default function Header() {
           <Link
             href="/nirajan_dhakal_cv.pdf"
             target="_blank"
-            className="hidden lg:block group cursor-pointer"
+            className="hidden lg:block group"
             aria-label="Download CV - PDF document"
           >
-            <button className="px-5 py-2 border border-white/20 text-white font-medium text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded cursor-pointer">
-              Download CV
+            <button className="relative px-6 py-2.5 bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium text-xs tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-2 cursor-pointer">
+              <span className="relative z-10">Download CV</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" x2="12" y1="15" y2="3" />
+              </svg>
             </button>
           </Link>
         </div>
