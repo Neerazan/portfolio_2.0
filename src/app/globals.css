@@ -61,15 +61,16 @@ body {
 /* Aurora Animation */
 @keyframes aurora {
   from {
-    background-position: 50% 50%, 50% 50%;
+    transform: translate(0, 0);
   }
   to {
-    background-position: 350% 50%, 350% 50%;
+    transform: translate(-50%, 0);
   }
 }
 
 .animate-aurora {
   animation: aurora 60s linear infinite;
+  will-change: transform;
 }
 
 /* Replace the existing scrollbar styles with these */

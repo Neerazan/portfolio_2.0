@@ -137,7 +137,7 @@ export default function Project({
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-cyan-300 transition-colors duration-300 rounded-none group"
+                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-cyan-300 transition-colors duration-300 rounded group"
                         >
                           Live Demo
                           <span className="block h-0.5 max-w-0 group-hover:max-w-full transition-all duration-300 bg-black"></span>
@@ -151,7 +151,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded-none"
+                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>

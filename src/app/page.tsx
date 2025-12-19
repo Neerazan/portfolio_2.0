@@ -165,7 +165,7 @@ function PageContent() {
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white">
       <div
-        className="fixed inset-0 pointer-events-none opacity-30 animate-aurora z-0"
+        className="fixed inset-[-50%] w-[200%] h-[200%] pointer-events-none opacity-30 animate-aurora z-0"
         style={{
           backgroundImage: `
             radial-gradient(circle at 18% 20%, rgba(76, 29, 149, 0.4) 0%, transparent 40%),
@@ -174,7 +174,7 @@ function PageContent() {
             radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)
           `,
           filter: "blur(60px)",
-          backgroundSize: "200% 200%"
+          backgroundSize: "50% 50%"
         }}
       />
       <div
@@ -199,4 +199,3 @@ export default function App() {
     </DisplayModeProvider>
   );
 }
-                                                                                                    

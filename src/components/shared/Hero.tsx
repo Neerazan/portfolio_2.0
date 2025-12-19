@@ -1,10 +1,14 @@
 "use client";
+import { useDisplayMode } from "@/src/context/DisplayModeContext";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaDatabase, FaEnvelope, FaGithub, FaLinkedin, FaServer, FaTerminal, FaTwitter } from "react-icons/fa";
 import { HiArrowRight } from "react-icons/hi";
 
 export default function Hero() {
+  const { mode } = useDisplayMode();
+  const isDev = mode === "developer";
+
   const handleScroll = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
@@ -42,25 +46,10 @@ export default function Hero() {
 
   return (
     <div
-      className="relative min-h-screen w-full bg-[#0a0a0a] text-white overflow-hidden flex flex-col"
+      id="home"
+      className={`relative min-h-screen w-full text-white overflow-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
       onMouseMove={handleMouseMove}
     >
-      {/* 
-        Aurora Background 
-      */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40 animate-aurora"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 18% 20%, rgba(76, 29, 149, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 80% 10%, rgba(6, 182, 212, 0.3) 0%, transparent 40%),
-            radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.3) 0%, transparent 40%),
-            radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)
-          `,
-          filter: "blur(60px)",
-          backgroundSize: "200% 200%"
-        }}
-      />
 
       {/* Grid Overlay for Texture */}
       <div
@@ -141,14 +130,14 @@ export default function Hero() {
               <div className="flex flex-wrap gap-6">
                 <button
                   onClick={handleScroll}
-                  className="cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm rounded-none hover:bg-cyan-300 transition-colors duration-300 flex items-center gap-3 overflow-hidden"
+                  className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm hover:bg-cyan-300 transition-colors duration-300 flex items-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10">Get in Touch</span>
                   <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                 </button>
 
-                <button className="cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 transition-colors">
+                <button className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 transition-colors">
                   View Projects
                 </button>
               </div>

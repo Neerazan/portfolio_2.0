@@ -31,45 +31,36 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
-    // Handle scroll events to update active section
-    const handleScrollEvent = () => {
-      // Check if at top of page
-      if (window.scrollY < 100) {
-        setActiveSection("home");
-        return;
-      }
-
-      // Find which section is currently in view
-      const sections = navSections.map(({ id }) => ({
-        id,
-        element: document.getElementById(id),
-      })).filter(({ element }) => element !== null);
-
-      let currentSection = "home";
-      let closestDistance = Infinity;
-
-      sections.forEach(({ id, element }) => {
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Check if section is in the upper half of viewport
-          const distance = Math.abs(rect.top - window.innerHeight / 2);
-
-          if (rect.top < window.innerHeight / 2 && distance < closestDistance) {
-            closestDistance = distance;
-            currentSection = id;
+    // Use IntersectionObserver to track active section
+    // We use a rootMargin that creates a narrow band in the middle of the viewport
+    // This effectively detects which section is "mostly" in the center
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        }
-      });
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: 0,
+      }
+    );
 
-      setActiveSection(currentSection);
-    };
+    // Observe all sections including home
+    const sectionIds = ["home", ...navSections.map((s) => s.id)];
 
-    window.addEventListener("scroll", handleScrollEvent, { passive: true });
-    // Initial check
-    handleScrollEvent();
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScrollEvent);
+      observer.disconnect();
     };
   }, []);
 
