@@ -151,7 +151,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded"
+                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>

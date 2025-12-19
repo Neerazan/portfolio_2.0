@@ -40,7 +40,7 @@ export default function Header() {
             className="hidden lg:block group cursor-pointer"
             aria-label="Download CV - PDF document"
           >
-            <button className="px-6 py-2.5 border border-white/20 text-white font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 uppercase tracking-widest rounded-none">
+            <button className="px-6 py-2.5 border border-white/20 text-white font-medium text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded cursor-pointer">
               Download CV
             </button>
           </Link>

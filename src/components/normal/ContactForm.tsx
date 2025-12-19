@@ -175,9 +175,14 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded cursor-pointer w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-white text-black font-bold uppercase tracking-widest text-sm sm:text-base hover:bg-cyan-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="rounded cursor-pointer group relative w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-white text-black font-bold uppercase tracking-widest text-sm sm:text-base hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        <span className="relative z-10 group-hover:text-black transition-colors">
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </span>
+        {!isSubmitting && (
+          <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+        )}
       </button>
 
       {submitStatus && (
