@@ -112,17 +112,17 @@ export default function Project({
 
               {/* Navigation Controls */}
               {images.length > 1 && (
-                <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 flex items-center justify-between px-4 sm:px-6 z-10 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity pointer-events-none">
                   <button
                     onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                    className="p-3 bg-black/70 backdrop-blur-sm text-white rounded-full hover:bg-black/90 border border-white/10 hover:border-white/20 transition-all"
+                    className="p-3 bg-black/70 backdrop-blur-sm text-white rounded-full hover:bg-black/90 border border-white/10 hover:border-white/20 transition-all pointer-events-auto cursor-pointer"
                     aria-label="Previous image"
                   >
                     <FaChevronLeft size={16} />
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                    className="p-3 bg-black/70 backdrop-blur-sm text-white rounded-full hover:bg-black/90 border border-white/10 hover:border-white/20 transition-all"
+                    className="p-3 bg-black/70 backdrop-blur-sm text-white rounded-full hover:bg-black/90 border border-white/10 hover:border-white/20 transition-all pointer-events-auto cursor-pointer"
                     aria-label="Next image"
                   >
                     <FaChevronRight size={16} />

@@ -156,7 +156,7 @@ export default function Hero() {
                   <>
                     <button
                       onClick={handleScroll}
-                      className="group font-mono text-sm px-6 py-3 bg-black border border-green-500/50 text-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 rounded"
+                      className="group font-mono text-sm px-6 py-3 bg-black border border-green-500/50 text-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
                     >
                       <span className="text-gray-500">$</span>
                       <span>./contact.sh</span>
@@ -165,7 +165,7 @@ export default function Hero() {
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 flex items-center gap-2 rounded"
+                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
                     >
                       <span className="text-gray-500">$</span>
                       <span>git checkout projects</span>
