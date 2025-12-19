@@ -29,7 +29,7 @@ export default function Contact() {
         {/* Right Side - Bento Boxes (Span 1) */}
         <div className="flex flex-col gap-6 lg:h-full">
           {/* Top Box - Quote */}
-          <div className="flex h-1/2 flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-[2] flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-500"></div>
             <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
               "Great things are not done by impulse, but by a series of small things brought together."
@@ -38,10 +38,10 @@ export default function Contact() {
           </div>
 
           {/* Bottom Box - Decoration/Social */}
-          <div className="flex h-1/2 flex-col justify-end items-start rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 group-hover:bg-cyan-500/20 transition-all duration-500"></div>
             <div className="relative z-10">
-              <p className="text-2xl font-bold text-white mb-2">Let's Build</p>
+              <p className="text-2xl font-bold text-white mb-2">Let's Buitld</p>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="text-sm text-gray-400">Available for work</span>
