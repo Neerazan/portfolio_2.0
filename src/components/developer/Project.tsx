@@ -144,12 +144,13 @@ export default function Project({
                 <h3 className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-3">Environment Variables</h3>
                 <div className="flex flex-wrap gap-2">
                   {technologies?.map((tech, i) => (
-                    <span
+                    <div
                       key={i}
-                      className="px-3 py-1.5 bg-white/5 border border-white/10 rounded text-xs text-blue-300 font-mono hover:bg-white/10 hover:border-white/20 transition-all"
+                      className="group flex items-center gap-1.5 px-3 py-1.5 bg-[#0d1117] border border-blue-500/20 rounded text-xs font-mono hover:bg-blue-500/10 hover:border-blue-500/40 transition-all cursor-default"
                     >
-                      {tech}
-                    </span>
+                      <span className="text-blue-500 group-hover:text-blue-400">$</span>
+                      <span className="text-gray-300 group-hover:text-white transition-colors">{tech}</span>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -160,18 +161,22 @@ export default function Project({
                 <Link
                   href={demoLink}
                   target="_blank"
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-black text-xs font-bold uppercase rounded hover:bg-white/90 transition-all hover:scale-105 active:scale-95 shadow-lg"
+                  className="group relative px-4 py-2 bg-[#0d1117] border border-green-500/50 text-green-400 font-mono text-xs hover:bg-green-500/10 hover:border-green-400 hover:shadow-[0_0_10px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2"
                 >
-                  <FaExternalLinkAlt size={12} /> Visit Deployment
+                  <span className="text-gray-600 group-hover:text-green-500 transition-colors">./</span>
+                  <span className="uppercase tracking-wider">Deploy</span>
+                  <FaExternalLinkAlt size={10} className="ml-1" />
                 </Link>
               )}
               {githubLink && (
                 <Link
                   href={githubLink}
                   target="_blank"
-                  className="flex items-center gap-2 px-5 py-2.5 border border-white/30 text-white text-xs font-bold uppercase rounded hover:bg-white/10 hover:border-white/50 transition-all hover:scale-105 active:scale-95"
+                  className="group relative px-4 py-2 bg-[#0d1117] border border-gray-700 text-gray-400 font-mono text-xs hover:bg-white/5 hover:border-white/50 hover:text-white transition-all duration-300 flex items-center gap-2"
                 >
-                  <FaGithub size={12} /> View Source
+                  <span className="text-gray-600 group-hover:text-gray-400 transition-colors">git</span>
+                  <span className="uppercase tracking-wider">Source</span>
+                  <FaGithub size={12} className="ml-1" />
                 </Link>
               )}
             </div>
