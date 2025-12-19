@@ -166,7 +166,7 @@ export default function Project({
         <div className="flex flex-col gap-3 sm:gap-4 md:w-1/2">
           <div className="flex items-center gap-3 sm:gap-4">
             <Num number={number} />
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400">
               {title}
             </h2>
           </div>

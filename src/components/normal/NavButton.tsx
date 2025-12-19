@@ -101,12 +101,12 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed inset-0 z-[100] bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden overflow-hidden"
+              className="fixed inset-0 z-1110 bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden overflow-hidden"
             >
               {/* Close Button inside Portal */}
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-6 right-6 z-[110] p-2 text-white hover:text-cyan-400 transition-all duration-300"
+                className="absolute top-6 right-6 z-110 p-2 text-white hover:text-cyan-400 transition-all duration-300"
                 aria-label="Close menu"
               >
                 <HiX className="w-8 h-8" />

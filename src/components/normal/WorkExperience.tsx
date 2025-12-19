@@ -91,7 +91,7 @@ function WorkExperience() {
               <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
                 <span className="text-xl sm:text-2xl">{item.icon}</span>
                 <div>
-                  <h3 className="text-lg font-semibold text-white sm:text-xl">
+                  <h3 className="text-lg font-semibold text-cyan-400 sm:text-xl">
                     {item.title}
                   </h3>
                   {/* position */}
