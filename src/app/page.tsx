@@ -5,83 +5,35 @@ import { projects } from "@/src/data/projects";
 import SharedHero from "@/src/components/shared/Hero";
 import { DisplayModeProvider, useDisplayMode } from "@/src/context/DisplayModeContext";
 
-import DeveloperHeader from "@/src/components/developer/Header";
-import NormalHeader from "@/src/components/normal/Header";
-
-import DeveloperAbout from "@/src/components/developer/About";
 import NormalAbout from "@/src/components/normal/About";
-
-import DeveloperContact from "@/src/components/developer/Contact";
 import NormalContact from "@/src/components/normal/Contact";
-
-import DeveloperProject from "@/src/components/developer/Project";
+import NormalFooter from "@/src/components/normal/Footer";
+import NormalHeader from "@/src/components/normal/Header";
 import NormalProject from "@/src/components/normal/Project";
-
-import DeveloperTechStack from "@/src/components/developer/Tech";
 import NormalTechStack from "@/src/components/normal/Tech";
-
-import DeveloperWorkExperience from "@/src/components/developer/WorkExperience";
+import NormalTitle from "@/src/components/normal/Title";
 import NormalWorkExperience from "@/src/components/normal/WorkExperience";
 
-import DeveloperFooter from "@/src/components/developer/Footer";
-import NormalFooter from "@/src/components/normal/Footer";
+import DevBootLoader from "@/src/components/developer/DevBootLoader";
+import dynamic from "next/dynamic";
 
-import DeveloperTitle from "@/src/components/developer/Title";
-import NormalTitle from "@/src/components/normal/Title";
+const DevModeLayout = dynamic(
+  async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return import("@/src/components/developer/DevModeLayout");
+  },
+  {
+    loading: () => <DevBootLoader />,
+    ssr: false,
+  }
+);
 
 function PageContent() {
   const { mode } = useDisplayMode();
   const isDev = mode === "developer";
 
-  const Header = isDev ? DeveloperHeader : NormalHeader;
-  const About = isDev ? DeveloperAbout : NormalAbout;
-  const Contact = isDev ? DeveloperContact : NormalContact;
-  const Project = isDev ? DeveloperProject : NormalProject;
-  const TechStack = isDev ? DeveloperTechStack : NormalTechStack;
-  const WorkExperience = isDev ? DeveloperWorkExperience : NormalWorkExperience;
-  const Footer = isDev ? DeveloperFooter : NormalFooter;
-  const Title = isDev ? DeveloperTitle : NormalTitle;
-
-
-  const content = (
-    <>
-      <Header />
-      <SharedHero />
-
-      {/* About Section */}
-      <Title title="About Me" id="about" className={undefined} />
-      <About />
-
-      {/* Skills and Tech Stack */}
-      <Title title="Skills & Technologies" id="skills" className={undefined} />
-      <TechStack />
-
-      {/* Work Experience */}
-      <Title title="Work Experience" id="work" className={undefined} />
-      <WorkExperience />
-
-      <Title title="Some featured projects" id="projects" className={undefined} />
-      <div className="flex flex-col gap-12 sm:gap-16">
-        {projects.map((project, index) => (
-          <Project key={index} {...project} />
-        ))}
-      </div>
-      <Title
-        title="Have an idea?"
-        id="contact"
-        className={undefined}
-      />
-      <Contact />
-      <Footer />
-    </>
-  );
-
   if (isDev) {
-    return (
-      <div className="pt-6.5">
-        {content}
-      </div>
-    );
+    return <DevModeLayout />;
   }
 
   // Normal Mode with Aurora Background
@@ -109,7 +61,34 @@ function PageContent() {
       />
 
       <div className="relative z-10">
-        {content}
+        <NormalHeader />
+        <SharedHero />
+
+        {/* About Section */}
+        <NormalTitle title="About Me" id="about" className={undefined} />
+        <NormalAbout />
+
+        {/* Skills and Tech Stack */}
+        <NormalTitle title="Skills & Technologies" id="skills" className={undefined} />
+        <NormalTechStack />
+
+        {/* Work Experience */}
+        <NormalTitle title="Work Experience" id="work" className={undefined} />
+        <NormalWorkExperience />
+
+        <NormalTitle title="Some featured projects" id="projects" className={undefined} />
+        <div className="flex flex-col gap-12 sm:gap-16">
+          {projects.map((project, index) => (
+            <NormalProject key={index} {...project} />
+          ))}
+        </div>
+        <NormalTitle
+          title="Have an idea?"
+          id="contact"
+          className={undefined}
+        />
+        <NormalContact />
+        <NormalFooter />
       </div>
     </div>
   );
