@@ -78,16 +78,11 @@ export default function Navbar() {
           isActive={activeSection === "home"}
           aria-label="Home"
         >
-          <div className="m-1 px-4 py-1 transition-all duration-300 hover:opacity-80">
-            <span className={activeSection === "home" ? "text-cyan-400 font-bold" : "text-gray-400 font-medium"}>
-              Home
-            </span>
-          </div>
+          Home
         </Navitem>
         <Navitem
           href="#about"
           isActive={activeSection === "about"}
-          className="transition-all duration-300 hover:text-cyan-400 font-medium text-sm tracking-wide"
           onClick={(event) => handleScroll(event, 'about')}
           aria-label="About section"
         >
@@ -96,7 +91,6 @@ export default function Navbar() {
         <Navitem
           href="#skills"
           isActive={activeSection === "skills"}
-          className="transition-all duration-300 hover:text-cyan-400 font-medium text-sm tracking-wide"
           onClick={(event) => handleScroll(event, 'skills')}
           aria-label="Skills section"
         >
@@ -105,7 +99,6 @@ export default function Navbar() {
         <Navitem
           href="#work"
           isActive={activeSection === "work"}
-          className="transition-all duration-300 hover:text-cyan-400 font-medium text-sm tracking-wide"
           onClick={(event) => handleScroll(event, 'work')}
           aria-label="Work experience section"
         >
@@ -114,7 +107,6 @@ export default function Navbar() {
         <Navitem
           href="#projects"
           isActive={activeSection === "projects"}
-          className="transition-all duration-300 hover:text-cyan-400 font-medium text-sm tracking-wide"
           onClick={(event) => handleScroll(event, 'projects')}
           aria-label="Projects section"
         >
@@ -123,7 +115,7 @@ export default function Navbar() {
         <Navitem
           href="#contact"
           isActive={activeSection === "contact"}
-          className="mr-6 transition-all duration-300 hover:text-cyan-400 font-medium text-sm tracking-wide"
+          className="mr-6"
           onClick={(event) => handleScroll(event, 'contact')}
           aria-label="Contact section"
         >
@@ -135,12 +127,20 @@ export default function Navbar() {
 }
 
 export function Navitem({ children, className, href, onClick, isActive }: NavItemProps) {
-  const activeClass = isActive ? "text-cyan-400 border-b border-cyan-400/50 pb-0.5" : "text-gray-400 hover:text-white pb-0.5 border-b border-transparent";
+  // Common base classes for all items
+  const baseClasses = "transition-all duration-300 font-medium tracking-wide flex items-center justify-center";
+
+  // Active: larger scale, cyan color
+  // Inactive: gray color, white on hover
+  const stateClasses = isActive
+    ? "text-cyan-400 scale-110 origin-center text-lg border-b border-cyan-400/50 pb-0.5"
+    : "text-gray-400 hover:text-cyan-400 text-lg hover:scale-105 origin-center border-b border-transparent pb-0.5";
+
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`${activeClass} ${className} transition-all duration-200`}
+      className={`${baseClasses} ${stateClasses} ${className || ""}`}
     >
       {children}
     </Link>
