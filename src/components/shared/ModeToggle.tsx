@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
-import { FaLaptop, FaTerminal } from "react-icons/fa";
+import { FaPalette, FaTerminal } from "react-icons/fa";
 
 export default function ModeToggle() {
   const { mode, toggleMode } = useDisplayMode();
@@ -25,8 +25,8 @@ export default function ModeToggle() {
           </>
         ) : (
           <>
-            <FaLaptop className="text-sm text-cyan-300" />
-            <span className="text-xs font-bold tracking-wider">NORMAL</span>
+            <FaPalette className="text-sm text-cyan-300" />
+            <span className="text-xs font-bold tracking-wider">STANDARD</span>
           </>
         )}
       </div>
