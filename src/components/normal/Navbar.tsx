@@ -1,68 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-interface NavItemProps {
-  children: React.ReactNode;
-  className?: string;
-  href: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  isActive?: boolean;
-}
-
-const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string): void => {
-  event.preventDefault();
-  const scrollSection = document.getElementById(id);
-  if (scrollSection) {
-    scrollSection.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
-const navSections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "work", label: "Experiences" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
+import { navSections } from "../../data/nav";
+import { useScrollSpy } from "../../hooks/useScrollSpy";
+import { NavItemProps } from "../../types";
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState<string>("home");
-
-  useEffect(() => {
-    // Use IntersectionObserver to track active section
-    // We use a rootMargin that creates a narrow band in the middle of the viewport
-    // This effectively detects which section is "mostly" in the center
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: 0,
-      }
-    );
-
-    // Observe all sections including home
-    const sectionIds = ["home", ...navSections.map((s) => s.id)];
-
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const { activeSection, scrollToSection } = useScrollSpy();
 
   return (
     <div className="hidden lg:block">
@@ -70,53 +15,28 @@ export default function Navbar() {
         <Navitem
           href="#home"
           className="cursor-pointer"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setActiveSection("home");
-          }}
+          onClick={(e) => scrollToSection(e, 'home')}
           isActive={activeSection === "home"}
           aria-label="Home"
         >
           Home
         </Navitem>
-        <Navitem
-          href="#about"
-          isActive={activeSection === "about"}
-          onClick={(event) => handleScroll(event, 'about')}
-          aria-label="About section"
-        >
-          About
-        </Navitem>
-        <Navitem
-          href="#skills"
-          isActive={activeSection === "skills"}
-          onClick={(event) => handleScroll(event, 'skills')}
-          aria-label="Skills section"
-        >
-          Skills
-        </Navitem>
-        <Navitem
-          href="#work"
-          isActive={activeSection === "work"}
-          onClick={(event) => handleScroll(event, 'work')}
-          aria-label="Work experience section"
-        >
-          Experiences
-        </Navitem>
-        <Navitem
-          href="#projects"
-          isActive={activeSection === "projects"}
-          onClick={(event) => handleScroll(event, 'projects')}
-          aria-label="Projects section"
-        >
-          Projects
-        </Navitem>
+        {navSections.map((section) => (
+          <Navitem
+            key={section.id}
+            href={`#${section.id}`}
+            isActive={activeSection === section.id}
+            onClick={(e) => scrollToSection(e, section.id)}
+            aria-label={`${section.label} section`}
+          >
+            {section.label}
+          </Navitem>
+        ))}
         <Navitem
           href="#contact"
           isActive={activeSection === "contact"}
           className="mr-6"
-          onClick={(event) => handleScroll(event, 'contact')}
+          onClick={(e) => scrollToSection(e, 'contact')}
           aria-label="Contact section"
         >
           Contact

@@ -6,15 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-export interface ProjectProps {
-  title: string;
-  number: string;
-  description: string;
-  technologies?: string[];
-  images: string[];
-  demoLink?: string;
-  githubLink?: string;
-}
+import { ProjectProps } from "../../types";
 
 export default function Project({
   title,

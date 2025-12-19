@@ -2,117 +2,17 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
-
-interface FormState {
-  name: string;
-  email: string;
-  message: string;
-}
-
-type SubmitStatus = 'success' | 'error' | null;
+import { useContactForm } from '../../hooks/useContactForm';
 
 export default function ContactForm() {
-  const [formState, setFormState] = useState<FormState>({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    // Check if script already exists
-    let script = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]') as HTMLScriptElement;
-
-    const renderWidget = () => {
-      if (turnstileRef.current && (window as any).turnstile && !widgetIdRef.current) {
-        widgetIdRef.current = (window as any).turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-          theme: 'dark',
-          size: 'normal',
-        });
-      }
-    };
-
-    if (script) {
-      // Script exists, check if Turnstile is loaded
-      if ((window as any).turnstile) {
-        renderWidget();
-      } else {
-        // Wait for script to load
-        script.addEventListener('load', renderWidget);
-      }
-    } else {
-      // Create new script
-      script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-      script.async = true;
-      script.defer = true;
-      script.onload = renderWidget;
-      script.onerror = () => console.error('Failed to load Turnstile script');
-      document.head.appendChild(script);
-    }
-
-    return () => {
-      if (widgetIdRef.current && (window as any).turnstile) {
-        (window as any).turnstile.remove(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-    };
-  }, []);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    let turnstileToken = '';
-    if (widgetIdRef.current && (window as any).turnstile) {
-      turnstileToken = (window as any).turnstile.getResponse(widgetIdRef.current);
-    }
-
-    if (!turnstileToken) {
-      setSubmitStatus('error');
-      console.error('Turnstile token not available');
-      setTimeout(() => setSubmitStatus(null), 5000);
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formState,
-          turnstileToken
-        }),
-      });
-
-      if (!response.ok) throw new Error('Form submission failed');
-
-      setSubmitStatus('success');
-      setFormState({ name: '', email: '', message: '' });
-
-      if (widgetIdRef.current && (window as any).turnstile) {
-        (window as any).turnstile.reset(widgetIdRef.current);
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
+  const {
+    formState,
+    isSubmitting,
+    submitStatus,
+    turnstileRef,
+    handleSubmit,
+    handleChange
+  } = useContactForm();
 
   const inputClass = "w-full bg-transparent border-none outline-none text-green-400 placeholder:text-gray-700 font-mono text-sm sm:text-base p-0 focus:ring-0";
   const containerClass = "flex items-center gap-2 bg-[#0d1117] border border-gray-800 rounded px-3 py-2 focus-within:border-green-500/50 transition-colors";

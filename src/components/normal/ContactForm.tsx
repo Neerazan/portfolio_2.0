@@ -2,127 +2,24 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
-
-interface FormState {
-  name: string;
-  email: string;
-  message: string;
-}
-
-type SubmitStatus = 'success' | 'error' | null;
+import { useEffect } from 'react';
+import { useContactForm } from '../../hooks/useContactForm';
 
 export default function ContactForm() {
-  const [formState, setFormState] = useState<FormState>({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<string | null>(null);
+  const {
+    formState,
+    isSubmitting,
+    submitStatus,
+    turnstileRef,
+    handleSubmit,
+    handleChange
+  } = useContactForm();
 
   useEffect(() => {
-    // Check if script is already present
-    let script = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]') as HTMLScriptElement;
-
-    const renderWidget = () => {
-      if (turnstileRef.current && (window as any).turnstile) {
-        // Clear any existing content in the ref to prevent duplicates if needed, though render normally replaces
-        // But the issue is likely strict mode double-invoking useEffect or multiple script loads
-        if (widgetIdRef.current) return; // Already rendered
-
-        widgetIdRef.current = (window as any).turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-          theme: 'dark',
-          size: 'normal',
-        });
-      }
-    };
-
-    if (!script) {
-      script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-      script.async = true;
-      script.defer = true;
-      script.onload = renderWidget;
-      script.onerror = () => console.error('Failed to load Turnstile script');
-      document.head.appendChild(script);
-    } else {
-      // Script already exists, checking if loaded
-      if ((window as any).turnstile) {
-        renderWidget();
-      } else {
-        script.addEventListener('load', renderWidget);
-      }
-    }
-
-    return () => {
-      if (widgetIdRef.current && (window as any).turnstile) {
-        (window as any).turnstile.remove(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-      // Don't remove the script tag as other components might need it
-      if (script) {
-        script.removeEventListener('load', renderWidget);
-      }
-    };
-  }, []);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Get Turnstile token from the widget
-    let turnstileToken = '';
-    if (widgetIdRef.current && (window as any).turnstile) {
-      turnstileToken = (window as any).turnstile.getResponse(widgetIdRef.current);
-    }
-
-    if (!turnstileToken) {
-      setSubmitStatus('error');
-      console.error('Turnstile token not available');
-      setTimeout(() => setSubmitStatus(null), 5000);
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formState,
-          turnstileToken
-        }),
-      });
-
-      if (!response.ok) throw new Error('Form submission failed');
-
-      setSubmitStatus('success');
-      setFormState({ name: '', email: '', message: '' });
-
-      // Reset Turnstile widget
-      if (widgetIdRef.current && (window as any).turnstile) {
-        (window as any).turnstile.reset(widgetIdRef.current);
-      }
-
+    if (submitStatus === 'success') {
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    } catch (error) {
-      setSubmitStatus('error');
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
     }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
+  }, [submitStatus]);
 
   const inputClass = "w-full p-2.5 sm:p-3 text-sm sm:text-base bg-white/5 rounded-lg border border-white/10 focus:border-cyan-500/50 outline-none transition-colors text-white/90 placeholder:text-white/40 disabled:opacity-50";
 
