@@ -32,15 +32,6 @@ export default function Navbar() {
             {section.label}
           </Navitem>
         ))}
-        <Navitem
-          href="#contact"
-          isActive={activeSection === "contact"}
-          className="mr-6"
-          onClick={(e) => scrollToSection(e, 'contact')}
-          aria-label="Contact section"
-        >
-          Contact
-        </Navitem>
       </nav>
     </div>
   );
