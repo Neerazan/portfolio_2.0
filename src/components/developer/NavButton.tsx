@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import { Navitem } from "./Navbar";
 
 interface NabButtonProps {
@@ -8,6 +9,20 @@ interface NabButtonProps {
 }
 
 export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonProps) {
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string): void => {
     event.preventDefault();
@@ -38,14 +53,14 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
       {/* Terminal-style Fullscreen Menu Panel */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-9999 bg-black transition-all duration-300 ease-out lg:hidden h-screen w-screen ${isMenuOpen
+        className={`fixed inset-0 z-9999 bg-black transition-all duration-300 ease-out lg:hidden h-dvh w-screen ${isMenuOpen
           ? 'opacity-100 translate-x-0'
           : 'opacity-0 translate-x-full pointer-events-none'
           }`}
         role="navigation"
         aria-label="Mobile navigation"
       >
-        <div className="h-full min-h-screen flex flex-col bg-black relative">
+        <div className="h-full flex flex-col bg-black relative">
           {/* Terminal Header */}
           <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between bg-[#0d1117] relative z-10">
             <div className="flex items-center gap-2">
@@ -68,7 +83,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
           </div>
 
           {/* Nav Items - Centered */}
-          <div className="flex-1 flex flex-col justify-center px-8 py-8 bg-black overflow-y-auto">
+          <div className="flex-1 flex flex-col justify-center px-8 py-8 bg-black overflow-y-auto overscroll-y-contain">
             <div className="space-y-2 max-w-md mx-auto w-full">
               <Navitem
                 href="#home"
