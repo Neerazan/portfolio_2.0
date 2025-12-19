@@ -148,6 +148,11 @@ function PageContent() {
           githubLink="https://github.com/nirajan-dhakal/right4children"
         />
       </div>
+      <Title
+        title="Have an idea?"
+        id="contact"
+        className={undefined}
+      />
       <Contact />
       <Footer />
     </>

@@ -1,18 +1,13 @@
 "use client";
 
 import ContactForm from "./ContactForm";
-import Title from "./Title";
 
 export default function Contact() {
   return (
     <section
       id="contact"
-      className="mx-auto w-11/12 max-w-7xl py-20"
+      className="mx-auto w-11/12 max-w-7xl"
     >
-      <Title
-        title="Have an idea?"
-        className="mb-2 flex items-center text-3xl font-bold text-white md:text-4xl"
-      />
       <p className="mb-12 text-gray-400 max-w-2xl">
         I&apos;d love to hear from you! Feel free to reach out for questions,
         collaboration, or just to connect.
