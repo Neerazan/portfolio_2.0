@@ -39,7 +39,7 @@ export default function Header() {
             className="hidden lg:block cursor-pointer group"
             aria-label="Download CV - PDF document"
           >
-            <div className="font-mono text-xs px-4 py-2 bg-[#0d1117] border border-green-500/30 text-green-400 rounded hover:bg-green-500/10 hover:shadow-[0_0_10px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 whitespace-nowrap min-w-fit">
+            <div className="font-mono text-xs px-4 py-2 bg-[#0d1117] border border-green-500/30 text-green-400 rounded hover:bg-green-500/10 hover:border-green-400 hover:text-green-300 hover:shadow-[0_0_10px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 whitespace-nowrap min-w-fit">
               <span className="text-gray-500">$</span>
               <span>wget cv.pdf</span>
               <span className="block w-1.5 h-3 bg-green-500 animate-pulse" />
