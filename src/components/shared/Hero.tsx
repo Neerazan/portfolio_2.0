@@ -47,7 +47,7 @@ export default function Hero() {
   return (
     <div
       id="home"
-      className={`relative min-h-screen w-full text-white overflow-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
+      className={`relative min-h-[100dvh] w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
       onMouseMove={handleMouseMove}
     >
 
@@ -60,7 +60,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="flex flex-1 relative z-10 container mx-auto px-0 lg:px-0">
+      <div className="flex flex-col lg:flex-row flex-1 relative z-10 container mx-auto px-0 lg:px-0">
         {/* 
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
@@ -94,7 +94,7 @@ export default function Hero() {
         {/* 
           MAIN CONTENT AREA 
         */}
-        <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-36 lg:pr-12 w-full pt-20 lg:pt-0 min-h-screen">
+        <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-36 lg:pr-12 w-full pt-20 lg:pt-0">
 
           {/* Text Section */}
           <div className="lg:w-1/2 max-w-3xl">
@@ -298,7 +298,7 @@ export default function Hero() {
         </main>
 
         {/* Mobile Socials */}
-        <div className="lg:hidden flex justify-center gap-6 pb-12 mt-8 absolute bottom-0 w-full z-20">
+        <div className="lg:hidden flex justify-center gap-6 pb-12 mt-8 z-20 w-full">
           {socialLinks.map((social, index) => (
             <a
               key={index}
