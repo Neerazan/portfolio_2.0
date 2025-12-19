@@ -344,12 +344,35 @@ export default function Hero() {
 
         </main>
 
-        {/* Mobile Socials */}
-        <div className="lg:hidden flex justify-center gap-6 pb-12 mt-8 z-20 w-full">
+        {/* Mobile Socials - Terminal Style */}
+        <div className={`lg:hidden flex flex-col gap-3 pb-12 mt-12 z-20 w-full max-w-sm mx-auto px-6 ${isDev ? 'block' : 'hidden'}`}>
+          <div className="text-xs font-mono text-gray-500 mb-2">
+            <span className="text-blue-400">$</span> cat .social_links
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 bg-[#0d1117] border border-gray-800 rounded text-xs font-mono text-gray-400 hover:text-blue-400 hover:border-blue-500/50 transition-all flex items-center gap-2"
+              >
+                <social.icon className="w-4 h-4" />
+                <span>{social.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Socials - Normal Mode */}
+        <div className={`lg:hidden flex justify-center gap-6 pb-12 mt-8 z-20 w-full ${isDev ? 'hidden' : 'flex'}`}>
           {socialLinks.map((social, index) => (
             <a
               key={index}
               href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
             >
               <social.icon className="w-6 h-6" />

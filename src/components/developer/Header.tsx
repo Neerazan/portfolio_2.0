@@ -12,7 +12,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5" role="banner">
+    <header className={`fixed top-0 left-0 right-0 z-100 ${isMenuOpen ? 'bg-black' : 'bg-black/60'} backdrop-blur-xl border-b border-white/5`} role="banner">
       <div className="mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
         <div className="flex items-center justify-center gap-x-2">
           {/* Terminal Title */}

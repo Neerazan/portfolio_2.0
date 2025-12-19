@@ -25,7 +25,7 @@ export default function Contact() {
         {/* Right Side - Bento Boxes (Span 1) */}
         <div className="flex flex-col gap-6 lg:h-full">
           {/* Top Box - Quote */}
-          <div className="flex flex-[2] flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-2 flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-500"></div>
             <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
               "Great things are not done by impulse, but by a series of small things brought together."
