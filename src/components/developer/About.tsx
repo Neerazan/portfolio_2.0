@@ -36,9 +36,9 @@ class Engineer {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-4 mb-8">
-            <HiChip className="text-4xl text-cyan-400" />
+            <HiChip className="text-4xl text-blue-400" />
             <h2 className="text-3xl font-bold tracking-tighter text-white">
-              SYSTEM <span className="text-purple-400">SPECS</span>
+              SYSTEM <span className="text-white">SPECS</span>
             </h2>
           </div>
 
@@ -50,14 +50,14 @@ class Engineer {
               {systemSpecs.map((spec, index) => (
                 <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
                   <span className="text-gray-500">{spec.label}</span>
-                  <span className="text-cyan-400">{spec.value}</span>
+                  <span className="text-blue-400">{spec.value}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/10 text-gray-400 leading-relaxed font-sans">
               <p className="mb-4">
-                <span className="text-purple-400 font-mono">&gt; info:</span> I am a software engineer focused on <span className="text-white">backend architecture</span> and <span className="text-white">cloud infrastructure</span>.
+                <span className="text-orange-400 font-mono">&gt; info:</span> I am a software engineer focused on <span className="text-white">backend architecture</span> and <span className="text-white">cloud infrastructure</span>.
               </p>
               <p>
                 My system is optimized for building scalable applications. I blend technical precision with creative problem-solving to deliver high-performance digital solutions.
@@ -81,9 +81,9 @@ class Engineer {
             {[
               { name: "Backend Logic", icon: FaServer, color: "text-green-400" },
               { name: "Database Design", icon: FaDatabase, color: "text-yellow-400" },
-              { name: "Cloud Native", icon: FaNetworkWired, color: "text-cyan-400" },
+              { name: "Cloud Native", icon: FaNetworkWired, color: "text-blue-400" },
               { name: "System Security", icon: FaShieldAlt, color: "text-red-400" },
-              { name: "clean_code.js", icon: FaCode, color: "text-purple-400" },
+              { name: "clean_code.js", icon: FaCode, color: "text-orange-400" },
               { name: "Optimization", icon: FaBolt, color: "text-orange-400" },
             ].map((item, index) => (
               <motion.div

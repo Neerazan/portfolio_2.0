@@ -128,7 +128,7 @@ export default function Navbar() {
         <Navitem
           href="#contact"
           isActive={activeSection === "contact"}
-          className="font-mono text-sm text-green-400 hover:text-green-300"
+          className="font-mono text-sm text-blue-400 hover:text-blue-300"
           onClick={(event) => handleScroll(event, 'contact')}
           aria-label="Contact section"
         >
@@ -140,14 +140,14 @@ export default function Navbar() {
 }
 
 export function Navitem({ children, className, href, onClick, isActive }: NavItemProps) {
-  const activeClass = isActive ? "text-cyan-400 font-bold" : "text-gray-400 hover:text-white";
+  const activeClass = isActive ? "text-green-400 font-bold" : "text-gray-400 hover:text-white";
   return (
     <Link
       href={href}
       onClick={onClick}
       className={`${activeClass} ${className} transition-colors duration-200 flex items-center`}
     >
-      {isActive && <span className="mr-1 text-purple-400">&gt;</span>}
+      {isActive && <span className="mr-1 text-blue-400">&gt;</span>}
       {children}
     </Link>
   );

@@ -119,7 +119,7 @@ export default function Project({
                 <h3 className="text-xs font-mono text-gray-500 uppercase mb-3">Environment Variables</h3>
                 <div className="flex flex-wrap gap-2">
                   {technologies?.map((tech, i) => (
-                    <span key={i} className="px-2 py-1 bg-white/5 border border-white/5 rounded text-[10px] sm:text-xs text-cyan-300 font-mono">
+                    <span key={i} className="px-2 py-1 bg-white/5 border border-white/5 rounded text-[10px] sm:text-xs text-blue-300 font-mono">
                       {tech}
                     </span>
                   ))}
@@ -132,7 +132,7 @@ export default function Project({
                 <Link
                   href={demoLink}
                   target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-bold uppercase rounded hover:bg-cyan-300 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-bold uppercase rounded hover:bg-white/90 transition-colors"
                 >
                   <FaExternalLinkAlt /> Visit Deployment
                 </Link>

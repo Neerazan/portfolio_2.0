@@ -23,7 +23,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
     <>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`lg:hidden cursor-pointer rounded-full bg-linear-to-r from-purple-600 to-cyan-600 p-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-[#7A87FB]/50 ${className}`}
+        className={`lg:hidden cursor-pointer rounded-full bg-linear-to-r from-green-600 to-emerald-600 p-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/50 ${className}`}
         aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={isMenuOpen}
         aria-controls="mobile-menu"
@@ -44,7 +44,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
       {/* Menu Panel */}
       <div
         id="mobile-menu"
-        className={`fixed top-20 right-4 z-50 w-48 rounded-lg border border-purple-600 bg-[#1C1C1C] shadow-2xl backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${isMenuOpen
+        className={`fixed top-20 right-4 z-50 w-48 rounded-lg border border-green-600 bg-[#1C1C1C] shadow-2xl backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${isMenuOpen
           ? 'opacity-100 translate-y-0 scale-100'
           : 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
           }`}
@@ -99,7 +99,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
         </Navitem>
 
         {/* Separator */}
-        <div className="mx-4 my-2 h-px bg-linear-to-r from-purple-600 to-cyan-600"></div>
+        <div className="mx-4 my-2 h-px bg-linear-to-r from-green-600 to-emerald-600"></div>
 
         {/* Download CV Button */}
         <div className="p-3">
@@ -107,7 +107,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonPro
             href="/nirajan_dhakal_cv.pdf"
             download="/nirajan_dhakal_cv.pdf"
             onClick={() => setIsMenuOpen(false)}
-            className="cursor-pointer flex w-full rounded-full bg-linear-to-r from-purple-600 to-cyan-600 px-4 py-3 text-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/50 min-h-11 items-center justify-center"
+            className="cursor-pointer flex w-full rounded-full bg-linear-to-r from-green-600 to-emerald-600 px-4 py-3 text-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-green-500/50 min-h-11 items-center justify-center"
           >
             Download CV
           </Link>

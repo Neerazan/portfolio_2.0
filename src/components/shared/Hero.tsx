@@ -65,8 +65,12 @@ export default function Hero() {
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
         */}
-        <aside className="hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r border-white/5 bg-black/20 backdrop-blur-md z-50 py-12">
-          <div className="w-px h-24 bg-linear-to-b from-transparent via-white/20 to-transparent" />
+        {/* 
+          LEFT SIDEBAR - Social Links
+          Fixed on desktop to stay efficient
+        */}
+        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r backdrop-blur-md z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/80' : 'border-white/5 bg-black/20'}`}>
+          <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
 
           <div className="flex flex-col gap-8">
             {socialLinks.map((social, index) => (
@@ -75,20 +79,25 @@ export default function Hero() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative p-3 text-gray-400 hover:text-white transition-colors"
+                className={`group relative p-3 transition-colors duration-300 ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
                 aria-label={social.label}
               >
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-cyan-400 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md" />
+                <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md ${isDev ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]' : 'bg-cyan-400'}`} />
                 <social.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
 
-                <span className="absolute left-full ml-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-white/10 backdrop-blur-md text-xs font-medium text-white rounded opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none border border-white/10 whitespace-nowrap">
-                  {social.label}
+                <span
+                  className={`absolute left-full ml-4 top-1/2 -translate-y-1/2 px-2 py-1 rounded opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none border whitespace-nowrap ${isDev
+                    ? 'bg-green-950/90 border-green-500/30 text-green-400 font-mono text-[10px] shadow-sm'
+                    : 'bg-white/10 backdrop-blur-md text-xs font-medium text-white border-white/10'
+                    }`}
+                >
+                  {isDev ? `> ${social.label.toLowerCase()}` : social.label}
                 </span>
               </a>
             ))}
           </div>
 
-          <div className="w-px h-24 bg-linear-to-b from-transparent via-white/20 to-transparent" />
+          <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
         </aside>
 
         {/* 
@@ -113,10 +122,10 @@ export default function Hero() {
             <h1 className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}>
               {isDev ? (
                 <>
-                  <span className="block text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-400 hover:from-purple-300 hover:to-pink-300 transition-colors duration-500 cursor-default">
+                  <span className="block text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-400 hover:from-green-300 hover:to-emerald-300 transition-colors duration-500 cursor-default">
                     {"<Build />"}
                   </span>
-                  <span className="block text-gray-500 text-6xl sm:text-8xl lg:text-9xl mt-2 hover:text-green-400 transition-colors duration-500 cursor-default">
+                  <span className="block text-gray-500 text-6xl sm:text-8xl lg:text-9xl mt-2 hover:text-orange-400 transition-colors duration-500 cursor-default">
                     {"scale()"}
                   </span>
                 </>
@@ -139,7 +148,7 @@ export default function Hero() {
               className="max-w-xl"
             >
               <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-300 font-light'} leading-relaxed mb-10`}>
-                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-purple-400' : 'text-purple-300 border-b border-purple-500/30'}`}>robust implementations</span> and <span className={`${isDev ? 'text-blue-400' : 'text-cyan-300 border-b border-cyan-500/30'}`}>scalable architecture</span> to power modern digital experiences.
+                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-purple-300 border-b border-purple-500/30'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-cyan-300 border-b border-cyan-500/30'}`}>scalable architecture</span> to power modern digital experiences.
               </p>
 
               <div className="flex flex-wrap gap-6">
@@ -156,7 +165,7 @@ export default function Hero() {
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-purple-500/50 hover:text-purple-400 transition-all duration-300 flex items-center gap-2 rounded"
+                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 flex items-center gap-2 rounded"
                     >
                       <span className="text-gray-500">$</span>
                       <span>git checkout projects</span>

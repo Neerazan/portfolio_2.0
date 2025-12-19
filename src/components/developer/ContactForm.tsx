@@ -24,12 +24,11 @@ export default function ContactForm() {
   const widgetIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      if (turnstileRef.current && (window as any).turnstile) {
+    // Check if script already exists
+    let script = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]') as HTMLScriptElement;
+
+    const renderWidget = () => {
+      if (turnstileRef.current && (window as any).turnstile && !widgetIdRef.current) {
         widgetIdRef.current = (window as any).turnstile.render(turnstileRef.current, {
           sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
           theme: 'dark',
@@ -37,11 +36,30 @@ export default function ContactForm() {
         });
       }
     };
-    script.onerror = () => console.error('Failed to load Turnstile script');
-    document.head.appendChild(script);
+
+    if (script) {
+      // Script exists, check if Turnstile is loaded
+      if ((window as any).turnstile) {
+        renderWidget();
+      } else {
+        // Wait for script to load
+        script.addEventListener('load', renderWidget);
+      }
+    } else {
+      // Create new script
+      script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      script.async = true;
+      script.defer = true;
+      script.onload = renderWidget;
+      script.onerror = () => console.error('Failed to load Turnstile script');
+      document.head.appendChild(script);
+    }
+
     return () => {
       if (widgetIdRef.current && (window as any).turnstile) {
         (window as any).turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
       }
     };
   }, []);
@@ -121,7 +139,7 @@ export default function ContactForm() {
       <div className="p-6 font-mono text-sm">
         <div className="mb-6 text-gray-400">
           Last login: {new Date().toDateString()} on ttys000 <br />
-          <span className="text-green-500">➜</span> <span className="text-cyan-400">~</span> <span className="text-white">./contact_me.sh</span>
+          <span className="text-green-500">➜</span> <span className="text-white">~</span> <span className="text-white">./contact_me.sh</span>
           <br />
           Initializing secure connection... <span className="text-green-500">Done</span>.
         </div>
@@ -131,7 +149,7 @@ export default function ContactForm() {
           <div>
             <label className="block text-gray-500 mb-1 text-xs">name:</label>
             <div className={containerClass}>
-              <span className="text-purple-500">$</span>
+              <span className="text-green-500">$</span>
               <input
                 type="text"
                 name="name"
@@ -165,7 +183,7 @@ export default function ContactForm() {
           <div>
             <label className="block text-gray-500 mb-1 text-xs">message:</label>
             <div className={`${containerClass} items-start`}>
-              <span className="text-purple-500 mt-0.5">&gt;</span>
+              <span className="text-green-500 mt-0.5">&gt;</span>
               <textarea
                 name="message"
                 value={formState.message}

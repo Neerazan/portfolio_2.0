@@ -68,13 +68,13 @@ export default function TechStack() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-20 bg-[#0a0a0a]">
       <div className="flex items-center gap-4 mb-10">
-        <div className="h-px w-10 bg-purple-500" />
-        <h2 className="text-xl font-mono text-purple-400">package.json</h2>
+        <div className="h-px w-10 bg-blue-500" />
+        <h2 className="text-xl font-mono text-blue-400">package.json</h2>
       </div>
 
       <div className="bg-[#151515] rounded-xl border border-white/5 p-6 sm:p-10 font-mono text-sm shadow-2xl overflow-hidden relative">
         {/* Line Numbers Decoration */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-white/2 border-r border-white/5 flex flex-col items-end pr-3 pt-6 text-gray-700 select-none hidden sm:flex">
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-white/2 border-r border-white/5 flex-col items-end pr-3 pt-6 text-gray-700 select-none hidden sm:flex">
           {Array.from({ length: 25 }).map((_, i) => (
             <span key={i} className="leading-7">{i + 1}</span>
           ))}
@@ -108,7 +108,7 @@ export default function TechStack() {
                       whileHover={{ x: 5 }}
                       className="flex items-center gap-2 group cursor-default"
                     >
-                      <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors">"{skill.name}"</span>
+                      <span className="text-blue-400 group-hover:text-blue-300 transition-colors">"{skill.name}"</span>
                       <span className="text-white">:</span>
                       <span className="text-orange-300">"{skill.version}"</span>
                       <span className="text-gray-600">,</span>

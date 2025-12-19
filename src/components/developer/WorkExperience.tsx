@@ -60,14 +60,14 @@ function WorkExperience() {
             className="relative pl-8 md:pl-12"
           >
             {/* Git Node Dot */}
-            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-purple-500" />
+            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-blue-500" />
 
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
               <span className="font-mono text-yellow-500 text-sm">
                 {exp.commitHash}
               </span>
               <h3 className="text-xl font-bold text-white tracking-tight">
-                <span className="text-purple-400">{exp.type}:</span> {exp.role} @ {exp.company}
+                <span className="text-orange-400">{exp.type}:</span> {exp.role} @ {exp.company}
               </h3>
             </div>
 
