@@ -14,11 +14,11 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-60 bg-[#101111] backdrop-blur-xl border-b border-[#7A87FB]/10" role="banner">
-      <div className="mx-auto px-4 py-4 flex items-center justify-between lg:w-15/20">
+      <div className="mx-auto px-4 py-3 flex items-center justify-between lg:w-15/20">
         <div className="flex items-center justify-center gap-x-2">
           <Link href="/" className="px-2">
             <h1
-              className={`text-[35px] text-white ${satisfy.className}`}
+              className={`text-[28px] text-white ${satisfy.className}`}
             >
               Neerajan .
             </h1>
@@ -40,7 +40,7 @@ export default function Header() {
             className="hidden lg:block group cursor-pointer"
             aria-label="Download CV - PDF document"
           >
-            <button className="px-6 py-2.5 border border-white/20 text-white font-medium text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded cursor-pointer">
+            <button className="px-5 py-2 border border-white/20 text-white font-medium text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded cursor-pointer">
               Download CV
             </button>
           </Link>

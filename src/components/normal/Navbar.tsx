@@ -66,7 +66,7 @@ export default function Navbar() {
 
   return (
     <div className="hidden lg:block">
-      <nav className="flex items-center justify-between gap-x-10 px-2 py-1" aria-label="Main navigation">
+      <nav className="flex items-center justify-between gap-x-8 px-2 py-1" aria-label="Main navigation">
         <Navitem
           href="#home"
           className="cursor-pointer"
@@ -133,8 +133,8 @@ export function Navitem({ children, className, href, onClick, isActive }: NavIte
   // Active: larger scale, cyan color
   // Inactive: gray color, white on hover
   const stateClasses = isActive
-    ? "text-cyan-400 scale-110 origin-center text-lg border-b border-cyan-400/50 pb-0.5"
-    : "text-gray-400 hover:text-cyan-400 text-lg hover:scale-105 origin-center border-b border-transparent pb-0.5";
+    ? "text-cyan-400 scale-110 origin-center text-base border-b border-cyan-400/50 pb-0.5"
+    : "text-gray-400 hover:text-cyan-400 text-base hover:scale-105 origin-center border-b border-transparent pb-0.5";
 
   return (
     <Link

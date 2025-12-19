@@ -1,8 +1,7 @@
 "use client";
 
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
-import { FaTerminal } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi";
+import { FaLaptop, FaTerminal } from "react-icons/fa";
 
 export default function ModeToggle() {
   const { mode, toggleMode } = useDisplayMode();
@@ -26,7 +25,7 @@ export default function ModeToggle() {
           </>
         ) : (
           <>
-            <HiSparkles className="text-sm text-yellow-300" />
+            <FaLaptop className="text-sm text-cyan-300" />
             <span className="text-xs font-bold tracking-wider">NORMAL</span>
           </>
         )}
