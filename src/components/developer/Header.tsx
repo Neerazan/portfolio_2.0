@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import ModeToggle from "../shared/ModeToggle";
-import Button from "../ui/Button";
 import { NavButton } from "./NavButton";
 import Navbar from "./Navbar";
 
@@ -33,10 +32,14 @@ export default function Header() {
           <Link
             href="/nirajan_dhakal_cv.pdf"
             target="_blank"
-            className="hidden lg:block cursor-pointer"
+            className="hidden lg:block cursor-pointer group"
             aria-label="Download CV - PDF document"
           >
-            <Button title="Download CV" />
+            <div className="font-mono text-xs sm:text-sm px-4 py-2 bg-[#0d1117] border border-green-500/30 text-green-400 rounded hover:bg-green-500/10 transition-colors flex items-center gap-2">
+              <span className="text-gray-500">$</span>
+              <span>wget cv.pdf</span>
+              <span className="w-2 h-4 bg-green-500 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity" />
+            </div>
           </Link>
         </div>
       </div>

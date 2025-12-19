@@ -104,17 +104,32 @@ export default function Hero() {
               transition={{ duration: 0.8 }}
               className="flex items-center gap-4 mb-6"
             >
-              <div className="h-px w-12 bg-cyan-500/50" />
-              <span className="text-cyan-400 font-medium tracking-[0.2em] text-sm uppercase">Full Stack Developer</span>
+              <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-cyan-500/50'}`} />
+              <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-cyan-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
+                {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
+              </span>
             </motion.div>
 
-            <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90">
-              <span className="block hover:text-transparent hover:bg-clip-text hover:bg-linear-to-r hover:from-cyan-300 hover:to-purple-400 transition-colors duration-500 cursor-default">
-                BUILD
-              </span>
-              <span className="block text-gray-500 hover:text-white transition-colors duration-500 cursor-default">
-                & SCALE
-              </span>
+            <h1 className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}>
+              {isDev ? (
+                <>
+                  <span className="block text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-400 hover:from-purple-300 hover:to-pink-300 transition-colors duration-500 cursor-default">
+                    {"<Build />"}
+                  </span>
+                  <span className="block text-gray-500 text-6xl sm:text-8xl lg:text-9xl mt-2 hover:text-green-400 transition-colors duration-500 cursor-default">
+                    {"scale()"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="block hover:text-transparent hover:bg-clip-text hover:bg-linear-to-r hover:from-cyan-300 hover:to-purple-400 transition-colors duration-500 cursor-default">
+                    BUILD
+                  </span>
+                  <span className="block text-gray-500 hover:text-white transition-colors duration-500 cursor-default">
+                    & SCALE
+                  </span>
+                </>
+              )}
             </h1>
 
             <motion.div
@@ -123,26 +138,49 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="max-w-xl"
             >
-              <p className="text-xl sm:text-2xl text-gray-300 font-light leading-relaxed mb-10">
-                I&apos;m <span className="text-white font-medium">Nirajan Dhakal</span>. I engineer <span className="text-purple-300 border-b border-purple-500/30">robust implementations</span> and <span className="text-cyan-300 border-b border-cyan-500/30">scalable architecture</span> to power modern digital experiences.
+              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-300 font-light'} leading-relaxed mb-10`}>
+                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-purple-400' : 'text-purple-300 border-b border-purple-500/30'}`}>robust implementations</span> and <span className={`${isDev ? 'text-blue-400' : 'text-cyan-300 border-b border-cyan-500/30'}`}>scalable architecture</span> to power modern digital experiences.
               </p>
 
               <div className="flex flex-wrap gap-6">
-                <button
-                  onClick={handleScroll}
-                  className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 flex items-center gap-3 overflow-hidden"
-                >
-                  <span className="relative z-10">Get in Touch</span>
-                  <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-                  <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-                </button>
+                {isDev ? (
+                  <>
+                    <button
+                      onClick={handleScroll}
+                      className="group font-mono text-sm px-6 py-3 bg-black border border-green-500/50 text-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 rounded"
+                    >
+                      <span className="text-gray-500">$</span>
+                      <span>./contact.sh</span>
+                      <span className="inline-block w-2 h-4 bg-green-500 animate-pulse ml-1" />
+                    </button>
 
-                <button
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] backdrop-blur-md transition-all duration-300"
-                >
-                  View Projects
-                </button>
+                    <button
+                      onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-purple-500/50 hover:text-purple-400 transition-all duration-300 flex items-center gap-2 rounded"
+                    >
+                      <span className="text-gray-500">$</span>
+                      <span>git checkout projects</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleScroll}
+                      className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 flex items-center gap-3 overflow-hidden"
+                    >
+                      <span className="relative z-10">Get in Touch</span>
+                      <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+                      <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+                    </button>
+
+                    <button
+                      onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] backdrop-blur-md transition-all duration-300"
+                    >
+                      View Projects
+                    </button>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
