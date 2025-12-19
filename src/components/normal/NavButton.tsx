@@ -1,118 +1,167 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Navitem } from "./Navbar";
+"use client";
 
-interface NabButtonProps {
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { HiMenuAlt4, HiX } from "react-icons/hi";
+
+interface NavButtonProps {
   className?: string;
   setIsMenuOpen: (isMenuOpen: boolean) => void;
   isMenuOpen: boolean;
 }
 
-export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NabButtonProps) {
-
-  const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string): void => {
-    event.preventDefault();
-    setIsMenuOpen(false);
-    const scrollSection = document.getElementById(id);
-    if (scrollSection) {
-      scrollSection.scrollIntoView({ behavior: "smooth" });
+const menuVariants: Variants = {
+  closed: {
+    opacity: 0,
+    x: "100%",
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 40,
+      staggerChildren: 0.05,
+      staggerDirection: -1
     }
+  },
+  open: {
+    opacity: 1,
+    x: "0%",
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 40,
+      staggerChildren: 0.07,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  closed: { opacity: 0, y: 50 },
+  open: { opacity: 1, y: 0 }
+};
+
+export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
+  const handleScroll = (id: string): void => {
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      const scrollSection = document.getElementById(id);
+      if (scrollSection) {
+        scrollSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300); // Wait for menu close animation
   };
+
+  const menuItems = [
+    { label: "Home", href: "/", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
+    { label: "About", href: "#about", action: () => handleScroll("about") },
+    { label: "Skills", href: "#skills", action: () => handleScroll("skills") },
+    { label: "Experiences", href: "#work", action: () => handleScroll("work") },
+    { label: "Projects", href: "#projects", action: () => handleScroll("projects") },
+    { label: "Contact", href: "#contact", action: () => handleScroll("contact") },
+  ];
 
   return (
     <>
+      {/* Toggle Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`lg:hidden cursor-pointer rounded-full bg-linear-to-r from-purple-600 to-cyan-600 p-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-[#7A87FB]/50 ${className}`}
-        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-        aria-expanded={isMenuOpen}
-        aria-controls="mobile-menu"
+        className={`lg:hidden relative z-100 p-2 text-white hover:text-cyan-400 transition-colors duration-300 ${className}`}
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
-        <div className="rounded-full border-4 border-[#101111]">
-          <div className="rounded-full bg-[#292929] px-4 py-1 flex items-center justify-center">
-            <Image
-              src={"/assets/jam_menu.svg"}
-              alt="Menu"
-              className="h-6 w-6"
-              width={24}
-              height={24}
-            />
-          </div>
-        </div>
+        <span className="sr-only">Toggle menu</span>
+        {isMenuOpen ? (
+          <HiX className="w-8 h-8" />
+        ) : (
+          <HiMenuAlt4 className="w-8 h-8" />
+        )}
       </button>
 
-      {/* Menu Panel */}
-      <div
-        id="mobile-menu"
-        className={`fixed top-20 right-4 z-50 w-48 rounded-lg border border-purple-600 bg-[#1C1C1C] shadow-2xl backdrop-blur-lg transition-all duration-300 ease-out lg:hidden ${isMenuOpen
-          ? 'opacity-100 translate-y-0 scale-100'
-          : 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
-          }`}
-        role="navigation"
-        aria-label="Mobile navigation"
-      >
-        <Navitem
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setIsMenuOpen(false);
-          }}
-          className="block px-4 py-4 transition-colors duration-200 first:rounded-t-lg hover:bg-[#292929] min-h-11"
-        >
-          Home
-        </Navitem>
-        <Navitem
-          href="#about"
-          onClick={(event) => handleScroll(event, 'about')}
-          className="block px-4 py-4 transition-colors duration-200 hover:bg-[#292929] min-h-11"
-        >
-          About
-        </Navitem>
-        <Navitem
-          href="#skills"
-          onClick={(event) => handleScroll(event, 'skills')}
-          className="block px-4 py-4 transition-colors duration-200 hover:bg-[#292929] min-h-11"
-        >
-          Skills
-        </Navitem>
-        <Navitem
-          href="#work"
-          onClick={(event) => handleScroll(event, 'work')}
-          className="block px-4 py-4 transition-colors duration-200 hover:bg-[#292929] min-h-11"
-        >
-          Experiences
-        </Navitem>
-        <Navitem
-          href="#projects"
-          onClick={(event) => handleScroll(event, 'projects')}
-          className="block px-4 py-4 transition-colors duration-200 hover:bg-[#292929] min-h-11"
-        >
-          Projects
-        </Navitem>
-        <Navitem
-          href="#contact"
-          onClick={(event) => handleScroll(event, 'contact')}
-          className="block px-4 py-4 transition-colors duration-200 hover:bg-[#292929] min-h-11"
-        >
-          Contact
-        </Navitem>
+      {/* Full Screen Menu Overlay - Portalled to body to escape parent stacking context */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={menuVariants}
+              className="fixed inset-0 z-[100] bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden overflow-hidden"
+            >
+              {/* Close Button inside Portal */}
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-6 right-6 z-[110] p-2 text-white hover:text-cyan-400 transition-all duration-300"
+                aria-label="Close menu"
+              >
+                <HiX className="w-8 h-8" />
+              </button>
 
-        {/* Separator */}
-        <div className="mx-4 my-2 h-px bg-linear-to-r from-purple-600 to-cyan-600"></div>
+              {/* Background Texture */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-size-[40px_40px]" />
 
-        {/* Download CV Button */}
-        <div className="p-3">
-          <Link
-            href="/nirajan_dhakal_cv.pdf"
-            download="/nirajan_dhakal_cv.pdf"
-            onClick={() => setIsMenuOpen(false)}
-            className="cursor-pointer flex w-full rounded-full bg-linear-to-r from-purple-600 to-cyan-600 px-4 py-3 text-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/50 min-h-11 items-center justify-center"
-          >
-            Download CV
-          </Link>
-        </div>
-      </div>
+              <motion.nav
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={{
+                  open: {
+                    transition: { staggerChildren: 0.07, delayChildren: 0.2 }
+                  },
+                  closed: {
+                    transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                  }
+                }}
+                className="relative z-10 flex flex-col items-center gap-8 w-full max-w-md px-6 max-h-[85vh] overflow-y-auto py-10 no-scrollbar"
+              >
+                {menuItems.map((item, index) => (
+                  <motion.div key={item.label} variants={itemVariants} className="w-full text-center shrink-0">
+                    <button
+                      onClick={() => {
+                        if (item.action) {
+                          item.action();
+                        } else {
+                          setIsMenuOpen(false);
+                        }
+                      }}
+                      className="text-4xl font-light text-white/90 hover:text-cyan-400 hover:scale-110 transition-all duration-300 cursor-pointer"
+                    >
+                      {item.label}
+                    </button>
+                  </motion.div>
+                ))}
+
+                <motion.div variants={itemVariants} className="mt-8 shrink-0">
+                  <Link
+                    href="/nirajan_dhakal_cv.pdf"
+                    target="_blank"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="px-8 py-3 border border-white/20 text-white font-medium text-lg uppercase tracking-widest hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300 rounded"
+                  >
+                    Download CV
+                  </Link>
+                </motion.div>
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }

@@ -8,14 +8,15 @@ export default function Contact() {
       id="contact"
       className="mx-auto w-11/12 max-w-7xl"
     >
-      <p className="mb-12 text-gray-400 max-w-2xl">
-        I&apos;d love to hear from you! Feel free to reach out for questions,
-        collaboration, or just to connect.
-      </p>
+
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left Side - Contact Form (Span 2) */}
         <div className="flex flex-col rounded-2xl bg-white/5 backdrop-blur-sm p-8 lg:col-span-2 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl">
+          <p className="mb-8 text-gray-300 max-w-2xl text-lg sm:text-xl leading-relaxed font-light">
+            I&apos;d love to hear from you! Feel free to reach out for questions,
+            collaboration, or just to connect.
+          </p>
           <div className="w-full">
             <ContactForm />
           </div>

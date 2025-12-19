@@ -13,7 +13,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#101111]/80 backdrop-blur-md border-b border-[#7A87FB]/10" role="banner">
+    <header className="fixed top-0 left-0 right-0 z-60 bg-[#101111] backdrop-blur-xl border-b border-[#7A87FB]/10" role="banner">
       <div className="mx-auto px-4 py-4 flex items-center justify-between lg:w-15/20">
         <div className="flex items-center justify-center gap-x-2">
           <Link href="/" className="px-2">
