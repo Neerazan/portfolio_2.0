@@ -75,7 +75,7 @@ export default function Navbar() {
 
   return (
     <div className="hidden lg:block">
-      <nav className="flex items-center justify-between gap-x-8 bg-black/40 px-6 py-2 rounded-full border border-white/5 backdrop-blur-md shadow-2xl" aria-label="Main navigation">
+      <nav className="flex items-center justify-between gap-x-8 bg-black px-6 py-2 border border-white/5 shadow-2xl" aria-label="Main navigation">
         <Navitem
           href="#home"
           className="font-mono text-sm"
