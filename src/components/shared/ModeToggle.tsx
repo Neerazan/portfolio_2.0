@@ -1,7 +1,7 @@
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { FaPalette, FaTerminal } from "react-icons/fa";
+import { FaCode, FaPalette, FaTerminal } from "react-icons/fa";
 
 export default function ModeToggle() {
   const { mode, toggleMode } = useDisplayMode();
@@ -102,7 +102,7 @@ export default function ModeToggle() {
             {/* Content */}
             <div className="relative z-10 w-full flex flex-col gap-3">
               <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-1">
-                <span className="text-xl">🚀</span>
+                <FaCode className="text-xl text-cyan-300" />
               </div>
 
               <div>
