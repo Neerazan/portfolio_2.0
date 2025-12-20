@@ -11,7 +11,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-100 bg-black border-b border-white/5`} role="banner">
+    <header className={`fixed top-0 left-0 right-0 z-100 bg-[#0d1117]/80 backdrop-blur-md border-b border-white/5`} role="banner">
       <div className="mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
         <div className="flex items-center justify-center gap-x-2">
           {/* Terminal Title */}
