@@ -57,10 +57,10 @@ function WorkExperience() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="relative pl-8 md:pl-12"
+            className="relative pl-8 md:pl-12 flex flex-col justify-start"
           >
-            {/* Git Node Dot */}
-            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-blue-500" />
+            {/* Standardized Git Node Dot */}
+            <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-blue-500 z-10" />
 
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
               <span className="font-mono text-yellow-500 text-sm">
@@ -75,7 +75,7 @@ function WorkExperience() {
               <span>Date: {exp.period}</span>
             </div>
 
-            <div className="bg-[#101111] border border-white/5 rounded-lg p-4 font-mono text-sm text-gray-300">
+            <div className="bg-[#0d1117] border border-white/5 rounded-lg p-4 font-mono text-sm text-gray-300">
               {/* Simulating Diff */}
               {exp.details.map((detail, i) => (
                 <div key={i} className="flex gap-2">
@@ -87,10 +87,10 @@ function WorkExperience() {
           </motion.div>
         ))}
 
-        {/* Origin Node */}
-        <div className="relative pl-8 md:pl-12 pt-4 opacity-50">
-          <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#101111] border-2 border-gray-600" />
-          <div className="font-mono text-sm text-gray-500">
+        {/* Origin Node - Fixed Transparency and Standardized Style */}
+        <div className="relative pl-8 md:pl-12 py-1 flex items-center min-h-6">
+          <div className="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-gray-600 z-10" />
+          <div className="font-mono text-sm text-gray-500 leading-none opacity-50">
             Initial commit
           </div>
         </div>
