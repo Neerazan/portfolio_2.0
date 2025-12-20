@@ -110,7 +110,7 @@ export default function ModeToggle() {
                   Developer Mode Available
                 </h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-light">
-                  Switch to <span className="text-cyan-400 font-semibold">Developer Mode</span> for a terminal-styled experience designed for developers.
+                  Switch to <span className="text-cyan-400 font-semibold">Developer Mode</span> for a more technical, developer-focused experience.
                 </p>
               </div>
 
