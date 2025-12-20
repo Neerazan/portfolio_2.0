@@ -13,7 +13,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-60 bg-[#101111] backdrop-blur-xl border-b border-[#7A87FB]/10" role="banner">
+    <header className="fixed top-0 left-0 right-0 z-60 bg-[#0a0a0f]/98 border-b border-[#7A87FB]/10" role="banner">
       <div className="mx-auto px-4 py-3 flex items-center justify-between lg:w-15/20">
         <div className="flex items-center justify-center gap-x-2">
           <Link href="/" className="px-2">
@@ -40,7 +40,7 @@ export default function Header() {
             className="hidden lg:block group"
             aria-label="Download CV - PDF document"
           >
-            <button className="relative px-6 py-2.5 bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium text-xs tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-2 cursor-pointer">
+            <button className="relative px-6 py-2.5 bg-white/5 border border-white/10 text-white font-medium text-xs tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-2 cursor-pointer">
               <span className="relative z-10">Download CV</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

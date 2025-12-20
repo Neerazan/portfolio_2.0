@@ -12,7 +12,7 @@ export default function Contact() {
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left Side - Contact Form (Span 2) */}
-        <div className="flex flex-col rounded-2xl bg-white/5 backdrop-blur-sm p-8 lg:col-span-2 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl">
+        <div className="flex flex-col rounded-2xl bg-[#151520]/95 p-8 lg:col-span-2 border border-white/5 hover:border-cyan-500/30 transition-all duration-300 shadow-2xl">
           <p className="mb-8 text-gray-300 max-w-2xl text-lg sm:text-xl leading-relaxed font-light">
             I&apos;d love to hear from you! Feel free to reach out for questions,
             collaboration, or just to connect.
@@ -25,7 +25,7 @@ export default function Contact() {
         {/* Right Side - Bento Boxes (Span 1) */}
         <div className="flex flex-col gap-6 lg:h-full">
           {/* Top Box - Quote */}
-          <div className="flex flex-2 flex-col justify-center rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-2 flex-col justify-center rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
               &quot;Great things are not done by impulse, but by a series of small things brought together.&quot;
             </blockquote>
@@ -33,7 +33,7 @@ export default function Contact() {
           </div>
 
           {/* Bottom Box - Decoration/Social */}
-          <div className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-2xl relative overflow-hidden group">
+          <div className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-2xl relative overflow-hidden group">
             <div className="relative z-10">
               <p className="text-2xl font-bold text-white mb-2">Let&apos;s Build</p>
               <div className="flex items-center gap-2">

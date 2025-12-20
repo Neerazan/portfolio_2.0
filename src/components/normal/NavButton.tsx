@@ -102,7 +102,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed inset-0 z-1110 bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden overflow-hidden"
+              className="fixed inset-0 z-1110 bg-[#0a0a0a]/99 flex flex-col items-center justify-center lg:hidden overflow-hidden"
             >
               {/* Close Button inside Portal */}
               <button

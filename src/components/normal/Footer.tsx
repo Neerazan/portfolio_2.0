@@ -4,27 +4,31 @@ const satisfy = Satisfy({ subsets: ["latin"], weight: ["400"] });
 
 const Footer = () => {
   return (
-    <footer className="relative mt-20 border-t border-white/5 bg-black/20 backdrop-blur-sm">
-      <div className="mx-auto w-13/14 lg:w-15/20 px-4 py-10">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className={`text-[35px] text-white ${satisfy.className}`}>
+    <footer className="relative mt-20 border-t border-white/5 bg-linear-to-b from-[#0a0a0f] to-[#151520]">
+      <div className="mx-auto w-13/14 lg:w-15/20 px-4 py-12">
+        <div className="flex flex-col items-center gap-8 text-center">
+          {/* Logo */}
+          <h1 className={`text-[40px] text-white ${satisfy.className}`}>
             Neerajan .
           </h1>
 
-          <p className="text-gray-400 text-sm max-w-md">
+          {/* Tagline */}
+          <p className="text-gray-400 text-base max-w-md leading-relaxed">
             Thanks for stopping by! Let&apos;s create something amazing together.
           </p>
 
-          <div className="pt-4 border-t border-white/5 w-full max-w-md">
-            <p className="text-gray-500 text-xs">
-              © {new Date().getFullYear()} Neerajan • Designed & Built with passion
-            </p>
-          </div>
+          {/* Divider */}
+          <div className="w-full max-w-md h-px bg-linear-to-r from-transparent via-white/10 to-transparent"></div>
+
+          {/* Copyright */}
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} Neerajan • Designed & Built with passion
+          </p>
         </div>
       </div>
 
-      {/* Subtle decorative glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-cyan-500/5 rounded-full blur-3xl -z-10"></div>
+      {/* Decorative Gradient Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-linear-to-t from-cyan-500/10 to-transparent -z-10"></div>
     </footer>
   )
 }

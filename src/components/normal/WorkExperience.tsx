@@ -1,6 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 const workExperiences = [
   {
@@ -73,54 +73,55 @@ function WorkExperience() {
       <div className="absolute left-4 h-full w-0.5 transform bg-linear-to-b from-gray-500/20 via-gray-600/20 to-gray-500/20 sm:left-1/2 sm:-translate-x-1/2"></div>
 
       <div className="space-y-8 sm:space-y-16">
-        {workExperiences.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: 0, y: 30 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className={`relative flex flex-col sm:flex-row ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-              } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
-          >
-            <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
-              <div className="h-4 w-4 rounded-full bg-gray-400 sm:h-5 sm:w-5"></div>
-            </div>
+        {workExperiences.map((item, index) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const { elementRef, isVisible } = useScrollReveal();
 
-            <div className="group relative w-full rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm p-4 shadow-xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/10 sm:w-[calc(50%-3rem)] sm:p-6">
-              <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
-                <span className="text-xl sm:text-2xl">{item.icon}</span>
-                <div>
-                  <h3 className="text-lg font-semibold text-white sm:text-xl">
-                    {item.title}
-                  </h3>
-                  {/* position */}
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm text-gray-400 sm:text-base">
-                      {item.position}
-                    </p>
-                    <span className="h-1 w-1 rounded-full bg-gray-500"></span>
-                  </div>
-                  <p className="text-sm text-gray-400 sm:text-base">
-                    {item.period}
-                  </p>
-                </div>
+          return (
+            <div
+              key={index}
+              ref={elementRef}
+              className={`relative flex flex-col sm:flex-row ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+                } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16 reveal ${isVisible ? 'active' : ''}`}
+            >
+              <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+                <div className="h-4 w-4 rounded-full bg-cyan-400 sm:h-5 sm:w-5"></div>
               </div>
-              <ul className="space-y-1 sm:space-y-2">
-                {item.details.map((detail, detailIndex) => (
-                  <li key={detailIndex} className="flex items-start gap-2">
-                    <span className="text-gray-400">
-                      ▹
-                    </span>
-                    <span className="text-sm text-gray-300 sm:text-base">
-                      {detail}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+
+              <div className="group relative w-full rounded-xl border border-white/5 bg-[#151520]/95 p-4 shadow-xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-[#1a1a2e]/95 sm:w-[calc(50%-3rem)] sm:p-6">
+                <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
+                  <span className="text-xl sm:text-2xl">{item.icon}</span>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white sm:text-xl">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm text-gray-400 sm:text-base">
+                        {item.position}
+                      </p>
+                      <span className="h-1 w-1 rounded-full bg-gray-500"></span>
+                    </div>
+                    <p className="text-sm text-gray-400 sm:text-base">
+                      {item.period}
+                    </p>
+                  </div>
+                </div>
+                <ul className="space-y-1 sm:space-y-2">
+                  {item.details.map((detail, detailIndex) => (
+                    <li key={detailIndex} className="flex items-start gap-2">
+                      <span className="text-cyan-400">
+                        ▹
+                      </span>
+                      <span className="text-sm text-gray-300 sm:text-base">
+                        {detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </motion.div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

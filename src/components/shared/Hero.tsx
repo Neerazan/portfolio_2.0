@@ -42,7 +42,7 @@ export default function Hero() {
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
         */}
-        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r backdrop-blur-md z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/80' : 'border-white/5 bg-black/20'}`}>
+        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/95' : 'border-white/5 bg-black/50'}`}>
           <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
 
           <div className="flex flex-col gap-8">
@@ -61,7 +61,7 @@ export default function Hero() {
                 <span
                   className={`absolute left-full ml-4 top-1/2 -translate-y-1/2 px-2 py-1 rounded opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none border whitespace-nowrap ${isDev
                     ? 'bg-green-950/90 border-green-500/30 text-green-400 font-mono text-[10px] shadow-sm'
-                    : 'bg-white/10 backdrop-blur-md text-xs font-medium text-white border-white/10'
+                    : 'bg-white/10 text-xs font-medium text-white border-white/10'
                     }`}
                 >
                   {isDev ? `> ${social.label.toLowerCase()}` : social.label}
@@ -80,17 +80,12 @@ export default function Hero() {
 
           {/* Text Section */}
           <div className="lg:w-1/2 max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex items-center gap-4 mb-6"
-            >
+            <div className="flex items-center gap-4 mb-6">
               <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
               <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
                 {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
               </span>
-            </motion.div>
+            </div>
 
             <h1 className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}>
               {isDev ? (
@@ -114,12 +109,7 @@ export default function Hero() {
               )}
             </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="max-w-xl"
-            >
+            <div className="max-w-xl">
               <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light'} leading-relaxed mb-10`}>
                 I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>scalable architecture</span> to power modern digital experiences.
               </p>
@@ -157,14 +147,14 @@ export default function Hero() {
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] backdrop-blur-md transition-all duration-300"
+                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300"
                     >
                       View Projects
                     </button>
                   </>
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* 
@@ -173,12 +163,7 @@ export default function Hero() {
           {/* 
             Right Creative Section - System Monitor (Backend Focused)
           */}
-          <motion.div
-            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]">
             {isDev ? (
               <>
                 {/* Terminal Window - System Monitor (htop style) */}
@@ -199,7 +184,7 @@ export default function Hero() {
                   </div>
 
                   {/* Monitor Content */}
-                  <div className="p-4 bg-[#0d1117]/95 backdrop-blur-sm space-y-4">
+                  <div className="p-4 bg-[#0d1117]/95 space-y-4">
 
                     {/* Resource Bars */}
                     <div className="grid grid-cols-2 gap-x-8 gap-y-2">
@@ -291,14 +276,10 @@ export default function Hero() {
               </>
             ) : (
               <div className="relative w-full h-full flex items-center justify-center">
-                {/* Abstract Visual Elements for Normal Mode */}
+                {/* Abstract Visual Elements for Normal Mode - NO ANIMATIONS */}
                 <div className="relative w-full max-w-lg aspect-square">
-                  {/* Floating Glass Cards */}
-                  <motion.div
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-10 right-0 w-64 h-80 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl z-20 flex flex-col p-6 overflow-hidden"
-                  >
+                  {/* Static Glass Cards */}
+                  <div className="absolute top-10 right-0 w-64 h-80 bg-[#151515]/95 border border-white/10 rounded-3xl shadow-2xl z-20 flex flex-col p-6 overflow-hidden">
                     <div className="w-12 h-2 bg-cyan-400/50 rounded-full mb-6" />
                     <div className="space-y-4">
                       <div className="w-full h-4 bg-white/10 rounded-md" />
@@ -310,14 +291,10 @@ export default function Hero() {
                       <div className="w-8 h-8 rounded-full bg-white/10" />
                     </div>
                     {/* Animated Glow */}
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full" />
-                  </motion.div>
+                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full" />
+                  </div>
 
-                  <motion.div
-                    animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
-                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-10 left-0 w-72 h-64 bg-white/5 backdrop-blur-lg border border-white/5 rounded-3xl shadow-xl z-10 p-8"
-                  >
+                  <div className="absolute bottom-10 left-0 w-72 h-64 bg-[#151515]/95 border border-white/5 rounded-3xl shadow-xl z-10 p-8">
                     <div className="flex items-center gap-3 mb-8">
                       <div className="w-3 h-3 rounded-full bg-orange-400/40" />
                       <div className="w-3 h-3 rounded-full bg-cyan-400/40" />
@@ -327,18 +304,10 @@ export default function Hero() {
                       <div className="h-2 w-full bg-white/5 rounded-full" />
                       <div className="h-2 w-3/4 bg-white/5 rounded-full" />
                     </div>
-                  </motion.div>
+                  </div>
 
-                  {/* Aesthetic Blobs/Glows */}
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 90, 0],
-                      opacity: [0.1, 0.2, 0.1]
-                    }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-tr from-cyan-500/20 via-purple-500/10 to-transparent blur-[100px] rounded-full -z-10"
-                  />
+                  {/* Static Background Glow */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-tr from-cyan-500/20 via-purple-500/10 to-transparent rounded-full -z-10" />
 
                   {/* Decorative Elements */}
                   <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-white/10 to-transparent" />
@@ -346,7 +315,7 @@ export default function Hero() {
                 </div>
               </div>
             )}
-          </motion.div>
+          </div>
 
         </main>
 
