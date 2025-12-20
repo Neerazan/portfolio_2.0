@@ -5,7 +5,7 @@ import ContactForm from "./ContactForm";
 export default function Contact() {
   return (
     <div
-      className="mx-auto flex flex-col items-center justify-center gap-10 py-20 px-4 max-w-7xl"
+      className="mx-auto flex flex-col items-center justify-center gap-10 py-0 px-4 max-w-7xl"
       id="contact"
     >
       <div className="text-center space-y-4">

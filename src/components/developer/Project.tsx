@@ -41,7 +41,7 @@ export default function Project({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative mx-auto mt-12 w-full max-w-7xl px-4 sm:px-6"
+      className="relative mx-auto w-full max-w-7xl px-4 sm:px-6"
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >

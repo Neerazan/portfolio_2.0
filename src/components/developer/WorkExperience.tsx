@@ -44,7 +44,7 @@ const workExperiences = [
 
 function WorkExperience() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
+    <div className="mx-auto max-w-4xl px-6 py-0">
       <div className="flex items-center gap-3 mb-12 font-mono text-gray-400">
         <FaGitAlt className="text-orange-500 text-xl" />
         <span>git log --pretty=format:&quot;%h - %an, %ar : %s&quot;</span>

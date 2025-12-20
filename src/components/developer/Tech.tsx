@@ -66,7 +66,7 @@ const techStack: DependencyGroup[] = [
 
 export default function TechStack() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-20 bg-[#0a0a0a]">
+    <div className="mx-auto w-full max-w-5xl px-6 py-0 bg-[#0a0a0a]">
       <div className="flex items-center gap-4 mb-10">
         <div className="h-px w-10 bg-blue-500" />
         <h2 className="text-xl font-mono text-blue-400">package.json</h2>

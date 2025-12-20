@@ -15,7 +15,7 @@ export default function About() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-20 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
+    <div className="mx-auto max-w-7xl px-6 py-0 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
       {/* Background Code Texture */}
       <div className="absolute top-0 right-0 p-10 opacity-5 font-mono text-xs hidden lg:block pointer-events-none select-none">
         {`
