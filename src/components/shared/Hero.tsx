@@ -78,7 +78,7 @@ export default function Hero() {
   return (
     <div
       id="home"
-      className={`relative min-h-[100svh] w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
+      className={`relative min-h-svh w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
       onMouseMove={handleMouseMove}
     >
 
