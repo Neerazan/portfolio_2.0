@@ -2,7 +2,7 @@
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { FaDatabase, FaEnvelope, FaGithub, FaLinkedin, FaServer, FaTerminal, FaTwitter } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin, FaTerminal, FaTwitter } from "react-icons/fa";
 import { HiArrowRight } from "react-icons/hi";
 
 export default function Hero() {
@@ -209,149 +209,115 @@ export default function Hero() {
           {/* 
             Right Creative Section - Interactive 3D Card Stack (Backend Focused)
           */}
+          {/* 
+            Right Creative Section - System Monitor (Backend Focused)
+          */}
           <motion.div
-            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px] perspective-1000"
-            style={{ perspective: 1000 }}
+            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Abstract Glow Behind */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] pointer-events-none" />
+            {/* Terminal Window */}
+            <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-sm relative z-10 group hover:border-gray-700 transition-colors">
 
-            {/* Container for tilting cards */}
-            <motion.div
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              className="relative w-[500px] h-[500px] flex items-center justify-center"
-            >
-              {/* 
-                  Card 1: Code Logic (The Backend Implementation)
-                  Positioned slightly behind
-                */}
-              <motion.div
-                className="absolute left-0 top-10 w-[380px] bg-[#0d1117] rounded-xl border border-white/10 shadow-2xl p-6 z-10"
-                style={{ transform: "translateZ(20px)" }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
-                  </div>
-                  <span className="text-xs text-gray-500 font-mono">server.ts</span>
+              {/* Terminal Header */}
+              <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center justify-between">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80 border border-red-600/50" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80 border border-yellow-600/50" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80 border border-green-600/50" />
                 </div>
-                <div className="space-y-2 font-mono text-sm leading-relaxed">
-                  <div className="flex">
-                    <span className="text-purple-400 mr-2">async function</span>
-                    <span className="text-blue-400">connectDB</span>
-                    <span className="text-yellow-300">() {"{"}</span>
-                  </div>
-                  <div className="pl-4">
-                    <span className="text-purple-400">try</span> <span className="text-yellow-300">{"{"}</span>
-                  </div>
-                  <div className="pl-8">
-                    {/* Establish high-performance connection */}
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-purple-400">await</span> <span className="text-blue-300">db</span>.<span className="text-blue-400">connect</span>(<span className="text-green-300">process.env.DB_URI</span>);
-                  </div>
-                  <div className="pl-8">
-                    <span className="text-blue-300">console</span>.<span className="text-blue-400">log</span>(<span className="text-green-300">&quot;🚀 Database Synchronized&quot;</span>);
-                  </div>
-                  <div className="pl-4">
-                    <span className="text-yellow-300">{"}"}</span> <span className="text-purple-400">catch</span> (<span className="text-red-400">err</span>) <span className="text-yellow-300">{"{"}</span>
-                  </div>
-                  <div className="pl-8 w-full bg-red-500/10 rounded">
-                    {/* Error handling logic... */}
-                  </div>
-                  <div className="text-yellow-300">{"}"}</div>
+                <div className="text-gray-500 text-xs font-medium flex items-center gap-1.5 opacity-60">
+                  <FaTerminal className="text-[10px]" />
+                  <span>zsh — nirajan@portfolio — 80x24</span>
                 </div>
-              </motion.div>
+                <div className="w-10" /> {/* Spacer for centering */}
+              </div>
 
-              {/* 
-                  Card 2: System Terminal (The Infrastructure/Status)
-                  Positioned slightly in front
-                */}
-              <motion.div
-                className="absolute right-0 bottom-20 w-[340px] h-[360px] bg-black/80 backdrop-blur-md rounded-lg border border-gray-800 shadow-2xl p-0 z-20 flex flex-col overflow-hidden"
-                style={{ transform: "translateZ(60px)" }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-              >
-                {/* Terminal Header */}
-                <div className="bg-gray-900 px-4 py-2 flex items-center justify-between border-b border-gray-800">
-                  <div className="flex items-center gap-2 text-gray-400 text-xs font-mono">
-                    <FaTerminal className="text-xs" />
-                    <span>root@server:~</span>
-                  </div>
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              {/* Terminal Content */}
+              <div className="p-6 text-gray-300 space-y-4 font-mono leading-relaxed bg-[#0d1117]/95 backdrop-blur-sm">
+
+                {/* Command Input */}
+                <div className="flex items-center gap-2 text-green-400">
+                  <span>➜</span>
+                  <span className="text-blue-400">~</span>
+                  <span className="text-gray-100">neofetch</span>
                 </div>
 
-                {/* Terminal Content */}
-                <div className="p-4 font-mono text-xs text-green-400 space-y-3 flex-1">
-                  <div>
-                    <span className="text-blue-400">➜</span> <span className="text-white">~ start-services</span>
-                  </div>
-                  <div className="text-gray-500">Initializing system modules...</div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500">✔</span>
-                    <span>API Gateway</span>
-                    <span className="text-gray-600 ml-auto mx-2">................</span>
-                    <span className="text-green-500">[OK]</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500">✔</span>
-                    <span>PostgreSQL</span>
-                    <span className="text-gray-600 ml-auto mx-2">.................</span>
-                    <span className="text-green-500">[OK]</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500">✔</span>
-                    <span>Redis Cache</span>
-                    <span className="text-gray-600 ml-auto mx-2">.................</span>
-                    <span className="text-green-500">[OK]</span>
+                {/* Neofetch Output */}
+                <div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-1 mt-4 items-start">
+                  {/* ASCII Logo - Better 'N' */}
+                  <div className="text-blue-500 font-bold select-none leading-[1.15] hidden sm:block font-mono whitespace-pre text-xs sm:text-sm">
+                    {`
+      z$$$$$$.
+    $$$$$$$$$$
+   $$$$$$$$$$$
+  $$$$$$$$$$$$
+ $$$$$$$$$$$$$
+$$$$$$$$$$$$$$
+$$$$$$"  "$$$$
+"$$$"      "$$
+                    `}
                   </div>
 
-                  <div className="pt-4 border-t border-gray-800 mt-4">
-                    <div className="text-gray-500 mb-1">System Load</div>
-                    <div className="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-green-500"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "42%" }}
-                        transition={{ duration: 1.5, delay: 1 }}
-                      />
+                  {/* System Info */}
+                  <div className="space-y-1.5 text-xs sm:text-sm font-mono">
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">Host</span>
+                      <span className="text-gray-300">portfolio.v2.0</span>
                     </div>
-                    <div className="flex justify-between text-[10px] text-gray-500 mt-1">
-                      <span>CPU: 12%</span>
-                      <span>MEM: 42%</span>
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">OS</span>
+                      <span className="text-gray-300">NirajanOS (Linux)</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">Kernel</span>
+                      <span className="text-gray-300">Next.js v14.2.0</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">Uptime</span>
+                      <span className="text-gray-300">Since 2024-06-01</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">Shell</span>
+                      <span className="text-gray-300">zsh 5.9</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400 font-bold min-w-[70px]">Role</span>
+                      <span className="text-gray-300">Full Stack Engineer</span>
+                    </div>
+                    <div className="flex gap-2 mt-3 pt-3 border-t border-gray-800 w-full max-w-[200px]">
+                      <div className="w-4 h-4 bg-black rounded-xs"></div>
+                      <div className="w-4 h-4 bg-red-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-green-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-yellow-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-blue-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-purple-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-cyan-500 rounded-xs"></div>
+                      <div className="w-4 h-4 bg-gray-200 rounded-xs"></div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
 
-              {/* Floating Elements/Icons around */}
-              <motion.div
-                className="absolute -right-8 top-0 p-3 bg-black/40 backdrop-blur-md rounded-xl border border-white/10 text-green-400 z-30"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transform: "translateZ(80px)" }}
-              >
-                <FaDatabase className="text-xl" />
-              </motion.div>
+                {/* Active Prompt */}
+                <div className="flex items-center gap-2 pt-2">
+                  <span className="text-green-400">➜</span>
+                  <span className="text-blue-400">~</span>
+                  <span className="w-2.5 h-4 bg-gray-500 animate-pulse block" />
+                </div>
+              </div>
 
-              <motion.div
-                className="absolute left-10 -bottom-10 p-3 bg-black/40 backdrop-blur-md rounded-xl border border-white/10 text-blue-400 z-30"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                style={{ transform: "translateZ(40px)" }}
-              >
-                <FaServer className="text-xl" />
-              </motion.div>
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full pointer-events-none -z-10" />
+            </div>
 
-            </motion.div>
+            {/* Decorative Matrix Rain / Texture behind */}
+            <div className="absolute -z-10 -right-20 -bottom-20 opacity-20 text-[10px] leading-[10px] font-mono select-none text-green-500/50 hidden xl:block pointer-events-none">
+              {Array.from({ length: 15 }).map((_, i) => (
+                <div key={i}>{Array.from({ length: 30 }).map(() => Math.random() > 0.5 ? '0' : '1').join(' ')}</div>
+              ))}
+            </div>
           </motion.div>
 
         </main>
