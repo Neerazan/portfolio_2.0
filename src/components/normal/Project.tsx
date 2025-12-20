@@ -46,7 +46,7 @@ export default function Project({
       tabIndex={0}
     >
       <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-sm p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-white/10 transition-all duration-300 shadow-2xl">
-        <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group">
+        <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
             animate={{ x: `-${currentImageIndex * 100}%` }}
@@ -120,19 +120,19 @@ export default function Project({
 
           {
             (demoLink || githubLink) && (
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent opacity-100 sm:opacity-0 group-hover/project:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-4 left-4 flex gap-2 sm:gap-3">
                   {
                     demoLink && (
-                      <div className="group relative">
+                      <div className="group/btn relative">
                         <Link
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-gray-200 transition-colors duration-300 rounded group"
+                          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 rounded group/btn overflow-hidden relative"
                         >
-                          Live Demo
-                          <span className="block h-0.5 max-w-0 group-hover:max-w-full transition-all duration-300 bg-black"></span>
+                          <span className="relative z-10">Live Demo</span>
+                          <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
                         </Link>
                       </div>
                     )
@@ -143,7 +143,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/30 transition-all duration-300 uppercase tracking-widest rounded"
+                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>
