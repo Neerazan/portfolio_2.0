@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { FaBolt, FaCode, FaDatabase, FaNetworkWired, FaServer, FaShieldAlt } from "react-icons/fa";
-import { HiChip } from "react-icons/hi";
 
 export default function About() {
   const systemSpecs = [

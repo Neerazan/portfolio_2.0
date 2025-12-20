@@ -1,7 +1,6 @@
 "use client";
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTerminal, FaTwitter } from "react-icons/fa";
 import { HiArrowRight } from "react-icons/hi";
 
@@ -23,48 +22,10 @@ export default function Hero() {
     { icon: FaEnvelope, href: "mailto:nirajandhakal@gmail.com", label: "Email" },
   ];
 
-  // Mouse Interaction for Typography & Parallax
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const mobile = width < 1024;
-      setIsMobile(mobile);
-      if (!mobile) {
-        setWindowSize({ width, height });
-      }
-    };
-
-    // Call update on mount asynchronously to avoid cascading renders warning
-    const rafId = requestAnimationFrame(handleResize);
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
-
-  const rotateX = useSpring(useTransform(mouseY, [0, windowSize.height], [5, -5]), { damping: 25, stiffness: 150 });
-  const rotateY = useSpring(useTransform(mouseX, [0, windowSize.width], [-5, 5]), { damping: 25, stiffness: 150 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isMobile) return; // Don't track mouse on mobile
-    const { clientX, clientY } = e;
-    mouseX.set(clientX);
-    mouseY.set(clientY);
-  };
-
   return (
     <div
       id="home"
       className={`relative min-h-svh w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
-      onMouseMove={handleMouseMove}
     >
 
       {/* Grid Overlay for Texture */}
