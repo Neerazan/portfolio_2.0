@@ -15,11 +15,11 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="p-6 sm:p-8 md:p-10 bg-white/5 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300"
+          className="p-6 sm:p-8 md:p-10 bg-white/5 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
         >
           <div className="mb-8 sm:mb-12">
             <p className="text-base sm:text-lg text-gray-300">
-              I&apos;m <span className="text-cyan-400 font-semibold">
+              I&apos;m <span className="text-white font-semibold">
                 Nirajan Dhakal
               </span>, a software engineer focused on full-stack development, cloud computing, and system design.
               I enjoy building scalable applications, optimizing performance, and solving complex problems.
@@ -32,7 +32,7 @@ export default function About() {
               className="space-y-4 mt-6"
             >
               <p className="text-gray-300">
-                I graduated from <span className="text-cyan-400 font-semibold">Asia Pacific University of Innovation and Technology</span> with a BSc in Information Technology, where I built real-world projects and gained experience in system design, performance optimization, and developing scalable applications.
+                I graduated from <span className="text-white font-semibold">Asia Pacific University of Innovation and Technology</span> with a BSc in Information Technology, where I built real-world projects and gained experience in system design, performance optimization, and developing scalable applications.
               </p>
             </motion.div>
           </div>
@@ -62,9 +62,9 @@ export default function About() {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="p-3 sm:p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300 group flex items-center gap-4 hover:bg-white/10"
                 >
-                  <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400/80 group-hover:text-cyan-400" />
+                  <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 group-hover:text-cyan-400 transition-colors" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-medium text-gray-200 group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-base sm:text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
                       {item.name}
                     </h3>
                     <p className="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2">

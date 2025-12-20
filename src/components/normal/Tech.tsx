@@ -78,10 +78,10 @@ export default function TechStack() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="group rounded-xl sm:rounded-3xl bg-white/5 backdrop-blur-sm p-px hover:shadow-2xl hover:shadow-cyan-500/10 border border-white/5 hover:border-cyan-500/30 transition-all duration-300"
+            className="group rounded-xl sm:rounded-3xl bg-white/5 backdrop-blur-sm p-px hover:shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
           >
             <div className="h-full rounded-xl sm:rounded-3xl bg-transparent p-3 sm:p-6 transition-all duration-300">
-              <h3 className="mb-2 text-base sm:text-xl font-bold text-cyan-400">
+              <h3 className="mb-2 text-base sm:text-xl font-bold text-white">
                 {tech.category}
               </h3>
               <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-6">{tech.description}</p>
@@ -91,7 +91,7 @@ export default function TechStack() {
                   <motion.div
                     key={skill.name}
                     whileHover={{ scale: 1.05 }}
-                    className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 hover:scale-105 transition-all duration-200 border border-white/5 hover:border-cyan-500/30"
+                    className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 hover:scale-105 transition-all duration-200 border border-white/5 hover:border-white/20"
                   >
                     <skill.icon className="w-6 h-6 sm:w-8 sm:h-8 mb-1 sm:mb-2 text-gray-300" />
                     <span className="text-[10px] sm:text-xs text-gray-300 text-center">

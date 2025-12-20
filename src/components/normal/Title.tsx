@@ -22,21 +22,15 @@ function Title({ title, className, id }: TitleProps) {
       {/* Decorative Sparkles */}
       <div className="relative flex items-center h-full">
         <Sparkle
-          color="#22d3ee" // Cyan
-          size={24}
+          color="#e5e7eb" // Light gray
+          size={20}
           delay={0}
           className="relative z-10"
-        />
-        <Sparkle
-          color="#c084fc" // Purple
-          size={16}
-          delay={0.5}
-          className="absolute left-4 -bottom-2 opacity-80"
         />
       </div>
 
       {/* Modern Gradient Line */}
-      <div className="h-px flex-1 mx-6 bg-linear-to-r from-cyan-500/50 via-purple-500/20 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.2)]" />
+      <div className="h-px flex-1 mx-6 bg-linear-to-r from-gray-500/50 via-gray-600/20 to-transparent" />
     </div>
   );
 }

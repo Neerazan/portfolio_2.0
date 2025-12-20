@@ -112,8 +112,8 @@ export default function Hero() {
               transition={{ duration: 0.8 }}
               className="flex items-center gap-4 mb-6"
             >
-              <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-cyan-500/50'}`} />
-              <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-cyan-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
+              <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
+              <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
                 {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
               </span>
             </motion.div>
@@ -130,10 +130,10 @@ export default function Hero() {
                 </>
               ) : (
                 <>
-                  <span className="block hover:text-transparent hover:bg-clip-text hover:bg-linear-to-r hover:from-cyan-300 hover:to-purple-400 transition-colors duration-500 cursor-default">
+                  <span className="block transition-colors duration-500 cursor-default">
                     BUILD
                   </span>
-                  <span className="block text-gray-500 hover:text-white transition-colors duration-500 cursor-default">
+                  <span className="block text-gray-500 transition-colors duration-500 cursor-default">
                     & SCALE
                   </span>
                 </>
@@ -146,8 +146,8 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="max-w-xl"
             >
-              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-300 font-light'} leading-relaxed mb-10`}>
-                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-purple-300 border-b border-purple-500/30'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-cyan-300 border-b border-cyan-500/30'}`}>scalable architecture</span> to power modern digital experiences.
+              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light'} leading-relaxed mb-10`}>
+                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>scalable architecture</span> to power modern digital experiences.
               </p>
 
               <div className="flex flex-wrap gap-6">

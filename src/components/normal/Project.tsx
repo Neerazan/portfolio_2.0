@@ -45,7 +45,7 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-sm p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-cyan-500/30 transition-all duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-sm p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-white/10 transition-all duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group">
           <motion.div
             initial={false}
@@ -129,7 +129,7 @@ export default function Project({
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-cyan-300 transition-colors duration-300 rounded group"
+                          className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:bg-gray-200 transition-colors duration-300 rounded group"
                         >
                           Live Demo
                           <span className="block h-0.5 max-w-0 group-hover:max-w-full transition-all duration-300 bg-black"></span>
@@ -143,7 +143,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
+                        className="px-6 py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/30 transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>
@@ -158,7 +158,7 @@ export default function Project({
         <div className="flex flex-col gap-3 sm:gap-4 md:w-1/2">
           <div className="flex items-center gap-3 sm:gap-4">
             <Num number={number} />
-            <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
               {title}
             </h2>
           </div>
@@ -171,7 +171,7 @@ export default function Project({
             {technologies?.map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-white/5 rounded-full text-gray-300 border border-white/10 hover:border-cyan-500/30 transition-all"
+                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-white/5 rounded-full text-gray-300 border border-white/10 hover:border-white/20 transition-all"
               >
                 {tech}
               </span>
