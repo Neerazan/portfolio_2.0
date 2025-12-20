@@ -10,7 +10,7 @@
   --font-display: 'Poppins', sans-serif;
   
   /* System Theme Colors */
-  --color-system-cyan: #22d3ee;
+  --color-system-cyan: #6366f1; /* Indigo 500 */
   --color-system-purple: #c084fc;
   --color-system-green: #4ade80;
 }

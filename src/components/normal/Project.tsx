@@ -45,7 +45,7 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151520]/95 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-white/10 transition-all duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151520]/95 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-all duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
@@ -132,7 +132,7 @@ export default function Project({
                           className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 rounded group/btn overflow-hidden relative"
                         >
                           <span className="relative z-10">Live Demo</span>
-                          <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
+                          <div className="absolute inset-0 bg-white transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
                         </Link>
                       </div>
                     )
@@ -143,7 +143,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
+                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/50 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>

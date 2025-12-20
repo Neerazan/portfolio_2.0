@@ -20,7 +20,7 @@ export default function ContactForm() {
     }
   }, [submitStatus]);
 
-  const inputClass = "w-full p-2.5 sm:p-3 text-sm sm:text-base bg-white/5 rounded-lg border border-white/10 focus:border-cyan-500/50 outline-none transition-colors text-white/90 placeholder:text-white/40 disabled:opacity-50";
+  const inputClass = "w-full p-2.5 sm:p-3 text-sm sm:text-base bg-white/5 rounded-lg border border-white/10 focus:border-indigo-500/50 outline-none transition-colors text-white/90 placeholder:text-white/40 disabled:opacity-50";
 
   return (
     <motion.form
@@ -77,7 +77,7 @@ export default function ContactForm() {
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </span>
         {!isSubmitting && (
-          <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+          <div className="absolute inset-0 bg-indigo-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
         )}
       </button>
 

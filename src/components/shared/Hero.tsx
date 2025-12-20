@@ -42,7 +42,7 @@ export default function Hero() {
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
         */}
-        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/95' : 'border-white/5 bg-black/50'}`}>
+        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/95' : 'border-white/5 bg-[#151520]/95'}`}>
           <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
 
           <div className="flex flex-col gap-8">
@@ -55,7 +55,7 @@ export default function Hero() {
                 className={`group relative p-3 transition-colors duration-300 ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
                 aria-label={social.label}
               >
-                <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md ${isDev ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]' : 'bg-cyan-400'}`} />
+                <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md ${isDev ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]' : 'bg-indigo-400'}`} />
                 <social.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
 
                 <span
@@ -142,12 +142,12 @@ export default function Hero() {
                     >
                       <span className="relative z-10">Get in Touch</span>
                       <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-                      <div className="absolute inset-0 bg-cyan-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+                      <div className="absolute inset-0 bg-indigo-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                     </button>
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-cyan-400/50 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300"
+                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all duration-300"
                     >
                       View Projects
                     </button>
@@ -280,7 +280,7 @@ export default function Hero() {
                 <div className="relative w-full max-w-lg aspect-square">
                   {/* Static Glass Cards */}
                   <div className="absolute top-10 right-0 w-64 h-80 bg-[#151515]/95 border border-white/10 rounded-3xl shadow-2xl z-20 flex flex-col p-6 overflow-hidden">
-                    <div className="w-12 h-2 bg-cyan-400/50 rounded-full mb-6" />
+                    <div className="w-12 h-2 bg-indigo-400/50 rounded-full mb-6" />
                     <div className="space-y-4">
                       <div className="w-full h-4 bg-white/10 rounded-md" />
                       <div className="w-5/6 h-4 bg-white/10 rounded-md" />
@@ -291,13 +291,13 @@ export default function Hero() {
                       <div className="w-8 h-8 rounded-full bg-white/10" />
                     </div>
                     {/* Animated Glow */}
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full" />
+                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-indigo-500/10 rounded-full" />
                   </div>
 
                   <div className="absolute bottom-10 left-0 w-72 h-64 bg-[#151515]/95 border border-white/5 rounded-3xl shadow-xl z-10 p-8">
                     <div className="flex items-center gap-3 mb-8">
                       <div className="w-3 h-3 rounded-full bg-orange-400/40" />
-                      <div className="w-3 h-3 rounded-full bg-cyan-400/40" />
+                      <div className="w-3 h-3 rounded-full bg-indigo-400/40" />
                       <div className="w-3 h-3 rounded-full bg-purple-400/40" />
                     </div>
                     <div className="space-y-3">
@@ -307,7 +307,7 @@ export default function Hero() {
                   </div>
 
                   {/* Static Background Glow */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-tr from-cyan-500/20 via-purple-500/10 to-transparent rounded-full -z-10" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-tr from-indigo-500/20 via-purple-500/10 to-transparent rounded-full -z-10" />
 
                   {/* Decorative Elements */}
                   <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-white/10 to-transparent" />

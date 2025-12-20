@@ -102,7 +102,7 @@ export default function ModeToggle() {
             {/* Content */}
             <div className="relative z-10 w-full flex flex-col gap-3">
               <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-1">
-                <FaCode className="text-xl text-cyan-300" />
+                <FaCode className="text-xl text-indigo-300" />
               </div>
 
               <div>
@@ -110,7 +110,7 @@ export default function ModeToggle() {
                   Developer Mode Available
                 </h3>
                 <p className="text-sm text-gray-400 leading-relaxed font-light">
-                  Switch to <span className="text-cyan-400 font-semibold">Developer Mode</span> for a more technical, developer-focused experience.
+                  Switch to <span className="text-indigo-400 font-semibold">Developer Mode</span> for a more technical, developer-focused experience.
                 </p>
               </div>
 
@@ -124,7 +124,7 @@ export default function ModeToggle() {
                 </button>
                 <button
                   onClick={handleToggle}
-                  className="flex-1 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 text-xs font-medium transition-colors cursor-pointer"
+                  className="flex-1 py-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 text-xs font-medium transition-colors cursor-pointer"
                 >
                   Try It Now
                 </button>
@@ -152,7 +152,7 @@ export default function ModeToggle() {
             </>
           ) : (
             <>
-              <FaPalette className="text-sm text-cyan-300" />
+              <FaPalette className="text-sm text-indigo-300" />
               <span className="text-xs font-bold tracking-wider">STANDARD</span>
             </>
           )}

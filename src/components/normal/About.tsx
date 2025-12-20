@@ -41,9 +41,9 @@ export default function About() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300 group flex items-center gap-4 hover:bg-white/10"
+                  className="p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group flex items-center gap-4 hover:bg-white/10"
                 >
-                  <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 group-hover:text-cyan-400 transition-colors" />
+                  <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 group-hover:text-indigo-400 transition-colors" />
                   <div>
                     <h3 className="text-base sm:text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
                       {item.name}

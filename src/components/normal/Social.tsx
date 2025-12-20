@@ -2,7 +2,7 @@ import { Icone } from "../ui/Icone";
 
 export function Socials() {
   return (
-    <div className="rounded-full bg-linear-to-r from-purple-600 to-cyan-600 p-0.5">
+    <div className="rounded-full bg-linear-to-r from-purple-600 to-indigo-600 p-0.5">
       <nav className="flex items-center justify-between gap-x-8 rounded-full bg-[#1C1C1C] px-1 py-1">
         <Icone
           src={"/assets/email.svg"}

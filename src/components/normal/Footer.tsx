@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
 
       {/* Decorative Gradient Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-linear-to-t from-cyan-500/10 to-transparent -z-10"></div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-linear-to-t from-indigo-500/10 to-transparent -z-10"></div>
     </footer>
   )
 }
