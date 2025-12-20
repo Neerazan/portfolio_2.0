@@ -69,7 +69,7 @@ const workExperiences = [
 
 function WorkExperience() {
   return (
-    <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
+    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 mb-12 sm:mb-24">
       <div className="absolute left-4 h-full w-0.5 transform bg-linear-to-b from-gray-500/20 via-gray-600/20 to-gray-500/20 sm:left-1/2 sm:-translate-x-1/2"></div>
 
       <div className="space-y-8 sm:space-y-16">

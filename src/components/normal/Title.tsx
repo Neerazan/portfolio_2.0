@@ -12,7 +12,7 @@ function Title({ title, className, id }: TitleProps) {
   return (
     <div
       id={id}
-      className={className ? className : "mt-20 ml-6 flex items-center md:w-15/20 md:mx-auto mb-20 relative"}
+      className={className ? className : "mt-32 sm:mt-40 ml-6 flex items-center md:w-15/20 md:mx-auto mb-10 sm:mb-12 relative"}
     >
       {/* Title Text */}
       <h2 className="mr-4 text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white via-white to-gray-400 drop-shadow-sm tracking-tight">

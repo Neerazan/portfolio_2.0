@@ -77,7 +77,7 @@ function PageContent() {
         <NormalWorkExperience />
 
         <NormalTitle title="Some featured projects" id="projects" className={undefined} />
-        <div className="flex flex-col gap-12 sm:gap-16">
+        <div className="flex flex-col gap-12 sm:gap-16 mb-12 sm:mb-24">
           {projects.map((project, index) => (
             <NormalProject key={index} {...project} />
           ))}

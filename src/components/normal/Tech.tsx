@@ -70,7 +70,7 @@ const technologies: Tech[] = [
 
 export default function TechStack() {
   return (
-    <div className="mx-auto my-12 sm:my-20 w-full px-4 sm:px-6 sm:w-15/20">
+    <div className="mx-auto mb-12 sm:mb-24 w-full px-4 sm:px-6 sm:w-15/20">
       <div className="grid gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
         {technologies.map((tech, index) => (
           <motion.div
