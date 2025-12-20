@@ -179,114 +179,173 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Terminal Window */}
-            {/* Terminal Window - System Monitor (htop style) */}
-            <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-gray-700 transition-colors">
+            {isDev ? (
+              <>
+                {/* Terminal Window - System Monitor (htop style) */}
+                <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-gray-700 transition-colors">
 
-              {/* Terminal Header */}
-              <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center justify-between">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-gray-600/50" />
-                  <div className="w-3 h-3 rounded-full bg-gray-600/50" />
-                  <div className="w-3 h-3 rounded-full bg-gray-600/50" />
+                  {/* Terminal Header */}
+                  <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center justify-between">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-gray-600/50" />
+                      <div className="w-3 h-3 rounded-full bg-gray-600/50" />
+                      <div className="w-3 h-3 rounded-full bg-gray-600/50" />
+                    </div>
+                    <div className="text-gray-500 font-medium flex items-center gap-1.5 opacity-60">
+                      <FaTerminal className="text-[10px]" />
+                      <span>monitor — root@portfolio — 80x24</span>
+                    </div>
+                    <div className="w-10" />
+                  </div>
+
+                  {/* Monitor Content */}
+                  <div className="p-4 bg-[#0d1117]/95 backdrop-blur-sm space-y-4">
+
+                    {/* Resource Bars */}
+                    <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-400 font-bold w-8">CPU</span>
+                          <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden flex">
+                            <motion.div
+                              className="h-full bg-green-500"
+                              initial={{ width: "10%" }} animate={{ width: "45%" }} transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                            />
+                            <motion.div
+                              className="h-full bg-red-500"
+                              initial={{ width: "0%" }} animate={{ width: "15%" }} transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
+                            />
+                          </div>
+                          <span className="text-white w-10 text-right">60%</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-400 font-bold w-8">MEM</span>
+                          <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden">
+                            <motion.div
+                              className="h-full bg-yellow-500"
+                              initial={{ width: "30%" }} animate={{ width: "32%" }} transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+                            />
+                          </div>
+                          <span className="text-white w-10 text-right">32%</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-400 font-bold w-8">TASKS</span>
+                          <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden">
+                            <div className="h-full bg-blue-500 w-[85%]" />
+                          </div>
+                          <span className="text-white w-10 text-right">144</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-400 font-bold w-8">NET</span>
+                          <div className="flex-1 text-[10px] text-gray-400 flex justify-between">
+                            <span className="text-green-400">↑ 1.2 KB/s</span>
+                            <span className="text-blue-400">↓ 42 KB/s</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Process List */}
+                    <div className="mt-4 border-t border-gray-800 pt-2">
+                      <div className="grid grid-cols-[1fr_2fr_3fr] gap-2 mb-2 text-black bg-green-400 px-1 font-bold">
+                        <div>PID</div>
+                        <div>USER</div>
+                        <div>COMMAND</div>
+                      </div>
+                      <div className="space-y-0.5 font-mono text-gray-300">
+                        {[
+                          { pid: "1", user: "root", cmd: "init", color: "text-white" },
+                          { pid: "342", user: "system", cmd: "v2_kernel_service", color: "text-blue-400" },
+                          { pid: "1024", user: "nirajan", cmd: "next-server", color: "text-green-400" },
+                          { pid: "1025", user: "nirajan", cmd: "node worker.ts", color: "text-yellow-400" },
+                          { pid: "1056", user: "postgres", cmd: "postgres", color: "text-gray-400" },
+                          { pid: "1192", user: "redis", cmd: "redis-server", color: "text-gray-400" },
+                          { pid: "9999", user: "monitor", cmd: "htop", color: "text-white blink" },
+                        ].map((proc, i) => (
+                          <div key={i} className="grid grid-cols-[1fr_2fr_3fr] gap-2 px-1 hover:bg-white/5 cursor-default transition-colors">
+                            <div className="text-green-500">{proc.pid}</div>
+                            <div>{proc.user}</div>
+                            <div className={proc.cmd === "htop" ? "text-white font-bold" : proc.color}>{proc.cmd}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Footer Status */}
+                    <div className="border-t border-gray-800 pt-1 mt-2 flex justify-between text-[10px] text-gray-500">
+                      <span>F1Help  F2Setup  F3Search  F4Filter  F5Tree</span>
+                      <span className="text-green-400">RUNNING</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-gray-500 font-medium flex items-center gap-1.5 opacity-60">
-                  <FaTerminal className="text-[10px]" />
-                  <span>monitor — root@portfolio — 80x24</span>
+
+                {/* Decorative Matrix Rain / Texture behind */}
+                <div className="absolute -z-10 -right-20 -bottom-20 opacity-20 text-[10px] leading-[10px] font-mono select-none text-green-500/50 hidden xl:block pointer-events-none">
+                  {Array.from({ length: 15 }).map((_, i) => (
+                    <div key={i}>{Array.from({ length: 30 }).map(() => Math.random() > 0.5 ? '0' : '1').join(' ')}</div>
+                  ))}
                 </div>
-                <div className="w-10" />
+              </>
+            ) : (
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Abstract Visual Elements for Normal Mode */}
+                <div className="relative w-full max-w-lg aspect-square">
+                  {/* Floating Glass Cards */}
+                  <motion.div
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-10 right-0 w-64 h-80 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl z-20 flex flex-col p-6 overflow-hidden"
+                  >
+                    <div className="w-12 h-2 bg-cyan-400/50 rounded-full mb-6" />
+                    <div className="space-y-4">
+                      <div className="w-full h-4 bg-white/10 rounded-md" />
+                      <div className="w-5/6 h-4 bg-white/10 rounded-md" />
+                      <div className="w-4/6 h-4 bg-white/10 rounded-md" />
+                    </div>
+                    <div className="mt-auto flex gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/10" />
+                      <div className="w-8 h-8 rounded-full bg-white/10" />
+                    </div>
+                    {/* Animated Glow */}
+                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full" />
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-10 left-0 w-72 h-64 bg-white/5 backdrop-blur-lg border border-white/5 rounded-3xl shadow-xl z-10 p-8"
+                  >
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-3 h-3 rounded-full bg-orange-400/40" />
+                      <div className="w-3 h-3 rounded-full bg-cyan-400/40" />
+                      <div className="w-3 h-3 rounded-full bg-purple-400/40" />
+                    </div>
+                    <div className="space-y-3">
+                      <div className="h-2 w-full bg-white/5 rounded-full" />
+                      <div className="h-2 w-3/4 bg-white/5 rounded-full" />
+                    </div>
+                  </motion.div>
+
+                  {/* Aesthetic Blobs/Glows */}
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 90, 0],
+                      opacity: [0.1, 0.2, 0.1]
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-tr from-cyan-500/20 via-purple-500/10 to-transparent blur-[100px] rounded-full -z-10"
+                  />
+
+                  {/* Decorative Elements */}
+                  <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-white/10 to-transparent" />
+                  <div className="absolute top-1/3 left-0 w-full h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
+                </div>
               </div>
-
-              {/* Monitor Content */}
-              <div className="p-4 bg-[#0d1117]/95 backdrop-blur-sm space-y-4">
-
-                {/* Resource Bars */}
-                <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold w-8">CPU</span>
-                      <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden flex">
-                        <motion.div
-                          className="h-full bg-green-500"
-                          initial={{ width: "10%" }} animate={{ width: "45%" }} transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                        />
-                        <motion.div
-                          className="h-full bg-red-500"
-                          initial={{ width: "0%" }} animate={{ width: "15%" }} transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
-                        />
-                      </div>
-                      <span className="text-white w-10 text-right">60%</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold w-8">MEM</span>
-                      <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden">
-                        <motion.div
-                          className="h-full bg-yellow-500"
-                          initial={{ width: "30%" }} animate={{ width: "32%" }} transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
-                        />
-                      </div>
-                      <span className="text-white w-10 text-right">32%</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold w-8">TASKS</span>
-                      <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden">
-                        <div className="h-full bg-blue-500 w-[85%]" />
-                      </div>
-                      <span className="text-white w-10 text-right">144</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold w-8">NET</span>
-                      <div className="flex-1 text-[10px] text-gray-400 flex justify-between">
-                        <span className="text-green-400">↑ 1.2 KB/s</span>
-                        <span className="text-blue-400">↓ 42 KB/s</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Process List */}
-                <div className="mt-4 border-t border-gray-800 pt-2">
-                  <div className="grid grid-cols-[1fr_2fr_3fr] gap-2 mb-2 text-black bg-green-400 px-1 font-bold">
-                    <div>PID</div>
-                    <div>USER</div>
-                    <div>COMMAND</div>
-                  </div>
-                  <div className="space-y-0.5 font-mono text-gray-300">
-                    {[
-                      { pid: "1", user: "root", cmd: "init", color: "text-white" },
-                      { pid: "342", user: "system", cmd: "v2_kernel_service", color: "text-blue-400" },
-                      { pid: "1024", user: "nirajan", cmd: "next-server", color: "text-green-400" },
-                      { pid: "1025", user: "nirajan", cmd: "node worker.ts", color: "text-yellow-400" },
-                      { pid: "1056", user: "postgres", cmd: "postgres", color: "text-gray-400" },
-                      { pid: "1192", user: "redis", cmd: "redis-server", color: "text-gray-400" },
-                      { pid: "9999", user: "monitor", cmd: "htop", color: "text-white blink" },
-                    ].map((proc, i) => (
-                      <div key={i} className="grid grid-cols-[1fr_2fr_3fr] gap-2 px-1 hover:bg-white/5 cursor-default transition-colors">
-                        <div className="text-green-500">{proc.pid}</div>
-                        <div>{proc.user}</div>
-                        <div className={proc.cmd === "htop" ? "text-white font-bold" : proc.color}>{proc.cmd}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer Status */}
-                <div className="border-t border-gray-800 pt-1 mt-2 flex justify-between text-[10px] text-gray-500">
-                  <span>F1Help  F2Setup  F3Search  F4Filter  F5Tree</span>
-                  <span className="text-green-400">RUNNING</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Decorative Matrix Rain / Texture behind */}
-            <div className="absolute -z-10 -right-20 -bottom-20 opacity-20 text-[10px] leading-[10px] font-mono select-none text-green-500/50 hidden xl:block pointer-events-none">
-              {Array.from({ length: 15 }).map((_, i) => (
-                <div key={i}>{Array.from({ length: 30 }).map(() => Math.random() > 0.5 ? '0' : '1').join(' ')}</div>
-              ))}
-            </div>
+            )}
           </motion.div>
 
         </main>
