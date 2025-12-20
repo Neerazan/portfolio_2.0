@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaBolt, FaCode, FaDatabase, FaNetworkWired, FaServer, FaShieldAlt } from "react-icons/fa";
 
 export default function About() {
   const systemSpecs = [
@@ -139,26 +138,54 @@ $$$$$$"  "$$$$
             INSTALLED_MODULES
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-            {[
-              { name: "Backend Logic", icon: FaServer, color: "text-green-400" },
-              { name: "Database Design", icon: FaDatabase, color: "text-yellow-400" },
-              { name: "Cloud Native", icon: FaNetworkWired, color: "text-blue-400" },
-              { name: "System Security", icon: FaShieldAlt, color: "text-red-400" },
-              { name: "clean_code.js", icon: FaCode, color: "text-orange-400" },
-              { name: "Optimization", icon: FaBolt, color: "text-orange-400" },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ x: 5 }}
-                className="bg-[#151515] p-3 rounded border border-white/5 hover:border-white/20 transition-all flex items-center gap-3 group cursor-default"
-              >
-                <div className={`p-1.5 bg-white/5 rounded ${item.color} opacity-80 group-hover:opacity-100 transition-opacity`}>
-                  <item.icon className="text-sm" />
-                </div>
-                <span className="font-mono text-xs sm:text-sm text-gray-400 group-hover:text-gray-200 transition-colors">{item.name}</span>
-              </motion.div>
-            ))}
+          <div className="bg-[#0d1117] rounded-lg border border-gray-800 p-6 font-mono text-sm leading-relaxed shadow-xl relative overflow-hidden group hover:border-gray-700 transition-colors">
+            {/* Header */}
+            <div className="text-gray-500 mb-4 flex items-center gap-2 border-b border-gray-800 pb-2">
+              <span className="text-green-400">$</span>
+              <span>tree ./modules -L 2</span>
+            </div>
+
+            {/* Tree Content */}
+            <div className="text-gray-300 relative z-10">
+              <span className="text-blue-400 font-bold">./modules</span>
+              <div className="flex flex-col ml-1 border-l border-gray-700/50 pl-4 relative mt-1 space-y-3">
+
+                {[
+                  { name: "backend_logic", version: "v3.2.0", color: "text-green-400" },
+                  { name: "database_design", version: "latest", color: "text-yellow-400" },
+                  { name: "cloud_native", version: "v2.1.0", color: "text-blue-400" },
+                  { name: "security", version: "stable", color: "text-red-400" },
+                  { name: "clean_code.js", version: "v1.0.0", color: "text-orange-400" },
+                  { name: "optimization", version: "beta", color: "text-purple-400" },
+                ].map((item, index) => (
+                  <div key={index} className="relative flex items-center group/item">
+                    {/* Horizontal Connector */}
+                    <span className="absolute -left-4 top-1/2 w-3 h-px bg-gray-700/50 group-hover/item:bg-gray-500 transition-colors" />
+
+                    <span className={`${item.color} group-hover/item:underline decoration-gray-600/50 underline-offset-4 cursor-default transition-all`}>
+                      {item.name}
+                    </span>
+                    <span className="text-gray-600 text-xs ml-3 opacity-60 group-hover/item:opacity-100 transition-opacity">
+                      {item.version}
+                    </span>
+                  </div>
+                ))}
+
+                {/* Vertical Connector Fix for last item if needed - CSS handles strict tree lines usually, but simple border-l works for this visual abstraction */}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-gray-800 text-gray-500 text-xs">
+                6 directories, 0 files
+              </div>
+            </div>
+
+            {/* Background Matrix/Code Effect */}
+            <div className="absolute top-0 right-0 p-4 opacity-[0.02] pointer-events-none select-none text-[10px] leading-3 font-mono text-right">
+              {`101010
+010101
+110011
+001100`}
+            </div>
           </div>
         </motion.div>
       </div>
