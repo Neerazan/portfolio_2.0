@@ -27,21 +27,49 @@ export default function Hero() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    // Initial size update
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    // Check if mobile on mount
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth < 1024; // lg breakpoint
+      setIsMobile(isMobileDevice);
+      return isMobileDevice;
+    };
 
-    const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    const mobile = checkMobile();
+
+    // Only track window size for parallax if NOT mobile
+    if (!mobile) {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+
+      const handleResize = () => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        setIsMobile(window.innerWidth < 1024);
+      };
+
+      // Debounce resize slightly if needed, but for now standard listener is okay if it's just updating state
+      // We will remove it if it becomes mobile
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    } else {
+      // Just a simple resize listener to check if we switch BACK to desktop
+      const handleResizeCheck = () => {
+        const newIsMobile = window.innerWidth < 1024;
+        if (newIsMobile !== isMobile) {
+          setIsMobile(newIsMobile);
+        }
+      };
+      window.addEventListener("resize", handleResizeCheck);
+      return () => window.removeEventListener("resize", handleResizeCheck);
+    }
+  }, [isMobile]);
 
   const rotateX = useSpring(useTransform(mouseY, [0, windowSize.height], [5, -5]), { damping: 25, stiffness: 150 });
   const rotateY = useSpring(useTransform(mouseX, [0, windowSize.width], [-5, 5]), { damping: 25, stiffness: 150 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (isMobile) return; // Don't track mouse on mobile
     const { clientX, clientY } = e;
     mouseX.set(clientX);
     mouseY.set(clientY);
@@ -50,13 +78,13 @@ export default function Hero() {
   return (
     <div
       id="home"
-      className={`relative min-h-dvh w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
+      className={`relative min-h-[100svh] w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
       onMouseMove={handleMouseMove}
     >
 
       {/* Grid Overlay for Texture */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay will-change-transform"
         style={{
           backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
           backgroundSize: "40px 40px"

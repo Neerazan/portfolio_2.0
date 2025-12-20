@@ -5,7 +5,12 @@ export function useScrollSpy() {
   const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
+    let lastRun = 0;
     const handleScrollEvent = () => {
+      const now = Date.now();
+      if (now - lastRun < 100) return;
+      lastRun = now;
+
       // Check if at top of page
       if (window.scrollY < 100) {
         setActiveSection("home");
