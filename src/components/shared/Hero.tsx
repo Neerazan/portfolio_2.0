@@ -30,40 +30,25 @@ export default function Hero() {
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    // Check if mobile on mount
-    const checkMobile = () => {
-      const isMobileDevice = window.innerWidth < 1024; // lg breakpoint
-      setIsMobile(isMobileDevice);
-      return isMobileDevice;
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const mobile = width < 1024;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setWindowSize({ width, height });
+      }
     };
 
-    const mobile = checkMobile();
+    // Call update on mount asynchronously to avoid cascading renders warning
+    const rafId = requestAnimationFrame(handleResize);
 
-    // Only track window size for parallax if NOT mobile
-    if (!mobile) {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-
-      const handleResize = () => {
-        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-        setIsMobile(window.innerWidth < 1024);
-      };
-
-      // Debounce resize slightly if needed, but for now standard listener is okay if it's just updating state
-      // We will remove it if it becomes mobile
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    } else {
-      // Just a simple resize listener to check if we switch BACK to desktop
-      const handleResizeCheck = () => {
-        const newIsMobile = window.innerWidth < 1024;
-        if (newIsMobile !== isMobile) {
-          setIsMobile(newIsMobile);
-        }
-      };
-      window.addEventListener("resize", handleResizeCheck);
-      return () => window.removeEventListener("resize", handleResizeCheck);
-    }
-  }, [isMobile]);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const rotateX = useSpring(useTransform(mouseY, [0, windowSize.height], [5, -5]), { damping: 25, stiffness: 150 });
   const rotateY = useSpring(useTransform(mouseX, [0, windowSize.width], [-5, 5]), { damping: 25, stiffness: 150 });
