@@ -63,7 +63,7 @@ export default function Project({
 
         <div className="grid lg:grid-cols-[1.5fr_1fr]">
           {/* Preview Area (Image Carousel) */}
-          <div className="relative aspect-video lg:aspect-21/10 border-b lg:border-b-0 lg:border-r border-white/5 bg-linear-to-br from-black to-zinc-950 group overflow-hidden">
+          <div className="relative aspect-video lg:aspect-auto lg:h-full lg:min-h-80 border-b lg:border-b-0 lg:border-r border-white/5 bg-linear-to-br from-black to-zinc-950 group overflow-hidden">
             <div className="relative w-full h-full">
               <motion.div
                 initial={false}
