@@ -15,7 +15,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="p-6 sm:p-8 md:p-10 bg-white/5 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
+          className="p-6 sm:p-8 md:p-10 bg-[#151515]/80 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
         >
           <div className="mb-8 sm:mb-12">
             <p className="text-base sm:text-lg text-gray-300">

@@ -78,7 +78,7 @@ export default function TechStack() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="group rounded-xl sm:rounded-3xl bg-white/5 backdrop-blur-sm p-px hover:shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
+            className="group rounded-xl sm:rounded-3xl bg-[#151515]/50 p-px hover:shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300"
           >
             <div className="h-full rounded-xl sm:rounded-3xl bg-transparent p-3 sm:p-6 transition-all duration-300">
               <h3 className="mb-2 text-base sm:text-xl font-bold text-white">

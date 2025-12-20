@@ -40,7 +40,7 @@ function PageContent() {
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white">
       <div
-        className="fixed inset-[-50%] w-[200%] h-[200%] pointer-events-none opacity-30 animate-aurora z-0 transform-gpu backface-hidden"
+        className="fixed inset-[-50%] w-[200%] h-[200%] pointer-events-none opacity-20 animate-aurora z-0 transform-gpu backface-hidden"
         style={{
           backgroundImage: `
             radial-gradient(circle at 18% 20%, rgba(76, 29, 149, 0.4) 0%, transparent 40%),

@@ -45,7 +45,7 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-white/5 backdrop-blur-sm p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-white/10 transition-all duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151515]/80 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-white/10 transition-all duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
