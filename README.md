@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio 2.0
 
-## Getting Started
+A modern, dual-mode portfolio website built with **Next.js**, **Tailwind CSS**, and **Framer Motion**.
 
-First, run the development server:
+This project features two distinct interactive experiences:
+1.  **Normal Mode**: A clean, minimalistic, and professional interface designed for recruiters and non-technical visitors.
+2.  **Developer Mode**: An immersive "meta-interface" that mimics a Linux terminal and IDE environment, designed for engineers and enthusiasts.
+
+---
+
+## 🚀 Features
+
+-   **Dual-Mode Interface**: Toggle between "Creative/Normal" and "Developer/Terminal" modes instantly.
+-   **Developer Mode Aesthetics**:
+    -   **Shell**: Terminal-style header (`root@portfolio:~#`).
+    -   **Process Monitor**: `htop`-inspired hero section with live resource animations.
+    -   **File System**: Tree-view visualization for technical skills.
+    -   **IDE Layout**: Project showcase mimicking a split-screen code editor.
+    -   **Logs**: Work experience presented as `git log` or system logs.
+-   **Tech Stack**:
+    -   [Next.js 14+](https://nextjs.org/) (App Router)
+    -   [Tailwind CSS](https://tailwindcss.com/)
+    -   [Framer Motion](https://www.framer.com/motion/)
+    -   [TypeScript](https://www.typescriptlang.org/)
+    -   [Lucide React](https://lucide.dev/) / React Icons
+
+---
+
+## 🛠️ Getting Started
+
+First, install the dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+```
+
+Then, run the development server:
+
+```bash
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Developer Mode Design Guide
 
-## Learn More
+For a deep dive into the design philosophy, inspiration, and implementation details of the Developer Mode—including a guide on how to customize the content for your own extensive experience—please read our dedicated documentation:
 
-To learn more about Next.js, take a look at the following resources:
+👉 **[Developer Mode Design Guide](./DEVELOPER_MODE.md)**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📂 Project Structure
 
-## Deploy on Vercel
+-   `src/components/developer`: Contains all Terminal/IDE-styled components.
+-   `src/components/normal`: Contains the standard professional UI components.
+-   `src/context`: Manages the global state for Mode switching.
+-   `src/components/shared`: Components shared or adaptable across both modes (e.g., Hero base).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚢 Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+
+```bash
+pnpm build
+```
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
