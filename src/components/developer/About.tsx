@@ -9,7 +9,7 @@ export default function About() {
     { label: "ROLE", value: "Full Stack Developer (Backend-Focused)" },
     { label: "LOCATION", value: "Pokhara, Nepal" },
     { label: "UPTIME", value: "Learning by Building" },
-    { label: "ARCHITECTURE", value: "API-Driven · Modular Design" },
+    { label: "ARCHITECTURE", value: "Microservices · Serverless" },
   ];
 
   const bio = `I'm a backend-leaning full-stack developer who focuses on clean APIs, reliable deployments, and pragmatic system design.
@@ -18,15 +18,15 @@ I learn by shipping projects, debugging in production, and improving developer w
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-12 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
-      <div className="grid lg:grid-cols-5 gap-8 xl:gap-12 items-start">
+      <div className="grid lg:grid-cols-5 gap-8 xl:gap-12 items-stretch">
         {/* Left: Terminal / Bio */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-3 w-full"
+          className="lg:col-span-3 w-full h-full"
         >
-          <div className="w-full bg-[#0a0a0a] rounded-xl border border-white/10 shadow-2xl overflow-hidden font-mono text-sm relative z-10 group hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300">
+          <div className="w-full h-full flex flex-col bg-[#0D1117] rounded-xl border border-white/10 shadow-2xl overflow-hidden font-mono text-sm relative z-10 group hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300">
             {/* Header */}
             <div className="bg-[#161B22] px-4 py-3 border-b border-white/5 flex items-center justify-between">
               <div className="flex gap-2">
@@ -41,7 +41,7 @@ I learn by shipping projects, debugging in production, and improving developer w
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-6 leading-relaxed bg-[#191D23]">
+            <div className="p-6 flex-1 space-y-6 leading-relaxed bg-[#0D1117]">
               {/* whoami */}
               <div>
                 <div className="flex items-center gap-2 text-green-400 mb-2">
@@ -95,7 +95,7 @@ $$$$$$"  "$$$$
                   </p>
                   <p>{bio.split("\n").slice(1).join(" ")}</p>
                   <div className="mt-3 text-xs text-gray-500 font-mono">
-                    $ echo $PHILOSOPHY — <span className="text-blue-400">"Prefer simple systems that evolve."</span>
+                    $ echo $PHILOSOPHY — <span className="text-blue-400">&quot;Prefer simple systems that evolve.&quot;</span>
                   </div>
                 </div>
               </div>
@@ -128,7 +128,7 @@ $$$$$$"  "$$$$
           transition={{ duration: 0.6, delay: 0.2 }}
           className="lg:col-span-2"
         >
-          <div className="bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 shadow-2xl group">
+          <div className="h-full flex flex-col bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 shadow-2xl group">
             {/* Dashboard Header */}
             <div className="bg-[#161B22] px-4 py-3 border-b border-white/5 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -144,7 +144,7 @@ $$$$$$"  "$$$$
               </div>
             </div>
 
-            <div className="bg-[#191D23] p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
+            <div className="flex-1 bg-[#0D1117] p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
               <div className="space-y-4">
                 {[
                   {
