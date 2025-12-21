@@ -73,27 +73,25 @@ export default function Project({
             transition={{
               type: "spring",
               stiffness: 200,
-              damping: 25,
-              mass: 0.5,
-              velocity: 2
+              damping: 25
             }}
-            className="flex w-full h-full"
+            className="flex w-full h-full bg-[#05050a] transform-gpu will-change-transform"
           >
             {images.map((image, index) => (
-              <Image
-                key={index}
-                src={image}
-                alt={`${title} screenshot ${index + 1}`}
-                width={1200}
-                height={675}
-                className="w-full h-full object-cover shrink-0"
-                loading={index === 0 ? "eager" : "lazy"}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = 'https://placehold.co/1200x675/1c1c1c/7A87FB?text=Image+Not+Available';
-                  target.onerror = null;
-                }}
-              />
+              <div key={index} className="relative w-full h-full shrink-0">
+                <Image
+                  src={image}
+                  alt={`${title} screenshot ${index + 1}`}
+                  fill
+                  className="object-contain"
+                  priority={index === 0}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://placehold.co/1200x675/1c1c1c/7A87FB?text=Image+Not+Available';
+                    target.onerror = null;
+                  }}
+                />
+              </div>
             ))}
           </motion.div>
 
