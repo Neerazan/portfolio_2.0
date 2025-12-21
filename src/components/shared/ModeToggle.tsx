@@ -81,7 +81,7 @@ export default function ModeToggle() {
             }}
             exit={{ opacity: 0, y: 10, x: "-50%", scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="absolute top-full mt-6 left-1/2 w-[280px] bg-[#1a1f2e] border border-white/10 rounded-2xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] z-50 pointer-events-auto flex flex-col items-center text-center"
+            className="absolute top-full mt-6 left-1/2 w-[280px] bg-[#0f0f1a] border border-indigo-500/20 rounded-2xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] z-50 pointer-events-auto flex flex-col items-center text-center"
           >
             {/* SVG Arrow - cleaner rendering without artifacts */}
             <svg
@@ -95,14 +95,14 @@ export default function ModeToggle() {
                 transform: `translateX(${-shift}px)` // Counter-shift
               }}
             >
-              <path d="M12 0L24 12H0L12 0Z" fill="#1a1f2e" />
-              <path d="M0 12L12 0L24 12" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+              <path d="M12 0L24 12H0L12 0Z" fill="#0f0f1a" />
+              <path d="M0 12L12 0L24 12" stroke="rgba(99, 102, 241, 0.2)" strokeWidth="1" />
             </svg>
 
             {/* Content */}
             <div className="relative z-10 w-full flex flex-col gap-3">
-              <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-1">
-                <FaCode className="text-xl text-indigo-300" />
+              <div className="w-10 h-10 mx-auto bg-indigo-500/10 rounded-full flex items-center justify-center mb-1 border border-indigo-500/20">
+                <FaCode className="text-xl text-indigo-400" />
               </div>
 
               <div>
@@ -124,7 +124,7 @@ export default function ModeToggle() {
                 </button>
                 <button
                   onClick={handleToggle}
-                  className="flex-1 py-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 text-xs font-medium transition-colors cursor-pointer"
+                  className="flex-1 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all duration-300 cursor-pointer shadow-lg shadow-indigo-500/10"
                 >
                   Try It Now
                 </button>
