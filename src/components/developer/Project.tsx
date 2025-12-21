@@ -159,18 +159,18 @@ export default function Project({
           >
             <div className="flex items-center gap-4">
               <TerminalDots />
-              <div className="flex items-center gap-2 text-xs text-[#8b949e]">
+              <div className="flex items-center gap-2 text-sm text-[#8b949e]">
                 <span className="opacity-50">/</span>
                 <span>projects</span>
                 <span className="opacity-50">/</span>
                 <span className="text-blue-400">{slug}.tsx</span>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-3 text-sm">
               <span className="text-[#8b949e]/60 hidden sm:inline">PID: {number}</span>
               <div className="flex items-center gap-2 px-2 py-0.5 bg-[#238636]/10 border border-[#238636]/30 rounded">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#238636] animate-pulse"></div>
-                <span className="text-[#238636] font-bold text-[10px]">LIVE</span>
+                <span className="text-[#238636] font-bold text-[11px]">LIVE</span>
               </div>
             </div>
           </motion.div>
@@ -182,7 +182,7 @@ export default function Project({
 
               {/* Terminal prompt overlay */}
               <motion.div
-                className="absolute top-4 left-4 z-20 text-[10px] text-[#8b949e] font-mono flex flex-col gap-1"
+                className="absolute top-4 left-4 z-20 text-xs text-[#8b949e] font-mono flex flex-col gap-1"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.3 }}
@@ -272,70 +272,70 @@ export default function Project({
               <div>
                 {/* Log Header */}
                 <div className="flex items-center gap-3 mb-6 pb-2 border-b border-[#30363d]">
-                  <span className="text-blue-400 text-xs font-bold">INFO</span>
-                  <span className="text-[#8b949e] text-[10px] uppercase tracking-[0.2em] font-bold">Project_Specification</span>
+                  <span className="text-blue-400 text-sm font-bold">INFO</span>
+                  <span className="text-[#8b949e] text-xs uppercase tracking-[0.2em] font-bold">Project_Specification</span>
                   <div className="flex-1"></div>
                 </div>
 
                 <div className="mb-6 space-y-1">
-                  <div className="flex items-center gap-2 text-[#8b949e] text-[10px]">
+                  <div className="flex items-center gap-2 text-[#8b949e] text-xs">
                     <span className="text-green-400">➜</span>
                     <span>TITLE:</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                     {title}
                   </h2>
                 </div>
 
                 <div className="mb-8 group">
-                  <div className="inline-flex items-center gap-2 text-[#8b949e] text-[10px] mb-3 bg-[#30363d]/30 px-2 py-0.5 rounded">
-                    <span className="text-orange-400">DESCRIPTION</span>
+                  <div className="inline-flex items-center gap-2 text-[#8b949e] text-xs mb-3 bg-[#30363d]/30 px-2 py-0.5 rounded">
+                    <span className="text-orange-400 font-bold">DESCRIPTION</span>
                     <span className="opacity-10">|</span>
                     <span>markdown</span>
                   </div>
-                  <p className="text-[#8b949e] text-sm leading-relaxed pl-4 border-l-2 border-[#30363d] group-hover:border-blue-400/50 transition-colors duration-500">
+                  <p className="text-[#8b949e] text-base leading-relaxed pl-4 border-l-2 border-[#30363d] group-hover:border-blue-400/50 transition-colors duration-500">
                     {description}
                   </p>
                 </div>
 
                 <div className="mb-8">
-                  <div className="flex items-center gap-2 text-[#8b949e] text-[10px] mb-4">
-                    <span className="text-purple-400">DEPENDENCIES</span>
-                    <span className="text-[#30363d]">{"{"}</span>
+                  <div className="flex items-center gap-2 text-[#8b949e] text-xs mb-4">
+                    <span className="text-purple-400 font-bold">TECH_STACK_MANIFEST</span>
+                    <span className="opacity-20">::</span>
+                    <span className="text-[10px]">v2.4.0</span>
                   </div>
-                  <div className="flex flex-wrap gap-x-6 gap-y-3 pl-4">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-3 pl-4 border-l border-[#30363d]/50">
                     {technologies?.map((tech, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 text-xs"
+                        className="flex items-center gap-2 group/item"
                       >
-                        <span className="text-blue-400 opacity-60">&quot;</span>
-                        <span className="text-[#c9d1d9] hover:text-blue-400 transition-colors cursor-default">{tech}</span>
-                        <span className="text-blue-400 opacity-60">&quot;</span>
-                        <span className="text-[#8b949e]/40">:</span>
-                        <span className="text-orange-400/80">&quot;^latest&quot;</span>
-                        {i < (technologies.length - 1) && <span className="text-[#8b949e]/40">,</span>}
+                        <span className="text-xs text-[#8b949e]/30 font-mono">{(i + 1).toString().padStart(2, '0')}</span>
+                        <span className="text-[#8b949e] text-xs">::</span>
+                        <span className="text-[#c9d1d9] text-sm font-medium group-hover/item:text-blue-400 transition-colors cursor-default">
+                          {tech}
+                        </span>
+                        <div className="h-px flex-1 bg-[#30363d]/20 group-hover/item:bg-blue-400/20 transition-colors" />
                       </div>
                     ))}
                   </div>
-                  <div className="text-[#30363d] text-[10px] mt-2">{"}"}</div>
                 </div>
               </div>
 
               {/* Command Line Actions */}
               <div className="space-y-3 mt-8 pt-8 border-t border-[#30363d]">
-                <div className="text-[10px] text-[#8b949e] mb-2 px-1">AVAILABLE ACTIONS:</div>
+                <div className="text-xs text-[#8b949e] mb-2 px-1 font-bold">AVAILABLE ACTIONS:</div>
                 {demoLink && (
                   <Link
                     href={demoLink}
                     target="_blank"
                     className="group relative w-full px-4 py-3 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] hover:border-blue-400 hover:text-blue-400 transition-all duration-300 flex items-center justify-between rounded-lg overflow-hidden"
                   >
-                    <div className="flex items-center gap-3 text-xs">
+                    <div className="flex items-center gap-3 text-sm">
                       <span className="text-blue-400 font-bold opacity-0 group-hover:opacity-100 transition-all -ml-2 group-hover:ml-0">{'>'}</span>
                       <span className="font-medium">Open Live Deployment</span>
                     </div>
-                    <FaExternalLinkAlt size={10} className="opacity-40 group-hover:opacity-100" />
+                    <FaExternalLinkAlt size={12} className="opacity-40 group-hover:opacity-100" />
                     <div className="absolute inset-0 bg-blue-400/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                   </Link>
                 )}
@@ -343,12 +343,12 @@ export default function Project({
                   <Link
                     href={githubLink}
                     target="_blank"
-                    className="group w-full px-4 py-3 bg-transparent border border-[#30363d] text-[#8b949e] hover:border-[#8b949e] hover:text-[#c9d1d9] transition-all duration-300 flex items-center justify-between rounded-lg text-xs"
+                    className="group w-full px-4 py-3 bg-transparent border border-[#30363d] text-[#8b949e] hover:border-[#8b949e] hover:text-[#c9d1d9] transition-all duration-300 flex items-center justify-between rounded-lg text-sm"
                   >
                     <div className="flex items-center gap-3">
                       <span>View Source Code</span>
                     </div>
-                    <FaGithub size={14} className="opacity-40 group-hover:opacity-100" />
+                    <FaGithub size={16} className="opacity-40 group-hover:opacity-100" />
                   </Link>
                 )}
               </div>
@@ -356,7 +356,7 @@ export default function Project({
           </div >
 
           {/* Footer status bar */}
-          < div className="bg-[#161B22] px-6 py-2 border-t border-[#30363d] flex items-center justify-between text-[10px] text-[#8b949e] font-mono" >
+          <div className="bg-[#161B22] px-6 py-2 border-t border-[#30363d] flex items-center justify-between text-xs text-[#8b949e] font-mono" >
             <div className="flex items-center gap-6">
               <div className="hidden sm:flex items-center gap-2">
                 <span className="opacity-40">Load:</span>
