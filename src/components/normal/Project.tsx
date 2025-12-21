@@ -138,7 +138,7 @@ export default function Project({
 
           {
             (demoLink || githubLink) && (
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent opacity-100 sm:opacity-0 group-hover/project:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-100 sm:opacity-0 group-hover/project:opacity-100 transition-opacity duration-400">
                 <div className="absolute bottom-4 left-4 flex gap-2 sm:gap-3">
                   {
                     demoLink && (
@@ -147,10 +147,10 @@ export default function Project({
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-shadow duration-300 rounded group/btn overflow-hidden relative"
+                          className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-xs shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 rounded group/btn overflow-hidden relative"
                         >
                           <span className="relative z-10">Live Demo</span>
-                          <div className="absolute inset-0 bg-white transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
+                          <div className="absolute inset-0 bg-indigo-400 transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
                         </Link>
                       </div>
                     )
@@ -161,7 +161,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/50 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-colors duration-300 uppercase tracking-widest rounded"
+                        className="px-4 py-2 sm:px-5 sm:py-2 bg-black/50 backdrop-blur-md border border-white/30 text-white font-medium text-xs sm:text-xs hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>

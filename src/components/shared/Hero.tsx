@@ -219,7 +219,7 @@ export default function Hero() {
                   <>
                     <button
                       onClick={handleScroll}
-                      className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 flex items-center gap-3 overflow-hidden"
+                      className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm transition-all duration-300 flex items-center gap-3 overflow-hidden"
                     >
                       <span className="relative z-10">Get in Touch</span>
                       <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
@@ -228,7 +228,7 @@ export default function Hero() {
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all duration-300"
+                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 transition-all duration-300"
                     >
                       View Projects
                     </button>

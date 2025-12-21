@@ -26,12 +26,12 @@ export default function ContactForm() {
   const { elementRef, isVisible } = useScrollReveal<HTMLFormElement>();
 
   const formVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 30
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
@@ -91,7 +91,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded cursor-pointer group relative w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-white text-black font-bold uppercase tracking-widest text-sm sm:text-base hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-shadow duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+        className="rounded cursor-pointer group relative w-full py-2.5 sm:py-3 px-4 sm:px-6 bg-white text-black font-bold uppercase tracking-widest text-sm sm:text-base transition-shadow duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className="relative z-10 group-hover:text-black transition-colors">
           {isSubmitting ? 'Sending...' : 'Send Message'}
