@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
 import { navSections } from "../../data/nav";
@@ -11,7 +12,7 @@ export default function Navbar() {
 
   return (
     <div className="hidden lg:block">
-      <nav className="flex items-center justify-between gap-x-8 bg-[#0d1117] px-6 py-2 border border-white/5 shadow-2xl" aria-label="Main navigation">
+      <nav className="flex items-center justify-between gap-x-2" aria-label="Main navigation">
         <Navitem
           href="#home"
           className="font-mono text-sm"
@@ -42,16 +43,39 @@ export default function Navbar() {
   );
 }
 
+const MotionLink = motion(Link);
+
 export function Navitem({ children, className, href, onClick, isActive }: NavItemProps) {
-  const activeClass = isActive ? "text-green-400 font-bold" : "text-gray-400 hover:text-white";
   return (
-    <Link
+    <MotionLink
       href={href}
       onClick={onClick}
-      className={`${activeClass} ${className} transition-colors duration-200 flex items-center`}
+      animate={{
+        color: isActive ? "#4ade80" : "#9ca3af" // transition between gray-400 and green-400
+      }}
+      whileHover={{ color: "#ffffff" }}
+      transition={{ duration: 0.3 }}
+      className={`${className} flex items-center relative font-medium group pl-3`}
     >
-      {isActive && <span className="mr-1 text-blue-400">&gt;</span>}
-      {children}
-    </Link>
+      <div className="absolute left-0 flex items-center justify-center w-4">
+        <AnimatePresence initial={false}>
+          {isActive && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5, x: -5 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.5, x: -2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="text-blue-400 font-bold"
+              aria-hidden="true"
+            >
+              &gt;
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+      <span className="relative">
+        {children}
+      </span>
+    </MotionLink>
   );
 }
