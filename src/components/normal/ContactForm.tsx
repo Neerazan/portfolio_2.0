@@ -25,11 +25,31 @@ export default function ContactForm() {
 
   const { elementRef, isVisible } = useScrollReveal<HTMLFormElement>();
 
+  const formVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <form
+    <motion.form
       ref={elementRef}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
+      variants={formVariants}
       onSubmit={handleSubmit}
-      className={`reveal ${isVisible ? 'active' : ''} space-y-4 sm:space-y-6 w-full`}
+      className="space-y-4 sm:space-y-6 w-full"
     >
       <input
         type="text"
@@ -94,6 +114,6 @@ export default function ContactForm() {
             : 'Failed to send message. Please try again.'}
         </motion.p>
       )}
-    </form>
+    </motion.form>
   );
 }

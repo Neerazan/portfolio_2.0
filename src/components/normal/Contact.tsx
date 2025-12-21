@@ -1,18 +1,57 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import ContactForm from "./ContactForm";
 
 export default function Contact() {
+  const { elementRef, isVisible } = useScrollReveal();
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        type: "spring" as const,
+        stiffness: 150
+      }
+    }
+  };
+
   return (
-    <section
+    <motion.section
       id="contact"
+      ref={elementRef}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
+      variants={containerVariants}
       className="mx-auto w-11/12 max-w-7xl"
     >
 
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left Side - Contact Form (Span 2) */}
-        <div className="flex flex-col rounded-2xl bg-[#151520]/95 p-8 lg:col-span-2 border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl">
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col rounded-2xl bg-[#151520]/95 p-8 lg:col-span-2 border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl"
+        >
           <p className="mb-8 text-gray-300 max-w-2xl text-lg sm:text-xl leading-relaxed font-light">
             I&apos;d love to hear from you! Feel free to reach out for questions,
             collaboration, or just to connect.
@@ -20,20 +59,26 @@ export default function Contact() {
           <div className="w-full">
             <ContactForm />
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side - Bento Boxes (Span 1) */}
         <div className="flex flex-col gap-6 lg:h-full">
           {/* Top Box - Quote */}
-          <div className="flex flex-2 flex-col justify-center rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-2 flex-col justify-center rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
+          >
             <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
               &quot;Great things are not done by impulse, but by a series of small things brought together.&quot;
             </blockquote>
             <p className="mt-4 text-sm text-gray-500">- Vincent van Gogh</p>
-          </div>
+          </motion.div>
 
           {/* Bottom Box - Decoration/Social */}
-          <div className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
+          >
             <div className="relative z-10">
               <p className="text-2xl font-bold text-white mb-2">Let&apos;s Build</p>
               <div className="flex items-center gap-2">
@@ -43,10 +88,10 @@ export default function Contact() {
             </div>
 
             <GlowingIcon className="absolute top-6 right-6 w-8 opacity-50 text-white/20 rotate-12" />
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

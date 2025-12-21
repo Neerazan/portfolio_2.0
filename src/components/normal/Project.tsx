@@ -38,10 +38,30 @@ export default function Project({
     if (e.key === 'ArrowRight') nextImage();
   };
 
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <div
+    <motion.div
       ref={elementRef}
-      className={`reveal ${isVisible ? 'active' : ''} relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0`}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
+      variants={containerVariants}
+      className="relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0"
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
@@ -179,7 +199,7 @@ export default function Project({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
@@ -75,11 +76,36 @@ interface WorkExperienceItemProps {
 function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
   const { elementRef, isVisible } = useScrollReveal();
 
+  const isEven = index % 2 === 0;
+  
+  const containerVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: isEven ? -50 : 50,
+      y: 20
+    },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15,
+        delay: index * 0.15
+      }
+    }
+  };
+
   return (
-    <div
+    <motion.div
       ref={elementRef}
-      className={`relative flex flex-col sm:flex-row ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-        } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16 reveal ${isVisible ? 'active' : ''}`}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
+      variants={containerVariants}
+      className={`relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
+        } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
     >
       <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
         <div className="h-4 w-4 rounded-full bg-indigo-400 sm:h-5 sm:w-5"></div>
@@ -116,7 +142,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
           ))}
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

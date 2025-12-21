@@ -22,9 +22,51 @@ export default function Hero() {
     { icon: FaEnvelope, href: "mailto:nirajandhakal@gmail.com", label: "Email" },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        type: "spring" as const,
+        stiffness: 80,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <div
+    <motion.div
       id="home"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
       className={`relative min-h-svh w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
     >
 
@@ -80,14 +122,20 @@ export default function Hero() {
 
           {/* Text Section */}
           <div className="lg:w-1/2 max-w-3xl">
-            <div className="flex items-center gap-4 mb-6">
+            <motion.div 
+              variants={textVariants}
+              className="flex items-center gap-4 mb-6"
+            >
               <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
               <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
                 {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}>
+            <motion.h1 
+              variants={titleVariants}
+              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}
+            >
               {isDev ? (
                 <>
                   <span className="block text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-400 hover:from-green-300 hover:to-emerald-300 transition-colors duration-500 cursor-default">
@@ -107,9 +155,12 @@ export default function Hero() {
                   </span>
                 </>
               )}
-            </h1>
+            </motion.h1>
 
-            <div className="max-w-xl">
+            <motion.div 
+              variants={textVariants}
+              className="max-w-xl"
+            >
               <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light'} leading-relaxed mb-10`}>
                 I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>scalable architecture</span> to power modern digital experiences.
               </p>
@@ -154,7 +205,7 @@ export default function Hero() {
                   </>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* 
@@ -355,6 +406,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

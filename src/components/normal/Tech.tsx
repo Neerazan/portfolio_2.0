@@ -1,4 +1,5 @@
 "use client";
+import { motion } from 'framer-motion';
 import { DiRedis } from "react-icons/di";
 import {
   FaAws,
@@ -75,12 +76,34 @@ interface TechCardProps {
 
 function TechCard({ tech, index }: TechCardProps) {
   const { elementRef, isVisible } = useScrollReveal();
-  const delayClass = index === 0 ? '' : index === 1 ? 'reveal-delay-1' : 'reveal-delay-2';
+
+  const containerVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        delay: index * 0.15,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
 
   return (
-    <div
+    <motion.div
       ref={elementRef}
-      className={`reveal ${delayClass} ${isVisible ? 'active' : ''} group rounded-xl sm:rounded-3xl bg-[#151520]/95 p-px hover:shadow-2xl border border-white/5 hover:border-indigo-500/30 transition-colors transition-shadow duration-300`}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
+      variants={containerVariants}
+      className="group rounded-xl sm:rounded-3xl bg-[#151520]/95 p-px hover:shadow-2xl border border-white/5 hover:border-indigo-500/30 transition-colors transition-shadow duration-300"
     >
       <div className="h-full rounded-xl sm:rounded-3xl bg-transparent p-3 sm:p-6">
         <h3 className="mb-2 text-base sm:text-xl font-bold text-white">
@@ -102,7 +125,7 @@ function TechCard({ tech, index }: TechCardProps) {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
