@@ -65,7 +65,7 @@ export default function ContactForm() {
           <div>
             <label className="block text-gray-500 mb-1 text-xs">email:</label>
             <div className={containerClass}>
-              <span className="text-purple-500">$</span>
+              <span className="text-green-500">$</span>
               <input
                 type="email"
                 name="email"
