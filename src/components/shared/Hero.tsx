@@ -27,36 +27,65 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.05
       }
     }
   };
 
   const textVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         type: "spring" as const,
-        stiffness: 100,
-        damping: 15
+        stiffness: 120,
+        damping: 20
       }
     }
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.5,
         type: "spring" as const,
-        stiffness: 80,
-        damping: 12
+        stiffness: 110,
+        damping: 18
+      }
+    }
+  };
+
+  const rightSideVariants = {
+    hidden: { opacity: 0, scale: 0.9, x: 20 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        delay: 0.3,
+        type: "spring" as const,
+        stiffness: 90,
+        damping: 20
+      }
+    }
+  };
+
+  const socialVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
       }
     }
   };
@@ -89,8 +118,9 @@ export default function Hero() {
 
           <div className="flex flex-col gap-8">
             {socialLinks.map((social, index) => (
-              <a
+              <motion.a
                 key={index}
+                variants={socialVariants}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -108,7 +138,7 @@ export default function Hero() {
                 >
                   {isDev ? `> ${social.label.toLowerCase()}` : social.label}
                 </span>
-              </a>
+              </motion.a>
             ))}
           </div>
 
@@ -122,7 +152,7 @@ export default function Hero() {
 
           {/* Text Section */}
           <div className="lg:w-1/2 max-w-3xl">
-            <motion.div 
+            <motion.div
               variants={textVariants}
               className="flex items-center gap-4 mb-6"
             >
@@ -132,7 +162,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               variants={titleVariants}
               className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}
             >
@@ -157,7 +187,7 @@ export default function Hero() {
               )}
             </motion.h1>
 
-            <motion.div 
+            <motion.div
               variants={textVariants}
               className="max-w-xl"
             >
@@ -214,11 +244,15 @@ export default function Hero() {
           {/* 
             Right Creative Section - System Monitor (Backend Focused)
           */}
-          <div className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]">
+          <motion.div
+            variants={rightSideVariants}
+            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]"
+          >
             {isDev ? (
               <>
                 {/* Terminal Window - System Monitor (htop style) */}
                 <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-gray-700 transition-colors">
+                  {/* ... terminal content ... */}
 
                   {/* Terminal Header */}
                   <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center justify-between">
@@ -366,7 +400,7 @@ export default function Hero() {
                 </div>
               </div>
             )}
-          </div>
+          </motion.div>
 
         </main>
 
@@ -377,16 +411,23 @@ export default function Hero() {
           </div>
           <div className="grid grid-cols-2 gap-2">
             {socialLinks.map((social, index) => (
-              <a
+              <motion.a
                 key={index}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.2 + (index * 0.1),
+                  ease: "easeOut"
+                }}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-2 bg-[#0d1117] border border-gray-800 rounded text-xs font-mono text-gray-400 hover:text-blue-400 hover:border-blue-500/50 transition-all flex items-center gap-2"
+                className="px-3 py-2 bg-[#0d1117] border border-gray-800 rounded text-xs font-mono text-gray-400 hover:text-blue-400 hover:border-blue-500/50 transition-all flex items-center gap-2 shadow-sm"
               >
                 <social.icon className="w-4 h-4" />
                 <span>{social.label}</span>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -394,15 +435,22 @@ export default function Hero() {
         {/* Mobile Socials - Normal Mode */}
         <div className={`lg:hidden flex justify-center gap-6 pb-12 mt-8 z-20 w-full ${isDev ? 'hidden' : 'flex'}`}>
           {socialLinks.map((social, index) => (
-            <a
+            <motion.a
               key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.2 + (index * 0.1),
+                ease: "easeOut"
+              }}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors p-2"
             >
               <social.icon className="w-6 h-6" />
-            </a>
+            </motion.a>
           ))}
         </div>
       </div>
