@@ -192,7 +192,7 @@ export default function Hero() {
               className="max-w-xl"
             >
               <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light'} leading-relaxed mb-10`}>
-                I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span>. I engineer <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>robust implementations</span> and <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>scalable architecture</span> to power modern digital experiences.
+                Hi, I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span> a full-stack developer focused on building <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>maintainable backends</span>, <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>clean APIs</span>, and production-ready web applications.
               </p>
 
               <div className="flex flex-wrap gap-6">
