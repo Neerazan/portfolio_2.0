@@ -77,15 +77,15 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
   const { elementRef, isVisible } = useScrollReveal();
 
   const isEven = index % 2 === 0;
-  
+
   const containerVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: isEven ? -50 : 50,
       y: 20
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       y: 0,
       transition: {
@@ -104,6 +104,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
       variants={containerVariants}
+      style={{ willChange: "transform, opacity" }}
       className={`relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
         } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
     >
@@ -148,7 +149,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
 
 function WorkExperience() {
   return (
-    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 mb-12 sm:mb-24">
+    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 mb-12 sm:mb-24 overflow-x-clip">
       <div className="absolute left-4 h-full w-0.5 transform bg-linear-to-b from-gray-500/20 via-gray-600/20 to-gray-500/20 sm:left-1/2 sm:-translate-x-1/2"></div>
 
       <div className="space-y-8 sm:space-y-16">

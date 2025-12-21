@@ -38,7 +38,7 @@ function PageContent() {
 
   // Normal Mode with Static Gradient Background
   return (
-    <div className="relative min-h-screen bg-linear-to-br from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f] text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-linear-to-br from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f] text-white">
       {/* Subtle Grid Texture - Optimized for GPU performance */}
       <div
         className="fixed inset-0 opacity-[0.02] pointer-events-none mix-blend-overlay z-0"
