@@ -103,7 +103,7 @@ function TechCard({ tech, index }: TechCardProps) {
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
       variants={containerVariants}
-      className="group rounded-xl sm:rounded-3xl bg-[#151520]/95 p-px hover:shadow-2xl border border-white/5 hover:border-indigo-500/30 transition-colors transition-shadow duration-300"
+      className="group rounded-xl sm:rounded-3xl bg-[#151520]/95 p-px hover:shadow-2xl border border-white/5 hover:border-indigo-500/30 transition-colors duration-300"
     >
       <div className="h-full rounded-xl sm:rounded-3xl bg-transparent p-3 sm:p-6">
         <h3 className="mb-2 text-base sm:text-xl font-bold text-white">
@@ -115,7 +115,7 @@ function TechCard({ tech, index }: TechCardProps) {
           {tech.skills.map((skill) => (
             <div
               key={skill.name}
-              className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 hover:scale-105 transition-transform transition-colors duration-200 border border-white/5 hover:border-white/20"
+              className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 hover:scale-105 transition-transform duration-200 border border-white/5 hover:border-white/20"
             >
               <skill.icon className="w-6 h-6 sm:w-8 sm:h-8 mb-1 sm:mb-2 text-gray-300 group-hover:text-indigo-400 transition-colors" />
               <span className="text-[10px] sm:text-xs text-gray-300 text-center">

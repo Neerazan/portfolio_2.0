@@ -111,7 +111,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
         <div className="h-4 w-4 rounded-full bg-indigo-400 sm:h-5 sm:w-5"></div>
       </div>
 
-      <div className="group relative w-full rounded-xl border border-white/5 bg-[#151520]/95 p-4 shadow-xl transition-colors transition-shadow duration-300 hover:border-indigo-500/30 hover:bg-[#151520]/98 sm:w-[calc(50%-3rem)] sm:p-6">
+      <div className="group relative w-full rounded-xl border border-white/5 bg-[#151520]/95 p-4 shadow-xl transition-colors duration-300 hover:border-indigo-500/30 hover:bg-[#151520]/98 sm:w-[calc(50%-3rem)] sm:p-6">
         <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
           <span className="text-xl sm:text-2xl">{item.icon}</span>
           <div>
