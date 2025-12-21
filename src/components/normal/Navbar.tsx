@@ -39,7 +39,7 @@ export default function Navbar() {
 
 export function Navitem({ children, className, href, onClick, isActive }: NavItemProps) {
   // Common base classes for all items
-  const baseClasses = "transition-all duration-300 font-medium tracking-wide flex items-center justify-center";
+  const baseClasses = "transition-colors transition-transform duration-300 font-medium tracking-wide flex items-center justify-center";
 
   // Active: larger scale, cyan color
   // Inactive: gray color, white on hover

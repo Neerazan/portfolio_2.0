@@ -12,9 +12,9 @@ interface UseScrollRevealOptions {
  * Lightweight hook to trigger CSS animations when element enters viewport
  * Replaces framer motion's whileInView for better performance
  */
-export function useScrollReveal(options: UseScrollRevealOptions = {}) {
+export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options: UseScrollRevealOptions = {}) {
   const { threshold = 0.1, rootMargin = "0px", once = true } = options;
-  const elementRef = useRef<HTMLDivElement>(null);
+  const elementRef = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

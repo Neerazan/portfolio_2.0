@@ -82,7 +82,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
       {/* Toggle Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`lg:hidden relative z-100 p-2 text-white hover:text-indigo-400 transition-all duration-300 ${className}`}
+        className={`lg:hidden relative z-100 p-2 text-white hover:text-indigo-400 transition-colors duration-300 ${className}`}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
         <span className="sr-only">Toggle menu</span>
@@ -107,7 +107,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
               {/* Close Button inside Portal */}
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-6 right-6 z-110 p-2 text-white hover:text-cyan-400 transition-all duration-300"
+                className="absolute top-6 right-6 z-110 p-2 text-white hover:text-cyan-400 transition-colors duration-300"
                 aria-label="Close menu"
               >
                 <HiX className="w-8 h-8" />
@@ -140,7 +140,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
                           setIsMenuOpen(false);
                         }
                       }}
-                      className="text-4xl font-light text-white/90 hover:text-indigo-400 hover:scale-110 transition-all duration-300 cursor-pointer"
+                      className="text-4xl font-light text-white/90 hover:text-indigo-400 hover:scale-110 transition-colors transition-transform duration-300 cursor-pointer"
                     >
                       {item.label}
                     </button>
@@ -152,7 +152,7 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
                     href="/nirajan_dhakal_cv.pdf"
                     target="_blank"
                     onClick={() => setIsMenuOpen(false)}
-                    className="px-8 py-3 border border-white/20 text-white font-medium text-lg uppercase tracking-widest hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all duration-300 rounded"
+                    className="px-8 py-3 border border-white/20 text-white font-medium text-lg uppercase tracking-widest hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-colors transition-shadow duration-300 rounded"
                   >
                     Download CV
                   </Link>

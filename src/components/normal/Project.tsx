@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { ProjectProps } from "../../types";
 
 export default function Project({
@@ -18,6 +19,7 @@ export default function Project({
   githubLink
 }: ProjectProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { elementRef, isVisible } = useScrollReveal();
 
   if (!images || images.length === 0) {
     return null;
@@ -37,15 +39,13 @@ export default function Project({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0"
+    <div
+      ref={elementRef}
+      className={`reveal ${isVisible ? 'active' : ''} relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151520]/95 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-all duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151520]/95 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors transition-shadow duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
@@ -129,7 +129,7 @@ export default function Project({
                           href={demoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 rounded group/btn overflow-hidden relative"
+                          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold uppercase tracking-widest text-xs sm:text-sm hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-shadow duration-300 rounded group/btn overflow-hidden relative"
                         >
                           <span className="relative z-10">Live Demo</span>
                           <div className="absolute inset-0 bg-white transform translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -143,7 +143,7 @@ export default function Project({
                         href={githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/50 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 uppercase tracking-widest rounded"
+                        className="px-4 py-2 sm:px-6 sm:py-2.5 border border-white/20 text-white font-medium text-xs sm:text-sm hover:bg-white/5 hover:border-white/50 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-colors transition-shadow duration-300 uppercase tracking-widest rounded"
                       >
                         GitHub
                       </Link>
@@ -171,7 +171,7 @@ export default function Project({
             {technologies?.map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-white/5 rounded-full text-gray-300 border border-white/10 hover:border-white/20 transition-all"
+                className="px-2 py-1 sm:px-3 text-xs sm:text-sm bg-white/5 rounded-full text-gray-300 border border-white/10 hover:border-white/20 transition-colors"
               >
                 {tech}
               </span>
@@ -179,7 +179,7 @@ export default function Project({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

@@ -39,12 +39,15 @@ function PageContent() {
   // Normal Mode with Static Gradient Background
   return (
     <div className="relative min-h-screen bg-linear-to-br from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f] text-white">
-      {/* Subtle Grid Texture */}
+      {/* Subtle Grid Texture - Optimized for GPU performance */}
       <div
         className="fixed inset-0 opacity-[0.02] pointer-events-none mix-blend-overlay z-0"
         style={{
           backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
-          backgroundSize: "40px 40px"
+          backgroundSize: "40px 40px",
+          transform: "translateZ(0)",
+          willChange: "auto",
+          backfaceVisibility: "hidden"
         }}
       />
 

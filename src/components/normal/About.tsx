@@ -6,7 +6,7 @@ export default function About() {
   return (
     <div className="mx-auto max-w-6xl px-6 bg-transparent text-gray-300 relative">
       <div className="max-w-4xl mx-auto sm:px-6 mb-12 sm:mb-24 z-10">
-        <div className="p-6 sm:p-8 md:p-10 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-300">
+        <div className="p-6 sm:p-8 md:p-10 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-colors duration-300">
           <div className="mb-8 sm:mb-12">
             <p className="text-base sm:text-lg text-gray-300">
               I&apos;m <span className="text-white font-semibold">
@@ -41,7 +41,7 @@ export default function About() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group flex items-center gap-4 hover:bg-white/10"
+                  className="p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 group flex items-center gap-4 hover:bg-white/10"
                 >
                   <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 group-hover:text-indigo-400 transition-colors" />
                   <div>

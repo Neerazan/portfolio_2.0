@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface TitleProps {
   title: string;
   className?: string;
@@ -19,12 +17,11 @@ function Title({ title, className, id }: TitleProps) {
         {title}
       </h2>
 
-      {/* Decorative Sparkles */}
+      {/* Decorative Sparkle - Static for performance */}
       <div className="relative flex items-center h-full">
         <Sparkle
           color="#e5e7eb" // Light gray
           size={20}
-          delay={0}
           className="relative z-10"
         />
       </div>
@@ -35,34 +32,22 @@ function Title({ title, className, id }: TitleProps) {
   );
 }
 
-function Sparkle({ color, size, delay, className }: { color: string; size: number; delay: number; className?: string }) {
+function Sparkle({ color, size, className }: { color: string; size: number; className?: string }) {
   return (
-    <motion.svg
+    <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      initial={{ scale: 0.8, opacity: 0.8 }}
-      animate={{
-        scale: [0.8, 1.2, 0.8],
-        opacity: [0.8, 1, 0.8],
-        rotate: [0, 15, 0],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: delay,
-      }}
     >
       <path
         d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"
         fill={color}
         style={{ filter: `drop-shadow(0 0 4px ${color})` }}
       />
-    </motion.svg>
+    </svg>
   );
 }
 

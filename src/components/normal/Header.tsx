@@ -40,7 +40,7 @@ export default function Header() {
             className="hidden lg:block group"
             aria-label="Download CV - PDF document"
           >
-            <button className="relative px-6 py-2.5 bg-white/5 border border-white/10 text-white font-medium text-xs tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-300 group-hover:bg-white/10 group-hover:border-indigo-500/20 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] flex items-center gap-2 cursor-pointer">
+            <button className="relative px-6 py-2.5 bg-white/5 border border-white/10 text-white font-medium text-xs tracking-[0.2em] uppercase rounded-full overflow-hidden transition-colors transition-shadow duration-300 group-hover:bg-white/10 group-hover:border-indigo-500/20 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] flex items-center gap-2 cursor-pointer">
               <span className="relative z-10">Download CV</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
