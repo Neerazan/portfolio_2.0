@@ -17,9 +17,9 @@ export default function Hero() {
 
   const socialLinks = [
     { icon: FaGithub, href: "https://github.com/Neerazan", label: "GitHub" },
-    { icon: FaLinkedin, href: "https://linkedin.com/in/nirajan-dhakal", label: "LinkedIn" },
-    { icon: FaTwitter, href: "https://twitter.com/nirajandhakal", label: "Twitter" },
-    { icon: FaEnvelope, href: "mailto:nirajandhakal@gmail.com", label: "Email" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "LinkedIn" },
+    { icon: FaTwitter, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "Twitter" },
+    { icon: FaEnvelope, href: "mailto:nirajandhakal634@gmail.com", label: "Email" },
   ];
 
   const containerVariants = {
