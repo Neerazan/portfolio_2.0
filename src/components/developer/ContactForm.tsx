@@ -21,7 +21,7 @@ export default function ContactForm() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="w-full max-w-2xl bg-[#010409] rounded-lg border border-gray-800 shadow-2xl overflow-hidden"
+      className="w-full max-w-2xl bg-[#0D1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden"
     >
       {/* Terminal Header */}
       <div className="bg-[#161b22] px-4 py-2 border-b border-gray-800 flex items-center gap-2">
