@@ -1,7 +1,7 @@
 "use client";
 import type { ContributionDay, GithubData } from "@/src/lib/github.types";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 interface DeveloperHeroProps {
@@ -39,9 +39,16 @@ const defaultActivities = [
   { action: 'Working on', repo: 'projects', branch: '', time: '', icon: '⎇' },
 ];
 
+const socialLinks = [
+  { icon: FaGithub, href: "https://github.com/Neerazan", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "LinkedIn" },
+  { icon: FaTwitter, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "Twitter" },
+  { icon: FaEnvelope, href: "mailto:nirajandhakal634@gmail.com", label: "Email" },
+];
+
 export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [codingStatus, setCodingStatus] = useState("Currently coding...");
+  const [codingStatus, setCodingStatus] = useState(getStatus);
 
   // Extract data with fallbacks
   const profile = githubData?.profile;
@@ -49,11 +56,10 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
   const activities = githubData?.activities?.length ? githubData.activities : defaultActivities;
 
   // Get all contribution data (usually 52-53 weeks) for the heatmap
-  const contributionWeeks = contributions?.weeks || [];
+  const contributionWeeks = useMemo(() => contributions?.weeks || [], [contributions?.weeks]);
   const totalContributions = contributions?.totalContributions || 0;
 
   useEffect(() => {
-    setCodingStatus(getStatus());
     const interval = setInterval(() => {
       setCodingStatus(getStatus());
     }, 60000); // Check every minute
@@ -73,28 +79,7 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
     }
   };
 
-  // Helper to check if a week is the start of a month
-  const getMonthLabel = (weekIndex: number) => {
-    if (weekIndex === 0) {
-      const date = new Date(contributionWeeks[0].contributionDays[0].date);
-      return date.toLocaleString('default', { month: 'short' });
-    }
 
-    const prevWeekFirstDay = new Date(contributionWeeks[weekIndex - 1].contributionDays[0].date);
-    const currWeekFirstDay = new Date(contributionWeeks[weekIndex].contributionDays[0].date);
-
-    if (prevWeekFirstDay.getMonth() !== currWeekFirstDay.getMonth()) {
-      return currWeekFirstDay.toLocaleString('default', { month: 'short' });
-    }
-    return null;
-  };
-
-  const socialLinks = [
-    { icon: FaGithub, href: "https://github.com/Neerazan", label: "GitHub" },
-    { icon: FaLinkedin, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "LinkedIn" },
-    { icon: FaTwitter, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "Twitter" },
-    { icon: FaEnvelope, href: "mailto:nirajandhakal634@gmail.com", label: "Email" },
-  ];
 
   return (
     <div
@@ -254,17 +239,7 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                   ref={scrollRef}
                   className="overflow-x-auto custom-scrollbar pb-2"
                 >
-                  {/* Month Labels */}
-                  <div className="flex gap-[4px] min-w-max mb-2">
-                    {contributionWeeks.map((_, i) => {
-                      const label = getMonthLabel(i);
-                      return (
-                        <div key={i} className="w-3 text-[11px] text-gray-600 font-mono relative">
-                          {label && <span className="absolute left-0 bottom-0 whitespace-nowrap">{label}</span>}
-                        </div>
-                      );
-                    })}
-                  </div>
+
 
                   <div className="flex gap-[4px] min-w-max">
                     {contributionWeeks.length > 0 ? (
