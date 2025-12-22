@@ -7,6 +7,7 @@ export interface GithubProfile {
   htmlUrl: string;
   publicRepos: number;
   followers: number;
+  totalStars: number;
 }
 
 export interface ContributionDay {

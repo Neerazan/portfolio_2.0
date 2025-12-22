@@ -308,10 +308,22 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
 
                 {/* Footer */}
                 <div className="border-t border-gray-800 pt-3.5 flex justify-between items-center text-xs text-gray-500">
-                  <span className="flex items-center gap-1.5">
-                    <span className="text-yellow-500">★</span> 24 stars earned
-                  </span>
-                  <span className="text-green-400/80">Currently coding...</span>
+                  <div className="flex items-center gap-4">
+                    <span className="flex items-center gap-1">
+                      <span className="text-blue-400 font-bold">{profile?.publicRepos || 0}</span>
+                      <span className="text-gray-600">repos</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span className="text-yellow-500">★</span>
+                      <span className="text-gray-300 font-bold">{profile?.totalStars || 0}</span>
+                      <span className="text-gray-600">stars</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span className="text-orange-400 font-bold">{profile?.followers || 0}</span>
+                      <span className="text-gray-600">followers</span>
+                    </span>
+                  </div>
+                  <span className="text-green-400/80 hidden sm:inline">Currently coding...</span>
                 </div>
               </div>
             </div>

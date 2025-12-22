@@ -67,46 +67,31 @@ function parseEventType(
 // =============================================================================
 
 export async function getGithubProfile(): Promise<GithubProfile | null> {
-  try {
-    const response = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}`,
-      {
-        headers: GITHUB_TOKEN
-          ? { Authorization: `Bearer ${GITHUB_TOKEN}` }
-          : {},
-        next: { revalidate: REVALIDATE_SECONDS },
-      }
-    );
-
-    if (!response.ok) {
-      console.error("GitHub Profile API error:", response.status);
-      return null;
-    }
-
-    const data = await response.json();
-
-    return {
-      username: data.login,
-      avatarUrl: data.avatar_url,
-      htmlUrl: data.html_url,
-      publicRepos: data.public_repos,
-      followers: data.followers,
-    };
-  } catch (error) {
-    console.error("Failed to fetch GitHub profile:", error);
-    return null;
-  }
+  // We'll now fetch this in getGithubData via GraphQL for efficiency and to get total stars
+  return null;
 }
 
-export async function getGithubContributions(): Promise<GithubContributions | null> {
+export async function getGithubContributionsAndProfile(): Promise<{ profile: GithubProfile, contributions: GithubContributions } | null> {
   if (!GITHUB_TOKEN) {
-    console.warn("GITHUB_TOKEN not set, skipping contributions fetch");
+    console.warn("GITHUB_TOKEN not set, skipping GitHub fetch");
     return null;
   }
 
   const query = `
     query ($login: String!) {
       user(login: $login) {
+        login
+        avatarUrl
+        url
+        repositories(first: 100, ownerAffiliations: OWNER) {
+          totalCount
+          nodes {
+            stargazerCount
+          }
+        }
+        followers {
+          totalCount
+        }
         contributionsCollection {
           contributionCalendar {
             totalContributions
@@ -141,25 +126,38 @@ export async function getGithubContributions(): Promise<GithubContributions | nu
       return null;
     }
 
-    const json = await response.json();
+    const { data, errors } = await response.json();
 
-    if (json.errors) {
-      console.error("GitHub GraphQL errors:", json.errors);
+    if (errors) {
+      console.error("GitHub GraphQL errors:", errors);
       return null;
     }
 
-    const calendar = json.data?.user?.contributionsCollection?.contributionCalendar;
+    const user = data?.user;
+    if (!user) return null;
 
-    if (!calendar) {
-      return null;
-    }
+    const calendar = user.contributionsCollection?.contributionCalendar;
+    const totalStars = user.repositories?.nodes?.reduce(
+      (acc: number, repo: { stargazerCount: number }) => acc + repo.stargazerCount,
+      0
+    ) || 0;
 
     return {
-      totalContributions: calendar.totalContributions,
-      weeks: calendar.weeks,
+      profile: {
+        username: user.login,
+        avatarUrl: user.avatarUrl,
+        htmlUrl: user.url,
+        publicRepos: user.repositories?.totalCount || 0,
+        followers: user.followers?.totalCount || 0,
+        totalStars,
+      },
+      contributions: {
+        totalContributions: calendar?.totalContributions || 0,
+        weeks: calendar?.weeks || [],
+      },
     };
   } catch (error) {
-    console.error("Failed to fetch GitHub contributions:", error);
+    console.error("Failed to fetch GitHub data via GraphQL:", error);
     return null;
   }
 }
@@ -211,15 +209,14 @@ export async function getGithubActivity(limit = 4): Promise<GithubActivity[]> {
 // =============================================================================
 
 export async function getGithubData(): Promise<GithubData> {
-  const [profile, contributions, activities] = await Promise.all([
-    getGithubProfile(),
-    getGithubContributions(),
+  const [mainData, activities] = await Promise.all([
+    getGithubContributionsAndProfile(),
     getGithubActivity(4),
   ]);
 
   return {
-    profile,
-    contributions,
+    profile: mainData?.profile || null,
+    contributions: mainData?.contributions || null,
     activities,
   };
 }
