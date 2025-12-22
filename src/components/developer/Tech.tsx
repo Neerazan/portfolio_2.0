@@ -98,7 +98,7 @@ export default function TechStack() {
   lineCount += 1; // final }
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 md:p-8">
+    <div className="w-full max-w-6xl mx-auto p-3 md:p-6">
       {/* VS Code Tab Header */}
       <div className="bg-[#1f1f1f] rounded-t-lg border-b border-[#252525] flex items-center justify-between px-2 py-1.5 shadow-lg">
         <div className="flex items-center gap-2 bg-[#151515] px-4 py-2 rounded-t border-t-2 border-t-blue-500">

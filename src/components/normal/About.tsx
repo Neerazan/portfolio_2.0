@@ -38,15 +38,15 @@ export default function About() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 bg-transparent text-gray-300 relative">
-      <div className="max-w-4xl mx-auto sm:px-6 mb-12 sm:mb-24 z-10">
+      <div className="max-w-4xl mx-auto sm:px-6 mb-10 sm:mb-20 z-10">
         <motion.div
           ref={elementRef}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={containerVariants}
-          className="p-6 sm:p-8 md:p-10 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-colors duration-300"
+          className="p-5 sm:p-6 md:p-8 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-colors duration-300"
         >
-          <div className="mb-8 sm:mb-12">
+          <div className="mb-6 sm:mb-10">
             <p className="text-base sm:text-lg text-gray-300">
               I&apos;m <span className="text-white font-semibold">
                 Nirajan Dhakal
@@ -62,7 +62,7 @@ export default function About() {
           </div>
 
           <div>
-            <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-5">
               What Drives Me
             </h2>
             <p className="text-sm sm:text-base text-gray-300 mb-6 sm:mb-8">

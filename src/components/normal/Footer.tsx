@@ -4,11 +4,11 @@ const satisfy = Satisfy({ subsets: ["latin"], weight: ["400"] });
 
 const Footer = () => {
   return (
-    <footer className="relative mt-20 border-t border-white/5 bg-linear-to-b from-[#0a0a0f] to-[#151520]">
-      <div className="mx-auto w-13/14 lg:w-15/20 px-4 py-12">
-        <div className="flex flex-col items-center gap-8 text-center">
+    <footer className="relative mt-16 border-t border-white/5 bg-linear-to-b from-[#0a0a0f] to-[#151520]">
+      <div className="mx-auto w-13/14 lg:w-15/20 px-4 py-10">
+        <div className="flex flex-col items-center gap-6 text-center">
           {/* Logo */}
-          <h1 className={`text-[40px] text-white ${satisfy.className}`}>
+          <h1 className={`text-[32px] text-white ${satisfy.className}`}>
             Neerajan .
           </h1>
 

@@ -177,7 +177,7 @@ export default function Project({
 
           <div className="grid lg:grid-cols-[1.6fr_1fr]">
             {/* Terminal Output Area (Image Carousel) */}
-            <div className="relative aspect-video lg:aspect-auto lg:h-full lg:min-h-[500px] border-b lg:border-b-0 lg:border-r border-[#30363d] bg-black overflow-hidden group">
+            <div className="relative aspect-video lg:aspect-auto lg:h-full lg:min-h-[420px] border-b lg:border-b-0 lg:border-r border-[#30363d] bg-black overflow-hidden group">
               <ScanlineEffect />
 
               {/* Terminal prompt overlay */}
@@ -282,7 +282,7 @@ export default function Project({
                     <span className="text-green-400">➜</span>
                     <span>TITLE:</span>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                     {title}
                   </h2>
                 </div>

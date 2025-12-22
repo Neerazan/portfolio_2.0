@@ -3,7 +3,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-white/5 py-8 font-mono text-sm">
+    <footer className="bg-[#0a0a0a] border-t border-white/5 py-6 font-mono text-sm">
       <div className="max-w-7xl mx-auto px-6">
         {/* Terminal Status Bar Style */}
         <div className="bg-[#0d1117] border border-gray-800 rounded px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">

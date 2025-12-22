@@ -65,7 +65,7 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-6 sm:gap-8 bg-[#151520]/95 p-5 sm:p-8 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-5 sm:gap-6 bg-[#151520]/95 p-4 sm:p-6 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl">
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
@@ -176,7 +176,7 @@ export default function Project({
         <div className="flex flex-col gap-3 sm:gap-4 md:w-1/2">
           <div className="flex items-center gap-3 sm:gap-4">
             <Num number={number} />
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               {title}
             </h2>
           </div>

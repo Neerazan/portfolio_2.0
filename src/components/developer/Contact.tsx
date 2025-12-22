@@ -39,7 +39,7 @@ export default function Contact() {
       <div className="text-center space-y-4">
         <motion.h2
           variants={itemVariants}
-          className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4"
+          className="text-2xl md:text-4xl font-bold tracking-tight text-white mb-3"
         >
           Establish <span className="text-green-500">Connection</span>
         </motion.h2>

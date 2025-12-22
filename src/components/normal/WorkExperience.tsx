@@ -116,7 +116,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
         <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-4">
           <span className="text-xl sm:text-2xl">{item.icon}</span>
           <div>
-            <h3 className="text-lg font-semibold text-white sm:text-xl">
+            <h3 className="text-base font-semibold text-white sm:text-lg">
               {item.title}
             </h3>
             <div className="flex items-center gap-2">
@@ -149,7 +149,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
 
 function WorkExperience() {
   return (
-    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 mb-12 sm:mb-24 overflow-x-clip">
+    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 mb-10 sm:mb-20 overflow-x-clip">
       <div className="absolute left-4 h-full w-0.5 transform bg-linear-to-b from-gray-500/20 via-gray-600/20 to-gray-500/20 sm:left-1/2 sm:-translate-x-1/2"></div>
 
       <div className="space-y-8 sm:space-y-16">

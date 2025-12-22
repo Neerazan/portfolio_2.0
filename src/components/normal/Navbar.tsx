@@ -44,8 +44,8 @@ export function Navitem({ children, className, href, onClick, isActive }: NavIte
   // Active: larger scale, cyan color
   // Inactive: gray color, white on hover
   const stateClasses = isActive
-    ? "text-indigo-400 scale-110 origin-center text-base border-b border-indigo-400/50 pb-0.5"
-    : "text-gray-400 hover:text-indigo-400 text-base hover:scale-105 origin-center border-b border-transparent pb-0.5";
+    ? "text-indigo-400 scale-110 origin-center text-sm border-b border-indigo-400/50 pb-0.5"
+    : "text-gray-400 hover:text-indigo-400 text-sm hover:scale-105 origin-center border-b border-transparent pb-0.5";
 
   return (
     <Link

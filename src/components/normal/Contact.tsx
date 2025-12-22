@@ -50,9 +50,9 @@ export default function Contact() {
         {/* Left Side - Contact Form (Span 2) */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col rounded-2xl bg-[#151520]/95 p-8 lg:col-span-2 border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl"
+          className="flex flex-col rounded-2xl bg-[#151520]/95 p-6 lg:col-span-2 border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl"
         >
-          <p className="mb-8 text-gray-300 max-w-2xl text-lg sm:text-xl leading-relaxed font-light">
+          <p className="mb-6 text-gray-300 max-w-2xl text-base sm:text-lg leading-relaxed font-light">
             I&apos;d love to hear from you! Feel free to reach out for questions,
             collaboration, or just to connect.
           </p>
@@ -66,9 +66,9 @@ export default function Contact() {
           {/* Top Box - Quote */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-2 flex-col justify-center rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
+            className="flex flex-2 flex-col justify-center rounded-2xl bg-[#151520]/95 p-6 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
           >
-            <blockquote className="relative z-10 text-xl font-medium italic text-gray-300">
+            <blockquote className="relative z-10 text-lg font-medium italic text-gray-300">
               &quot;Great things are not done by impulse, but by a series of small things brought together.&quot;
             </blockquote>
             <p className="mt-4 text-sm text-gray-500">- Vincent van Gogh</p>
@@ -77,10 +77,10 @@ export default function Contact() {
           {/* Bottom Box - Decoration/Social */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-[#151520]/95 p-8 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
+            className="flex flex-1 flex-col justify-end items-start rounded-2xl bg-[#151520]/95 p-6 border border-white/5 hover:border-white/10 transition-colors duration-300 shadow-2xl relative overflow-hidden group"
           >
             <div className="relative z-10">
-              <p className="text-2xl font-bold text-white mb-2">Let&apos;s Build</p>
+              <p className="text-xl font-bold text-white mb-2">Let&apos;s Build</p>
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="text-sm text-gray-400">Available for work</span>

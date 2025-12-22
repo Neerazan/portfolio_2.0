@@ -41,17 +41,17 @@ export default function Hero() {
           LEFT SIDEBAR - Social Links
           Fixed on desktop to stay efficient
         */}
-        <aside className={`hidden lg:flex flex-col justify-between items-center w-24 h-screen fixed left-0 top-0 border-r z-50 py-12 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/95' : 'border-white/5 bg-[#151520]/95'}`}>
-          <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
+        <aside className={`hidden lg:flex flex-col justify-between items-center w-20 h-screen fixed left-0 top-0 border-r z-50 py-10 transition-colors duration-500 ${isDev ? 'border-green-500/20 bg-[#0d1117]/95' : 'border-white/5 bg-[#151520]/95'}`}>
+          <div className={`w-px h-20 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             {socialLinks.map((social, index) => (
               <a
                 key={index}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative p-3 transition-colors duration-300 animate-fade-in-left ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
+                className={`group relative p-2.5 transition-colors duration-300 animate-fade-in-left ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
                 style={{ animationDelay: `${index * 50}ms` }}
                 aria-label={social.label}
               >
@@ -70,33 +70,33 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className={`w-px h-24 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
+          <div className={`w-px h-20 bg-linear-to-b from-transparent to-transparent ${isDev ? 'via-green-500/20' : 'via-white/20'}`} />
         </aside>
 
         {/* 
           MAIN CONTENT AREA 
         */}
-        <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-36 lg:pr-12 w-full pt-20 lg:pt-0">
+        <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-28 lg:pr-12 w-full pt-20 lg:pt-0">
 
           {/* Text Section - CSS animations for instant LCP */}
-          <div className="lg:w-1/2 max-w-3xl">
-            <div className="flex items-center gap-4 mb-6 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
-              <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
-              <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
+          <div className="lg:w-1/2 max-w-2xl">
+            <div className="flex items-center gap-3 mb-4 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
+              <div className={`h-px w-10 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
+              <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-xs sm:text-sm`}>
                 {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
               </span>
             </div>
 
             {/* LCP Element - No animation delay, instant render */}
             <h1
-              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter font-display'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8`}
+              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter font-display'} text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white leading-[0.9] mb-6`}
             >
               {isDev ? (
                 <>
                   <span className="block text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-400 hover:from-green-300 hover:to-emerald-300 transition-colors duration-500 cursor-default">
                     {"<Build />"}
                   </span>
-                  <span className="block text-gray-500 text-6xl sm:text-8xl lg:text-9xl mt-2 hover:text-orange-400 transition-colors duration-500 cursor-default">
+                  <span className="block text-gray-500 text-5xl sm:text-6xl md:text-7xl lg:text-8xl mt-2 hover:text-orange-400 transition-colors duration-500 cursor-default">
                     {"scale()"}
                   </span>
                 </>
@@ -112,26 +112,26 @@ export default function Hero() {
               )}
             </h1>
 
-            <div className="max-w-xl animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light font-display'} leading-relaxed mb-10`}>
+            <div className="max-w-lg animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+              <p className={`${isDev ? 'font-mono text-sm sm:text-base text-green-400/80' : 'text-base sm:text-lg lg:text-xl text-gray-400 font-light font-display'} leading-relaxed mb-8`}>
                 Hi, I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span> a full-stack developer focused on building <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>maintainable backends</span>, <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>clean APIs</span>, and production-ready web applications.
               </p>
 
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap gap-4">
                 {isDev ? (
                   <>
                     <button
                       onClick={handleScroll}
-                      className="group font-mono text-sm px-6 py-3 bg-black border border-green-500/50 text-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
+                      className="group font-mono text-xs sm:text-sm px-5 py-2.5 bg-black border border-green-500/50 text-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
                     >
                       <span className="text-gray-500">$</span>
                       <span>./contact.sh</span>
-                      <div className="w-2 h-4 bg-green-500 animate-[pulse_1s_infinite] ml-1" />
+                      <div className="w-1.5 h-3.5 bg-green-500 animate-[pulse_1s_infinite] ml-1" />
                     </button>
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="group font-mono text-sm px-6 py-3 bg-black border border-gray-700 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
+                      className="group font-mono text-xs sm:text-sm px-5 py-2.5 bg-black border border-gray-700 text-gray-400 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 flex items-center gap-2 rounded cursor-pointer"
                     >
                       <span className="text-gray-500">$</span>
                       <span>git checkout projects</span>
@@ -141,16 +141,16 @@ export default function Hero() {
                   <>
                     <button
                       onClick={handleScroll}
-                      className="rounded cursor-pointer group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-wide text-sm transition-all duration-300 flex items-center gap-3 overflow-hidden"
+                      className="rounded cursor-pointer group relative px-6 py-3 bg-white text-black font-bold uppercase tracking-wide text-xs sm:text-sm transition-all duration-300 flex items-center gap-2 overflow-hidden"
                     >
                       <span className="relative z-10">Get in Touch</span>
-                      <HiArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+                      <HiArrowRight className="w-3.5 h-3.5 relative z-10 group-hover:translate-x-1 transition-transform" />
                       <div className="absolute inset-0 bg-indigo-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                     </button>
 
                     <button
                       onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="rounded cursor-pointer px-8 py-4 border border-white/20 text-white font-medium uppercase tracking-wide text-sm hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 transition-all duration-300"
+                      className="rounded cursor-pointer px-6 py-3 border border-white/20 text-white font-medium uppercase tracking-wide text-xs sm:text-sm hover:bg-white/5 hover:border-indigo-400/50 hover:text-indigo-400 transition-all duration-300"
                     >
                       View Projects
                     </button>
@@ -164,13 +164,13 @@ export default function Hero() {
             Right Creative Section - GitHub Activity Graph
           */}
           <div
-            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px] animate-fade-in-right"
+            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[500px] animate-fade-in-right"
             style={{ animationDelay: '150ms' }}
           >
             {isDev ? (
               <>
                 {/* GitHub Activity Graph */}
-                <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-green-500/30 transition-colors">
+                <div className="w-full max-w-md bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-green-500/30 transition-colors">
 
                   {/* Header */}
                   <div className="bg-[#161b22] px-4 py-3 border-b border-gray-800 flex items-center justify-between">

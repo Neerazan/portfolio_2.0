@@ -78,13 +78,13 @@ function TechCard({ tech, index }: TechCardProps) {
   const { elementRef, isVisible } = useScrollReveal();
 
   const containerVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 30,
       scale: 0.95
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
@@ -131,7 +131,7 @@ function TechCard({ tech, index }: TechCardProps) {
 
 export default function TechStack() {
   return (
-    <div className="mx-auto mb-12 sm:mb-24 w-full px-4 sm:px-6 sm:w-15/20">
+    <div className="mx-auto mb-10 sm:mb-20 w-full px-4 sm:px-6 sm:w-15/20">
       <div className="grid gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
         {technologies.map((tech, index) => (
           <TechCard key={tech.category} tech={tech} index={index} />

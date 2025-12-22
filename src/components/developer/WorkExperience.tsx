@@ -46,7 +46,7 @@ function WorkExperience() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-0">
       <div className="flex items-center gap-3 mb-12 font-mono text-gray-400">
-        <FaGitAlt className="text-orange-500 text-xl" />
+        <FaGitAlt className="text-orange-500 text-lg" />
         <span>git log --pretty=format:&quot;%h - %an, %ar : %s&quot;</span>
       </div>
 
@@ -66,7 +66,7 @@ function WorkExperience() {
               <span className="font-mono text-yellow-500 text-sm">
                 {exp.commitHash}
               </span>
-              <h3 className="text-xl font-bold text-white tracking-tight">
+              <h3 className="text-lg font-bold text-white tracking-tight">
                 <span className="text-orange-400">{exp.type}:</span> {exp.role} @ {exp.company}
               </h3>
             </div>

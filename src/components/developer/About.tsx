@@ -17,7 +17,7 @@ I prefer simple, maintainable systems that evolve with real usage.
 I learn by shipping projects, debugging in production, and improving developer workflows.`;
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-12 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
+    <section className="mx-auto max-w-7xl px-6 py-8 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
       <div className="grid lg:grid-cols-5 gap-8 xl:gap-12 items-stretch">
         {/* Left: Terminal / Bio */}
         <motion.div

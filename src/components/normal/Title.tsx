@@ -61,11 +61,11 @@ function Title({ title, className, id }: TitleProps) {
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
       variants={containerVariants}
-      className={className ? className : "mt-32 sm:mt-40 ml-6 flex items-center md:w-15/20 md:mx-auto mb-10 sm:mb-12 relative"}
+      className={className ? className : "mt-24 sm:mt-32 ml-6 flex items-center md:w-15/20 md:mx-auto mb-8 sm:mb-10 relative"}
     >
       {/* Title Text */}
-      <motion.h2 
-        className="mr-4 text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white via-white to-gray-400 drop-shadow-sm tracking-tight"
+      <motion.h2
+        className="mr-3 text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white via-white to-gray-400 drop-shadow-sm tracking-tight"
       >
         {title}
       </motion.h2>
@@ -86,7 +86,7 @@ function Title({ title, className, id }: TitleProps) {
       </div>
 
       {/* Modern Gradient Line - Animated */}
-      <motion.div 
+      <motion.div
         variants={lineVariants}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}

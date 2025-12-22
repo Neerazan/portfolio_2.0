@@ -45,7 +45,7 @@ export const projects: ProjectProps[] = [
   {
     title: "Kirana Pasal",
     number: "3",
-    description: "Kirana Pasal is a fully functional e-commerce platform built on WordPress and WooCommerce, specializing in South Asian groceries. I was responsible for the end-to-end development, including responsive front-end design using Elementor, integrating secure Stripe payments, optimizing performance with Nginx, and implementing Yoast SEO for organic growth.",
+    description: "Kirana Pasal is a fully functional e-commerce platform built on WordPress and WooCommerce, specializing in South Asian groceries. I was responsible for the end-to-end development, including responsive frontend design using Elementor, integrating secure Stripe payments, optimizing performance with Nginx, and implementing Yoast SEO for organic growth.",
     technologies: [
       "Wordpress",
       "WooCommerce",
@@ -64,7 +64,7 @@ export const projects: ProjectProps[] = [
   {
     title: "Right4Children",
     number: "4",
-    description: "Right4Children is a child- and youth-focused organization dedicated to empowering young people by helping them access their rights through impactful programs and services. During my time at Aarambha IT, I worked as a full-stack developer on this project, building and integrating both frontend and backend features using Django and Next.js. My contributions included developing core APIs, managing database models, and implementing dynamic, responsive UI components to ensure a seamless user experience.",
+    description: "Right4Children is a child and youth focused organization that works to help young people access their rights through meaningful programs. While working at Aarambha IT, I contributed to this project as a full-stack developer, building backend features with Django and creating responsive, user friendly interfaces with Next.js. I worked on core APIs, database models, and UI components to deliver a smooth and reliable user experience.",
     technologies: [
       "Next.js",
       "Tailwind CSS",
