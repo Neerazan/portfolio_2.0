@@ -214,7 +214,7 @@ export async function getGithubData(): Promise<GithubData> {
   const [profile, contributions, activities] = await Promise.all([
     getGithubProfile(),
     getGithubContributions(),
-    getGithubActivity(8),
+    getGithubActivity(4),
   ]);
 
   return {
