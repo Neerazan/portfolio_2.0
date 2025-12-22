@@ -81,6 +81,7 @@ export async function getGithubContributionsAndProfile(): Promise<{ profile: Git
     query ($login: String!) {
       user(login: $login) {
         login
+        name
         avatarUrl
         url
         repositories(first: 100, ownerAffiliations: OWNER) {
@@ -145,6 +146,7 @@ export async function getGithubContributionsAndProfile(): Promise<{ profile: Git
     return {
       profile: {
         username: user.login,
+        name: user.name || user.login,
         avatarUrl: user.avatarUrl,
         htmlUrl: user.url,
         publicRepos: user.repositories?.totalCount || 0,

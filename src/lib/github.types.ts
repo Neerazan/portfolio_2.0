@@ -3,6 +3,7 @@
 
 export interface GithubProfile {
   username: string;
+  name: string;
   avatarUrl: string;
   htmlUrl: string;
   publicRepos: number;

@@ -208,8 +208,15 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                     </div>
                   )}
                   <div>
-                    <div className="text-white font-semibold text-base">{profile?.username || 'Neerazan'}</div>
-                    <div className="text-gray-500 text-xs">@{profile?.username?.toLowerCase() || 'neerazan'}</div>
+                    <div className="text-white font-semibold text-base">{profile?.name || 'Neerazan Dhakal'}</div>
+                    <a
+                      href={profile?.htmlUrl || 'https://github.com/Neerazan'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 text-xs hover:text-green-400 transition-colors"
+                    >
+                      @{profile?.username?.toLowerCase() || 'neerazan'}
+                    </a>
                   </div>
                 </div>
                 <a
