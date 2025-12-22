@@ -1,6 +1,5 @@
 "use client";
 import { useDisplayMode } from "@/src/context/DisplayModeContext";
-import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { HiArrowRight } from "react-icons/hi";
 
@@ -22,80 +21,9 @@ export default function Hero() {
     { icon: FaEnvelope, href: "mailto:nirajandhakal634@gmail.com", label: "Email" },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.05
-      }
-    }
-  };
-
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        type: "spring" as const,
-        stiffness: 120,
-        damping: 20
-      }
-    }
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0.1, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        type: "spring" as const,
-        stiffness: 110,
-        damping: 18
-      }
-    }
-  };
-
-  const rightSideVariants = {
-    hidden: { opacity: 0, scale: 0.9, x: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.3,
-        type: "spring" as const,
-        stiffness: 90,
-        damping: 20
-      }
-    }
-  };
-
-  const socialVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  };
-
   return (
-    <motion.div
+    <div
       id="home"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
       className={`relative min-h-svh w-full text-white overflow-x-hidden flex flex-col ${isDev ? "bg-[#0a0a0a]" : "bg-transparent"}`}
     >
 
@@ -118,13 +46,13 @@ export default function Hero() {
 
           <div className="flex flex-col gap-8">
             {socialLinks.map((social, index) => (
-              <motion.a
+              <a
                 key={index}
-                variants={socialVariants}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative p-3 transition-colors duration-300 ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
+                className={`group relative p-3 transition-colors duration-300 animate-fade-in-left ${isDev ? 'text-green-500/60 hover:text-green-400' : 'text-gray-400 hover:text-white'}`}
+                style={{ animationDelay: `${index * 50}ms` }}
                 aria-label={social.label}
               >
                 <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md ${isDev ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]' : 'bg-indigo-400'}`} />
@@ -138,7 +66,7 @@ export default function Hero() {
                 >
                   {isDev ? `> ${social.label.toLowerCase()}` : social.label}
                 </span>
-              </motion.a>
+              </a>
             ))}
           </div>
 
@@ -150,21 +78,18 @@ export default function Hero() {
         */}
         <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-36 lg:pr-12 w-full pt-20 lg:pt-0">
 
-          {/* Text Section */}
+          {/* Text Section - CSS animations for instant LCP */}
           <div className="lg:w-1/2 max-w-3xl">
-            <motion.div
-              variants={textVariants}
-              className="flex items-center gap-4 mb-6"
-            >
+            <div className="flex items-center gap-4 mb-6 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
               <div className={`h-px w-12 ${isDev ? 'bg-green-500/50' : 'bg-gray-500'}`} />
               <span className={`${isDev ? 'text-green-400 font-mono tracking-normal lowercase' : 'text-gray-400 font-medium tracking-[0.2em] uppercase'} text-sm`}>
                 {isDev ? '> initializing_portfolio_v2...' : 'Full Stack Developer'}
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              variants={titleVariants}
-              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter font-display'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}
+            {/* LCP Element - No animation delay, instant render */}
+            <h1
+              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter font-display'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8`}
             >
               {isDev ? (
                 <>
@@ -185,12 +110,9 @@ export default function Hero() {
                   </span>
                 </>
               )}
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              variants={textVariants}
-              className="max-w-xl"
-            >
+            <div className="max-w-xl animate-fade-in-up" style={{ animationDelay: '100ms' }}>
               <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light font-display'} leading-relaxed mb-10`}>
                 Hi, I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span> a full-stack developer focused on building <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>maintainable backends</span>, <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>clean APIs</span>, and production-ready web applications.
               </p>
@@ -235,18 +157,15 @@ export default function Hero() {
                   </>
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* 
-            Right Creative Section - Interactive 3D Card Stack (Backend Focused)
+            Right Creative Section - GitHub Activity Graph
           */}
-          {/* 
-            Right Creative Section - System Monitor (Backend Focused)
-          */}
-          <motion.div
-            variants={rightSideVariants}
-            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px]"
+          <div
+            className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[600px] animate-fade-in-right"
+            style={{ animationDelay: '150ms' }}
           >
             {isDev ? (
               <>
@@ -409,7 +328,7 @@ export default function Hero() {
                 </div>
               </div>
             )}
-          </motion.div>
+          </div>
 
         </main>
 
@@ -420,23 +339,17 @@ export default function Hero() {
           </div>
           <div className="grid grid-cols-2 gap-2">
             {socialLinks.map((social, index) => (
-              <motion.a
+              <a
                 key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.2 + (index * 0.1),
-                  ease: "easeOut"
-                }}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-2 bg-[#0d1117] border border-gray-800 rounded text-xs font-mono text-gray-400 hover:text-blue-400 hover:border-blue-500/50 transition-all flex items-center gap-2 shadow-sm"
+                className="px-3 py-2 bg-[#0d1117] border border-gray-800 rounded text-xs font-mono text-gray-400 hover:text-blue-400 hover:border-blue-500/50 transition-all flex items-center gap-2 shadow-sm animate-fade-in-up"
+                style={{ animationDelay: `${200 + index * 50}ms` }}
               >
                 <social.icon className="w-4 h-4" />
                 <span>{social.label}</span>
-              </motion.a>
+              </a>
             ))}
           </div>
         </div>
@@ -444,25 +357,19 @@ export default function Hero() {
         {/* Mobile Socials - Normal Mode */}
         <div className={`lg:hidden flex justify-center gap-6 pb-12 mt-8 z-20 w-full ${isDev ? 'hidden' : 'flex'}`}>
           {socialLinks.map((social, index) => (
-            <motion.a
+            <a
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.4,
-                delay: 0.2 + (index * 0.1),
-                ease: "easeOut"
-              }}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors p-2"
+              className="text-gray-400 hover:text-white transition-colors p-2 animate-fade-in-up"
+              style={{ animationDelay: `${200 + index * 50}ms` }}
             >
               <social.icon className="w-6 h-6" />
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
