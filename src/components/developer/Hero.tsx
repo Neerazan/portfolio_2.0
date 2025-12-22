@@ -50,6 +50,22 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
     }
   };
 
+  // Helper to check if a week is the start of a month
+  const getMonthLabel = (weekIndex: number) => {
+    if (weekIndex === 0) {
+      const date = new Date(contributionWeeks[0].contributionDays[0].date);
+      return date.toLocaleString('default', { month: 'short' });
+    }
+
+    const prevWeekFirstDay = new Date(contributionWeeks[weekIndex - 1].contributionDays[0].date);
+    const currWeekFirstDay = new Date(contributionWeeks[weekIndex].contributionDays[0].date);
+
+    if (prevWeekFirstDay.getMonth() !== currWeekFirstDay.getMonth()) {
+      return currWeekFirstDay.toLocaleString('default', { month: 'short' });
+    }
+    return null;
+  };
+
   const socialLinks = [
     { icon: FaGithub, href: "https://github.com/Neerazan", label: "GitHub" },
     { icon: FaLinkedin, href: "https://www.linkedin.com/in/nirajan-dhakal-a49a36214/", label: "LinkedIn" },
@@ -193,11 +209,11 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                   <div className="flex items-center gap-1 text-gray-500">
                     <span>Less</span>
                     <div className="flex gap-0.5">
-                      <div className="w-2.5 h-2.5 rounded-sm bg-[#161b22] border border-gray-800" />
-                      <div className="w-2.5 h-2.5 rounded-sm bg-green-900/60" />
-                      <div className="w-2.5 h-2.5 rounded-sm bg-green-700/80" />
-                      <div className="w-2.5 h-2.5 rounded-sm bg-green-500" />
-                      <div className="w-2.5 h-2.5 rounded-sm bg-green-400" />
+                      <div className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22] border border-gray-800" />
+                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-900/60" />
+                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-700/80" />
+                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-500" />
+                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-400" />
                     </div>
                     <span>More</span>
                   </div>
@@ -208,6 +224,18 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                   ref={scrollRef}
                   className="overflow-x-auto custom-scrollbar pb-2"
                 >
+                  {/* Month Labels */}
+                  <div className="flex gap-[3px] min-w-max mb-1">
+                    {contributionWeeks.map((_, i) => {
+                      const label = getMonthLabel(i);
+                      return (
+                        <div key={i} className="w-2.5 text-[9px] text-gray-600 font-mono relative">
+                          {label && <span className="absolute left-0 bottom-0 whitespace-nowrap">{label}</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+
                   <div className="flex gap-[3px] min-w-max">
                     {contributionWeeks.length > 0 ? (
                       contributionWeeks.map((week, weekIndex) => (
@@ -226,7 +254,7 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                               <div
                                 key={dayIndex}
                                 title={`${day.contributionCount} contributions on ${day.date}`}
-                                className={`w-2.5 h-2.5 rounded-sm ${colors[level]} hover:ring-1 hover:ring-green-400/50 transition-all cursor-crosshair`}
+                                className={`w-2.5 h-2.5 rounded-[2px] ${colors[level]} cursor-default`}
                               />
                             );
                           })}
@@ -238,7 +266,7 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                           {Array.from({ length: 7 }).map((_, dayIndex) => (
                             <div
                               key={dayIndex}
-                              className="w-2.5 h-2.5 rounded-sm bg-[#161b22] border border-gray-800/50 animate-pulse"
+                              className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22] border border-gray-800/50 animate-pulse"
                             />
                           ))}
                         </div>
