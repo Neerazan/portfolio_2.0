@@ -167,26 +167,26 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
             className="hidden lg:flex lg:w-1/2 items-center justify-center relative h-[500px] animate-fade-in-right"
             style={{ animationDelay: '150ms' }}
           >
-            <div className="w-full max-w-md bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-green-500/30 transition-colors">
+            <div className="w-full max-w-lg bg-[#0d1117] rounded-lg border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs relative z-10 group hover:border-green-500/30 transition-colors">
               {/* Header */}
-              <div className="bg-[#161b22] px-4 py-3 border-b border-gray-800 flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="bg-[#161b22] px-5 py-4 border-b border-gray-800 flex items-center justify-between">
+                <div className="flex items-center gap-4">
                   {profile?.avatarUrl ? (
                     <Image
                       src={profile.avatarUrl}
                       alt={profile.username}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 rounded-full"
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 rounded-full"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white font-bold text-base">
                       N
                     </div>
                   )}
                   <div>
-                    <div className="text-white font-semibold text-sm">{profile?.username || 'Neerazan'}</div>
-                    <div className="text-gray-500 text-[10px]">@{profile?.username?.toLowerCase() || 'neerazan'}</div>
+                    <div className="text-white font-semibold text-base">{profile?.username || 'Neerazan'}</div>
+                    <div className="text-gray-500 text-xs">@{profile?.username?.toLowerCase() || 'neerazan'}</div>
                   </div>
                 </div>
                 <a
@@ -195,25 +195,25 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-gray-500 hover:text-green-400 transition-colors"
                 >
-                  <FaGithub className="text-base" />
+                  <FaGithub className="text-xl" />
                 </a>
               </div>
 
               {/* Contribution Graph */}
-              <div className="p-4 space-y-4">
+              <div className="p-6 space-y-5">
                 {/* Stats Row */}
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-[13px]">
                   <span className="text-gray-400">
                     <span className="text-green-400 font-bold">{totalContributions.toLocaleString()}</span> contributions in the last year
                   </span>
-                  <div className="flex items-center gap-1 text-gray-500">
+                  <div className="flex items-center gap-1.5 text-gray-500">
                     <span>Less</span>
-                    <div className="flex gap-0.5">
-                      <div className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22] border border-gray-800" />
-                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-900/60" />
-                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-700/80" />
-                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-500" />
-                      <div className="w-2.5 h-2.5 rounded-[2px] bg-green-400" />
+                    <div className="flex gap-1">
+                      <div className="w-3 h-3 rounded-[2px] bg-[#161b22] border border-gray-800" />
+                      <div className="w-3 h-3 rounded-[2px] bg-green-900/60" />
+                      <div className="w-3 h-3 rounded-[2px] bg-green-700/80" />
+                      <div className="w-3 h-3 rounded-[2px] bg-green-500" />
+                      <div className="w-3 h-3 rounded-[2px] bg-green-400" />
                     </div>
                     <span>More</span>
                   </div>
@@ -225,21 +225,21 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                   className="overflow-x-auto custom-scrollbar pb-2"
                 >
                   {/* Month Labels */}
-                  <div className="flex gap-[3px] min-w-max mb-1">
+                  <div className="flex gap-[4px] min-w-max mb-2">
                     {contributionWeeks.map((_, i) => {
                       const label = getMonthLabel(i);
                       return (
-                        <div key={i} className="w-2.5 text-[9px] text-gray-600 font-mono relative">
+                        <div key={i} className="w-3 text-[11px] text-gray-600 font-mono relative">
                           {label && <span className="absolute left-0 bottom-0 whitespace-nowrap">{label}</span>}
                         </div>
                       );
                     })}
                   </div>
 
-                  <div className="flex gap-[3px] min-w-max">
+                  <div className="flex gap-[4px] min-w-max">
                     {contributionWeeks.length > 0 ? (
                       contributionWeeks.map((week, weekIndex) => (
-                        <div key={weekIndex} className="flex flex-col gap-[3px]">
+                        <div key={weekIndex} className="flex flex-col gap-[4px]">
                           {week.contributionDays.map((day: ContributionDay, dayIndex: number) => {
                             const level = getContributionLevel(day.contributionCount);
                             const colors = [
@@ -254,7 +254,7 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                               <div
                                 key={dayIndex}
                                 title={`${day.contributionCount} contributions on ${day.date}`}
-                                className={`w-2.5 h-2.5 rounded-[2px] ${colors[level]} cursor-default`}
+                                className={`w-3 h-3 rounded-[2px] ${colors[level]} cursor-default`}
                               />
                             );
                           })}
@@ -262,11 +262,11 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                       ))
                     ) : (
                       Array.from({ length: 52 }).map((_, weekIndex) => (
-                        <div key={weekIndex} className="flex flex-col gap-[3px]">
+                        <div key={weekIndex} className="flex flex-col gap-[4px]">
                           {Array.from({ length: 7 }).map((_, dayIndex) => (
                             <div
                               key={dayIndex}
-                              className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22] border border-gray-800/50 animate-pulse"
+                              className="w-3 h-3 rounded-[2px] bg-[#161b22] border border-gray-800/50 animate-pulse"
                             />
                           ))}
                         </div>
@@ -276,15 +276,15 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                 </div>
 
                 {/* Recent Activity */}
-                <div className="border-t border-gray-800 pt-3 mt-2">
-                  <div className="text-gray-400 text-[10px] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <div className="border-t border-gray-800 pt-4 mt-2">
+                  <div className="text-gray-400 text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                     Recent Activity
                   </div>
-                  <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
+                  <div className="space-y-2 max-h-[240px] overflow-y-auto pr-1 custom-scrollbar">
                     {activities.map((activity, i) => (
-                      <div key={i} className="flex items-center gap-3 text-[11px] group/item hover:bg-white/5 py-1.5 px-2 rounded-md transition-all cursor-default border border-transparent hover:border-gray-800/50">
-                        <span className="text-green-500 w-5 h-5 flex items-center justify-center font-bold bg-[#161b22] rounded text-[10px] border border-gray-800 group-hover/item:border-green-500/30 transition-colors">
+                      <div key={i} className="flex items-center gap-3.5 text-[13px] group/item hover:bg-white/5 py-2 px-2.5 rounded-md transition-all cursor-default border border-transparent hover:border-gray-800/50">
+                        <span className="text-green-500 w-6 h-6 flex items-center justify-center font-bold bg-[#161b22] rounded text-[12px] border border-gray-800 group-hover/item:border-green-500/30 transition-colors">
                           {activity.icon}
                         </span>
                         <div className="flex flex-1 items-center gap-2 overflow-hidden">
@@ -293,12 +293,12 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                             {activity.repo}
                           </span>
                           {activity.branch && (
-                            <span className="text-gray-500 text-[9px] px-1.5 py-0.5 bg-[#161b22] border border-gray-800/50 rounded shrink-0">
+                            <span className="text-gray-500 text-[10px] px-1.5 py-0.5 bg-[#161b22] border border-gray-800/50 rounded shrink-0">
                               {activity.branch}
                             </span>
                           )}
                         </div>
-                        <span className="text-gray-600 text-[9px] font-mono ml-auto opacity-70 group-hover/item:opacity-100 transition-opacity">
+                        <span className="text-gray-600 text-[10px] font-mono ml-auto opacity-70 group-hover/item:opacity-100 transition-opacity">
                           {activity.time}
                         </span>
                       </div>
@@ -307,8 +307,8 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-gray-800 pt-2 flex justify-between items-center text-[10px] text-gray-500">
-                  <span className="flex items-center gap-1">
+                <div className="border-t border-gray-800 pt-3.5 flex justify-between items-center text-xs text-gray-500">
+                  <span className="flex items-center gap-1.5">
                     <span className="text-yellow-500">★</span> 24 stars earned
                   </span>
                   <span className="text-green-400/80">Currently coding...</span>
