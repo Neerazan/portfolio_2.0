@@ -1,7 +1,7 @@
 "use client";
 import type { ContributionDay, GithubData } from "@/src/lib/github.types";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 interface DeveloperHeroProps {
@@ -19,6 +19,20 @@ function getContributionLevel(count: number): number {
   return 4;
 }
 
+// Helper to determine coding status based on Kathmandu time
+function getStatus() {
+  const now = new Date();
+  const hour = parseInt(new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kathmandu',
+    hour: 'numeric',
+    hour12: false,
+  }).format(now));
+
+  // 7am-9am, 10am-5pm, 8pm-10pm
+  const isCoding = (hour >= 7 && hour < 9) || (hour >= 10 && hour < 17) || (hour >= 20 && hour < 22);
+  return isCoding ? "Currently coding..." : "Currently debugging life, not code...";
+}
+
 // Default fallback data for when GitHub API fails
 const defaultActivities = [
   { action: 'Pushed to', repo: 'portfolio_2.0', branch: 'main', time: 'recently', icon: '↑' },
@@ -27,6 +41,7 @@ const defaultActivities = [
 
 export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [codingStatus, setCodingStatus] = useState("Currently coding...");
 
   // Extract data with fallbacks
   const profile = githubData?.profile;
@@ -36,6 +51,14 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
   // Get all contribution data (usually 52-53 weeks) for the heatmap
   const contributionWeeks = contributions?.weeks || [];
   const totalContributions = contributions?.totalContributions || 0;
+
+  useEffect(() => {
+    setCodingStatus(getStatus());
+    const interval = setInterval(() => {
+      setCodingStatus(getStatus());
+    }, 60000); // Check every minute
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -314,16 +337,11 @@ export default function DeveloperHero({ githubData }: DeveloperHeroProps) {
                       <span className="text-gray-600">repos</span>
                     </span>
                     <span className="flex items-center gap-1">
-                      <span className="text-yellow-500">★</span>
-                      <span className="text-gray-300 font-bold">{profile?.totalStars || 0}</span>
-                      <span className="text-gray-600">stars</span>
-                    </span>
-                    <span className="flex items-center gap-1">
                       <span className="text-orange-400 font-bold">{profile?.followers || 0}</span>
                       <span className="text-gray-600">followers</span>
                     </span>
                   </div>
-                  <span className="text-green-400/80 hidden sm:inline">Currently coding...</span>
+                  <span className="text-green-400/80 hidden sm:inline">{codingStatus}</span>
                 </div>
               </div>
             </div>
