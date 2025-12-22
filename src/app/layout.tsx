@@ -1,6 +1,19 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, Roboto_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+});
 
 const siteUrl = 'https://dhakalnirajan.com.np';
 const siteName = 'Nirajan Dhakal';
@@ -46,16 +59,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        {/* Preload critical resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        {/* Prefetch likely resources */}
-        <link rel="prefetch" href="/assets/Portal.svg" />
-        <link rel="prefetch" href="/assets/Home Icom.svg" />
-      </head>
-      <body className="bg-[#0a0a0a] text-white min-h-screen relative overflow-x-hidden">
+    <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
+      <body className="bg-[#0a0a0a] text-white min-h-screen relative overflow-x-hidden antialiased">
         {/* Global Grid Texture */}
         <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-grid-white bg-grid-small-white z-0" />
         <div className="relative z-10">

@@ -204,7 +204,7 @@ export default function Project({
 function Num({ number }: { number: string }) {
   return (
     <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-md border border-[#7A87FB]/20 bg-[#151515]">
-      <div className="font-['Roboto_Mono'] text-lg sm:text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+      <div className="font-mono text-lg sm:text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
         {number}
       </div>
     </div>

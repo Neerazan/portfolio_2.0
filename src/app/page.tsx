@@ -5,20 +5,33 @@ import { projects } from "@/src/data/projects";
 import SharedHero from "@/src/components/shared/Hero";
 import { DisplayModeProvider, useDisplayMode } from "@/src/context/DisplayModeContext";
 
-import NormalAbout from "@/src/components/normal/About";
-import NormalContact from "@/src/components/normal/Contact";
-import NormalFooter from "@/src/components/normal/Footer";
 import NormalHeader from "@/src/components/normal/Header";
-import NormalProject from "@/src/components/normal/Project";
-import NormalTechStack from "@/src/components/normal/Tech";
 import NormalTitle from "@/src/components/normal/Title";
-import NormalWorkExperience from "@/src/components/normal/WorkExperience";
 
 import DevBootLoader from "@/src/components/developer/DevBootLoader";
 import dynamic from "next/dynamic";
 
+// Dynamic imports for below-the-fold components
+const NormalAbout = dynamic(() => import("@/src/components/normal/About"), {
+  loading: () => <div className="h-96 animate-pulse bg-white/5 rounded-3xl mx-auto w-full max-w-6xl" />
+});
+const NormalTechStack = dynamic(() => import("@/src/components/normal/Tech"), {
+  loading: () => <div className="h-64 animate-pulse bg-white/5 rounded-3xl mx-auto w-full max-w-6xl" />
+});
+const NormalWorkExperience = dynamic(() => import("@/src/components/normal/WorkExperience"), {
+  loading: () => <div className="h-96 animate-pulse bg-white/5 rounded-3xl mx-auto w-full max-w-6xl" />
+});
+const NormalProject = dynamic(() => import("@/src/components/normal/Project"), {
+  loading: () => <div className="h-96 animate-pulse bg-white/5 rounded-3xl mx-auto w-full max-w-6xl" />
+});
+const NormalContact = dynamic(() => import("@/src/components/normal/Contact"), {
+  loading: () => <div className="h-96 animate-pulse bg-white/5 rounded-3xl mx-auto w-full max-w-6xl" />
+});
+const NormalFooter = dynamic(() => import("@/src/components/normal/Footer"));
+
 const DevModeLayout = dynamic(
   async () => {
+    // Artificial delay for boot sequence simulation
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return import("@/src/components/developer/DevModeLayout");
   },

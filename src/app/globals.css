@@ -7,7 +7,8 @@
   --animation-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animation-ping-slow: ping 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --drop-shadow-glow: 0 0 8px rgba(122, 135, 251, 0.5);
-  --font-display: 'Poppins', sans-serif;
+  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-roboto-mono), monospace;
   
   /* System Theme Colors */
   --color-system-cyan: #6366f1; /* Indigo 500 */
@@ -15,14 +16,6 @@
   --color-system-green: #4ade80;
 }
 
-/* Optimize font loading */
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Poppins'), local('Poppins-Regular');
-}
 
 @layer utilities {
   .font-display {

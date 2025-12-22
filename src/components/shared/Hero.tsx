@@ -48,12 +48,12 @@ export default function Hero() {
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0.1, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.4,
         type: "spring" as const,
         stiffness: 110,
         damping: 18
@@ -164,7 +164,7 @@ export default function Hero() {
 
             <motion.h1
               variants={titleVariants}
-              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}
+              className={`${isDev ? 'font-mono' : 'font-bold tracking-tighter font-display'} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-[0.9] mb-8 mix-blend-overlay opacity-90`}
             >
               {isDev ? (
                 <>
@@ -191,7 +191,7 @@ export default function Hero() {
               variants={textVariants}
               className="max-w-xl"
             >
-              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light'} leading-relaxed mb-10`}>
+              <p className={`${isDev ? 'font-mono text-base sm:text-lg text-green-400/80' : 'text-xl sm:text-2xl text-gray-400 font-light font-display'} leading-relaxed mb-10`}>
                 Hi, I&apos;m <span className={`${isDev ? 'text-green-400 font-bold' : 'text-white font-medium'}`}>Nirajan Dhakal</span> a full-stack developer focused on building <span className={`${isDev ? 'text-blue-400' : 'text-gray-200'}`}>maintainable backends</span>, <span className={`${isDev ? 'text-orange-400' : 'text-gray-200'}`}>clean APIs</span>, and production-ready web applications.
               </p>
 
@@ -204,7 +204,7 @@ export default function Hero() {
                     >
                       <span className="text-gray-500">$</span>
                       <span>./contact.sh</span>
-                      <span className="inline-block w-2 h-4 bg-green-500 animate-pulse ml-1" />
+                      <div className="w-2 h-4 bg-green-500 animate-[pulse_1s_infinite] ml-1" />
                     </button>
 
                     <button
@@ -278,12 +278,12 @@ export default function Hero() {
                           <span className="text-cyan-400 font-bold w-8">CPU</span>
                           <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden flex">
                             <motion.div
-                              className="h-full bg-green-500"
-                              initial={{ width: "10%" }} animate={{ width: "45%" }} transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                              className="h-full bg-green-500 will-change-[width]"
+                              initial={{ width: "10%" }} animate={{ width: "45%" }} transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
                             />
                             <motion.div
-                              className="h-full bg-red-500"
-                              initial={{ width: "0%" }} animate={{ width: "15%" }} transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
+                              className="h-full bg-red-500 will-change-[width]"
+                              initial={{ width: "0%" }} animate={{ width: "15%" }} transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "linear", delay: 1 }}
                             />
                           </div>
                           <span className="text-white w-10 text-right">60%</span>
@@ -292,8 +292,8 @@ export default function Hero() {
                           <span className="text-cyan-400 font-bold w-8">MEM</span>
                           <div className="flex-1 h-3 bg-gray-800 rounded-sm overflow-hidden">
                             <motion.div
-                              className="h-full bg-yellow-500"
-                              initial={{ width: "30%" }} animate={{ width: "32%" }} transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+                              className="h-full bg-yellow-500 will-change-[width]"
+                              initial={{ width: "30%" }} animate={{ width: "32%" }} transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
                             />
                           </div>
                           <span className="text-white w-10 text-right">32%</span>
