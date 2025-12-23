@@ -1,5 +1,6 @@
 "use client";
 
+import { portraitArt } from "@/src/data/asciiArt";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -18,13 +19,13 @@ I learn by shipping projects, debugging in production, and improving developer w
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-8 bg-[#0a0a0a] text-gray-300 relative overflow-hidden">
-      <div className="grid lg:grid-cols-5 gap-8 xl:gap-12 items-stretch">
+      <div className="grid lg:grid-cols-12 gap-8 xl:gap-12 items-stretch">
         {/* Left: Terminal / Bio */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-3 w-full h-full"
+          className="lg:col-span-8 w-full h-full"
         >
           <div className="w-full h-full flex flex-col bg-[#0D1117] rounded-xl border border-white/10 shadow-2xl overflow-hidden font-mono text-sm relative z-10 group hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300">
             {/* Header */}
@@ -56,17 +57,9 @@ I learn by shipping projects, debugging in production, and improving developer w
                 </div>
 
                 <div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-1">
-                  <div className="text-blue-500 hidden sm:block whitespace-pre text-xs sm:text-sm">
-                    {`      z$$$$$$.
-    $$$$$$$$$$
-   $$$$$$$$$$$
-  $$$$$$$$$$$$
- $$$$$$$$$$$$$
-$$$$$$$$$$$$$$
-$$$$$$"  "$$$$
-"$$$"      "$$
-`}                  </div>
-
+                  <div className="text-blue-500 hidden sm:block whitespace-pre text-[2px] leading-none">
+                    {portraitArt.trim()}
+                  </div>
                   <div className="space-y-1.5 text-xs sm:text-sm">
                     {systemSpecs.map((spec, i) => (
                       <div key={i} className="flex gap-3">
@@ -126,7 +119,7 @@ $$$$$$"  "$$$$
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-2"
+          className="lg:col-span-4"
         >
           <div className="h-full flex flex-col bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 shadow-2xl group">
             {/* Dashboard Header */}
