@@ -33,7 +33,7 @@ const NormalFooter = dynamic(() => import("@/src/components/normal/Footer"));
 const DevModeLayout = dynamic(
   async () => {
     // Artificial delay for boot sequence simulation
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 400));
     return import("@/src/components/developer/DevModeLayout");
   },
   {
