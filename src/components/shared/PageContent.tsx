@@ -3,7 +3,7 @@
 import { projects } from "@/src/data/projects";
 import type { GithubData } from "@/src/lib/github.types";
 
-import { DisplayModeProvider, useDisplayMode } from "@/src/context/DisplayModeContext";
+import { useDisplayMode } from "@/src/context/DisplayModeContext";
 
 import NormalHeader from "@/src/components/normal/Header";
 import NormalHero from "@/src/components/normal/Hero";
@@ -104,9 +104,5 @@ function PageContentInner({ githubData }: PageContentProps) {
 }
 
 export default function PageContent({ githubData }: PageContentProps) {
-  return (
-    <DisplayModeProvider>
-      <PageContentInner githubData={githubData} />
-    </DisplayModeProvider>
-  );
+  return <PageContentInner githubData={githubData} />;
 }
