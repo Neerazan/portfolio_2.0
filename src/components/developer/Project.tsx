@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaFileCode, FaFolder, FaGithub, FaLevelUpAlt, FaQuestionCircle, FaTerminal, FaTrashAlt } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaFileCode, FaFolder, FaGithub, FaLevelUpAlt, FaMapMarkerAlt, FaQuestionCircle, FaTerminal, FaTrashAlt } from 'react-icons/fa';
 
 import { projects } from "@/src/data/projects";
 import { ProjectProps } from "../../types";
@@ -140,11 +140,16 @@ export default function Project() {
           <div className="grid grid-cols-[80px_1fr] gap-x-4 gap-y-1 text-sm">
             <span className="text-green-400">ls</span> <span>List contents of current directory</span>
             <span className="text-green-400">cd &lt;dir&gt;</span> <span>Change directory</span>
+            <span className="text-green-400">pwd</span> <span>Print working directory</span>
             <span className="text-green-400">cat &lt;file&gt;</span> <span>View project details</span>
             <span className="text-green-400">clear</span> <span>Clear terminal history</span>
             <span className="text-green-400">help</span> <span>Show this help message</span>
           </div>
         );
+        break;
+
+      case 'pwd':
+        output = <span className="text-[#8b949e]">{currentPath.replace('~', '/home/neerazan')}</span>;
         break;
 
       case 'ls':
@@ -242,7 +247,7 @@ export default function Project() {
     const base = parts[0];
     const arg = parts.slice(1).join(' ');
 
-    const commands = ['help', 'ls', 'cd', 'cat', 'clear'];
+    const commands = ['help', 'ls', 'cd', 'cat', 'clear', 'pwd'];
 
     // Command completion
     if (parts.length === 1) {
@@ -486,6 +491,14 @@ export default function Project() {
             >
               <FaTerminal size={10} />
               ls
+            </button>
+            <button
+              onClick={() => handleCommand('pwd')}
+              className="px-3 py-1.5 bg-[#30363d]/50 hover:bg-[#30363d] text-[#8b949e] hover:text-white rounded text-xs flex items-center gap-2 transition-colors shrink-0"
+              title="Print working directory"
+            >
+              <FaMapMarkerAlt size={10} />
+              pwd
             </button>
             <button
               onClick={() => handleCommand('cd ..')}
