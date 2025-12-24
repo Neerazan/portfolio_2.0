@@ -64,6 +64,7 @@ export default function Project() {
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // Memoize categories and projects for efficient lookup
   const categories = useMemo(() => Array.from(new Set(projects.map(p => p.category))), []);
@@ -73,6 +74,25 @@ export default function Project() {
       slug: p.title.toLowerCase().replace(/\s+/g, '-')
     })),
     []);
+
+  // Intersection Observer to focus input ONLY when in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && inputRef.current) {
+          // small delay to avoid focus-racing with scroll animations
+          inputRef.current.focus({ preventScroll: true });
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // --- Terminal Logic ---
 
@@ -382,7 +402,10 @@ export default function Project() {
   };
 
   return (
-    <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono">
+    <div
+      ref={sectionRef}
+      className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono"
+    >
       <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[700px] lg:h-[800px]">
         {/* Terminal Header */}
         <div className="bg-[#161B22] px-4 py-3 border-b border-[#30363d] flex items-center justify-between shrink-0">
@@ -447,7 +470,6 @@ export default function Project() {
                   className="flex-1 bg-transparent border-none outline-hidden text-white caret-blue-400"
                   spellCheck={false}
                   autoComplete="off"
-                  autoFocus
                 />
               </div>
             </>
