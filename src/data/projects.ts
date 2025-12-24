@@ -2,7 +2,7 @@ import { ProjectProps } from "../types";
 
 export const projects: ProjectProps[] = [
   {
-    title: "Tishy & Co.",
+    title: "Tishy & Co",
     number: "1",
     description: "Tishy & Co is an award-winning catering service provider based in Sydney, specializing in premium catering for corporate events, private parties, and special occasions. During my time at Aarambha IT, I contributed to this project by developing the backend and RESTful APIs using Django, integrating Celery for background tasks, and working on several frontend components. I also handled API integration with the React-based frontend, ensuring seamless communication between the client and server.",
     technologies: [

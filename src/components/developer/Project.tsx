@@ -383,7 +383,7 @@ export default function Project() {
 
   return (
     <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono">
-      <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[700px]">
+      <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[700px] lg:h-[800px]">
         {/* Terminal Header */}
         <div className="bg-[#161B22] px-4 py-3 border-b border-[#30363d] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
