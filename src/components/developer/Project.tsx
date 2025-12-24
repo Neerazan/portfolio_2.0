@@ -58,8 +58,6 @@ export default function Project() {
   const [currentPath, setCurrentPath] = useState("~/projects");
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [inputValue, setInputValue] = useState("");
-  const [activeProject, setActiveProject] = useState<ProjectProps | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [booting, setBooting] = useState(true);
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -104,7 +102,7 @@ export default function Project() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [history, activeProject, scrollToBottom]);
+  }, [history, scrollToBottom]);
 
   useEffect(() => {
     // Initial boot sequence
@@ -192,7 +190,6 @@ export default function Project() {
         const target = args[0];
         if (!target || target === "~" || target === "~/projects") {
           setCurrentPath("~/projects");
-          setActiveProject(null);
         } else if (target === "..") {
           if (currentPath !== "~/projects") {
             setCurrentPath("~/projects");
@@ -209,11 +206,13 @@ export default function Project() {
         const slug = args[0]?.replace('.tsx', '');
         const project = slugifiedProjects.find(p => p.slug === slug);
         if (project) {
-          setActiveProject(project);
-          setCurrentImageIndex(0);
+          const category = project.category;
           output = (
-            <div className="text-blue-400 text-sm italic">
-              Opening {slug}.tsx...
+            <div className="space-y-4">
+              <div className="text-blue-400 text-sm italic">
+                Opening {slug}.tsx...
+              </div>
+              <ProjectDetailView project={project} category={category} />
             </div>
           );
         } else {
@@ -225,7 +224,6 @@ export default function Project() {
       case 'clear':
         setHistory([]);
         setInputValue("");
-        setActiveProject(null);
         return;
 
       default:
@@ -286,9 +284,8 @@ export default function Project() {
   };
 
   // --- Sub-components for Project Details ---
-
-  const renderProjectDetail = () => {
-    if (!activeProject) return null;
+  const ProjectDetailView = ({ project, category }: { project: ProjectProps; category: string }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     return (
       <motion.div
@@ -311,8 +308,8 @@ export default function Project() {
               >
                 <div className="relative w-full h-full">
                   <Image
-                    src={activeProject.images[currentImageIndex]}
-                    alt={activeProject.title}
+                    src={project.images[currentImageIndex]}
+                    alt={project.title}
                     fill
                     className="object-contain"
                   />
@@ -321,18 +318,18 @@ export default function Project() {
               </motion.div>
             </AnimatePresence>
 
-            {activeProject.images.length > 1 && (
+            {project.images.length > 1 && (
               <>
                 {/* Navigation Arrows */}
                 <button
-                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + activeProject.images.length) % activeProject.images.length); }}
+                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + project.images.length) % project.images.length); }}
                   className="absolute cursor-pointer md:left-6 left-9 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all text-white/50 hover:text-white border border-white/5 md:opacity-0 md:group-hover:opacity-100"
                   aria-label="Previous image"
                 >
                   <FaChevronLeft size={14} />
                 </button>
                 <button
-                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % activeProject.images.length); }}
+                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % project.images.length); }}
                   className="absolute cursor-pointer md:right-6 right-9 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all text-white/50 hover:text-white border border-white/5 md:opacity-0 md:group-hover:opacity-100"
                   aria-label="Next image"
                 >
@@ -341,7 +338,7 @@ export default function Project() {
 
                 {/* Indicators */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-30 bg-black/20 backdrop-blur-xs px-2 py-1 rounded-full">
-                  {activeProject.images.map((_, i) => (
+                  {project.images.map((_, i) => (
                     <div
                       key={i}
                       className={`h-1 rounded-full transition-all duration-300 ${i === currentImageIndex ? 'w-4 bg-blue-400' : 'w-1 bg-white/20'}`}
@@ -356,20 +353,20 @@ export default function Project() {
           <div className="p-6 sm:p-8 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[#30363d]">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-white tracking-tight">{activeProject.title}</h3>
+                <h3 className="text-2xl font-bold text-white tracking-tight">{project.title}</h3>
                 <div className="px-2 py-0.5 bg-blue-400/10 border border-blue-400/20 rounded text-[10px] text-blue-400 font-bold uppercase">
-                  {activeProject.category}
+                  {category}
                 </div>
               </div>
 
               <p className="text-[#8b949e] text-sm leading-relaxed mb-8 pl-4 border-l-2 border-[#30363d]">
-                {activeProject.description}
+                {project.description}
               </p>
 
               <div className="space-y-4 mb-8">
                 <div className="text-[10px] text-[#8b949e] uppercase font-bold tracking-widest">Stack Manifest</div>
                 <div className="flex flex-wrap gap-2">
-                  {activeProject.technologies?.map(tech => (
+                  {project.technologies?.map(tech => (
                     <span key={tech} className="px-2 py-1 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] text-[11px] rounded hover:border-blue-400/50 transition-colors">
                       {tech}
                     </span>
@@ -379,9 +376,9 @@ export default function Project() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              {activeProject.demoLink && (
+              {project.demoLink && (
                 <Link
-                  href={activeProject.demoLink}
+                  href={project.demoLink}
                   target="_blank"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-bold rounded transition-colors"
                 >
@@ -389,9 +386,9 @@ export default function Project() {
                   Live Demo
                 </Link>
               )}
-              {activeProject.githubLink && (
+              {project.githubLink && (
                 <Link
-                  href={activeProject.githubLink}
+                  href={project.githubLink}
                   target="_blank"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] hover:border-[#8b949e] text-sm font-bold rounded transition-colors"
                 >
@@ -459,8 +456,6 @@ export default function Project() {
                 ))}
               </div>
 
-              {/* Active Project View */}
-              {renderProjectDetail()}
 
               {/* Input Line */}
               <div className="flex items-center gap-2 group">
