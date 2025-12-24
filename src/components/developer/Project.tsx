@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FaLevelUpAlt, FaMapMarkerAlt, FaQuestionCircle, FaTerminal, FaTrashAlt } from 'react-icons/fa';
 
 import { projects } from "@/src/data/projects";
-import { COMMANDS, ROOT_PATH } from './terminal/constants';
+import { COMMANDS, MAX_HISTORY, ROOT_PATH } from './terminal/constants';
 import { TerminalDots } from './terminal/TerminalElements';
 import { HistoryItem } from './terminal/types';
 import { useTerminalCommands } from './terminal/useTerminal';
@@ -97,7 +97,7 @@ export default function Project() {
     const fullCmd = cmd.trim();
     if (!fullCmd) return;
 
-    setCommandHistory(prev => [...prev, fullCmd]);
+    setCommandHistory(prev => [...prev.slice(-(MAX_HISTORY - 1)), fullCmd]);
     setHistoryIndex(-1);
 
     if (fullCmd.toLowerCase() === 'clear') {
@@ -107,7 +107,7 @@ export default function Project() {
     }
 
     const { output, type } = executeCommand(fullCmd);
-    setHistory(prev => [...prev, { command: fullCmd, output, type }]);
+    setHistory(prev => [...prev.slice(-(MAX_HISTORY - 1)), { command: fullCmd, output, type }]);
     setInputValue("");
   }, [executeCommand]);
 
