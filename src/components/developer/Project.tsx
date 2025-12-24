@@ -210,7 +210,8 @@ const useTerminalCommands = (
   categories: string[],
   slugifiedProjects: SlugifiedProject[],
   currentPath: string,
-  setCurrentPath: (path: string) => void
+  setCurrentPath: (path: string) => void,
+  onCommand: (cmd: string) => void
 ) => {
   return useCallback((cmd: string): { output: React.ReactNode; type: HistoryItem['type'] } => {
     const [baseCmd, ...args] = cmd.toLowerCase().split(' ');
@@ -246,10 +247,14 @@ const useTerminalCommands = (
           output = (
             <div className="flex flex-wrap gap-6">
               {categories.map(cat => (
-                <div key={cat} className="flex items-center gap-2 text-blue-400">
-                  <FaFolder />
-                  <span>{cat}/</span>
-                </div>
+                <button
+                  key={cat}
+                  onClick={(e) => { e.stopPropagation(); onCommand(`cd ${cat}`); }}
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group"
+                >
+                  <FaFolder className="group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-dotted underline-offset-4">{cat}/</span>
+                </button>
               ))}
             </div>
           );
@@ -259,10 +264,14 @@ const useTerminalCommands = (
           output = (
             <div className="flex flex-wrap gap-6">
               {filtered.map(p => (
-                <div key={p.slug} className="flex items-center gap-2 text-green-400">
-                  <FaFileCode />
-                  <span>{p.slug}.tsx</span>
-                </div>
+                <button
+                  key={p.slug}
+                  onClick={(e) => { e.stopPropagation(); onCommand(`cat ${p.slug}`); }}
+                  className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors cursor-pointer group"
+                >
+                  <FaFileCode className="group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-dotted underline-offset-4">{p.slug}.tsx</span>
+                </button>
               ))}
             </div>
           );
@@ -312,7 +321,7 @@ const useTerminalCommands = (
     }
 
     return { output, type };
-  }, [categories, slugifiedProjects, currentPath, setCurrentPath]);
+  }, [categories, slugifiedProjects, currentPath, setCurrentPath, onCommand]);
 };
 
 // --- Main Component ---
@@ -327,6 +336,7 @@ export default function Project() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const handleCommandRef = useRef<(cmd: string) => void>(() => { });
 
   // Memoize expensive computations with proper dependencies
   const categories = useMemo(
@@ -339,7 +349,13 @@ export default function Project() {
     []
   );
 
-  const executeCommand = useTerminalCommands(categories, slugifiedProjects, currentPath, setCurrentPath);
+  const executeCommand = useTerminalCommands(
+    categories,
+    slugifiedProjects,
+    currentPath,
+    setCurrentPath,
+    useCallback((cmd: string) => handleCommandRef.current(cmd), [])
+  );
 
   // Scroll to bottom when history changes
   const scrollToBottom = useCallback(() => {
@@ -410,6 +426,11 @@ export default function Project() {
     setHistory(prev => [...prev, { command: fullCmd, output, type }]);
     setInputValue("");
   }, [executeCommand]);
+
+  // Update the ref whenever handleCommand is recreated
+  useEffect(() => {
+    handleCommandRef.current = handleCommand;
+  }, [handleCommand]);
 
   const handleTabComplete = useCallback(() => {
     const parts = inputValue.toLowerCase().split(' ');
