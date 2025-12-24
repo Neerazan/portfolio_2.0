@@ -409,9 +409,9 @@ export default function Project() {
   return (
     <div
       ref={sectionRef}
-      className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono"
+      className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono overflow-x-clip"
     >
-      <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[700px] lg:h-[800px]">
+      <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[750px] lg:h-[800px]">
         {/* Terminal Header */}
         <div className="bg-[#161B22] px-4 py-3 border-b border-[#30363d] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
@@ -451,7 +451,7 @@ export default function Project() {
                       <span className="text-white">{item.command}</span>
                     </div>
                     {item.output && (
-                      <div className="pl-6 animate-in fade-in slide-in-from-left-2 duration-300">
+                      <div className="pl-6 animate-in fade-in slide-in-from-left-2 duration-300 wrap-break-word whitespace-pre-wrap">
                         {item.output}
                       </div>
                     )}
@@ -536,7 +536,7 @@ export default function Project() {
       </div>
 
       {/* Background Ambience */}
-      <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-full h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
     </div>
   );
 }

@@ -18,7 +18,7 @@ interface DevModeLayoutProps {
 
 export default function DevModeLayout({ githubData }: DevModeLayoutProps) {
   return (
-    <div className="pt-6.5">
+    <div className="pt-6.5 overflow-x-hidden">
       <DeveloperHeader />
       <DeveloperHero githubData={githubData} />
 
