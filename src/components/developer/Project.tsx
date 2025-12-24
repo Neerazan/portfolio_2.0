@@ -300,14 +300,6 @@ export default function Project() {
           {/* Image Panel */}
           <div className="relative aspect-video bg-black overflow-hidden group">
             <ScanlineEffect />
-            <div className="absolute top-4 left-4 z-20 text-[10px] text-[#8b949e] font-mono flex flex-col gap-1 opacity-60">
-              <div className="flex items-center gap-2">
-                <span className="text-green-400">➜</span>
-                <span>cat images.log</span>
-              </div>
-              <div>FRAME_{currentImageIndex + 1}_BUFFERING...</div>
-            </div>
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentImageIndex}
