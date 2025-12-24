@@ -217,9 +217,46 @@ export default function Project() {
     setInputValue("");
   };
 
+  const handleTabComplete = useCallback(() => {
+    const parts = inputValue.toLowerCase().split(' ');
+    const base = parts[0];
+    const arg = parts.slice(1).join(' ');
+
+    const commands = ['help', 'ls', 'cd', 'cat', 'clear'];
+
+    // Command completion
+    if (parts.length === 1) {
+      const matches = commands.filter(c => c.startsWith(base));
+      if (matches.length === 1) {
+        setInputValue(matches[0] + ' ');
+      }
+      return;
+    }
+
+    // Argument completion
+    if (base === 'cd') {
+      const matches = categories.filter(c => c.startsWith(arg));
+      if (matches.length === 1) {
+        setInputValue(`cd ${matches[0]}`);
+      }
+    } else if (base === 'cat') {
+      const filtered = slugifiedProjects
+        .filter(p => currentPath === "~/projects" || p.category === currentPath.split('/').pop())
+        .map(p => p.slug);
+
+      const matches = filtered.filter(f => f.startsWith(arg));
+      if (matches.length === 1) {
+        setInputValue(`cat ${matches[0]}.tsx`);
+      }
+    }
+  }, [inputValue, categories, slugifiedProjects, currentPath]);
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleCommand(inputValue);
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      handleTabComplete();
     }
   };
 
