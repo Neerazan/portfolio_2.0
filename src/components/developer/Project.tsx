@@ -79,8 +79,8 @@ export default function Project() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && inputRef.current) {
-          // small delay to avoid focus-racing with scroll animations
+        if (entry.isIntersecting && inputRef.current && window.innerWidth > 768) {
+          // Only auto-focus on desktop (width > 768px) to avoid triggering keyboard on mobile
           inputRef.current.focus({ preventScroll: true });
         }
       },
@@ -154,7 +154,7 @@ export default function Project() {
               {categories.map(cat => (
                 <button
                   key={cat}
-                  onClick={() => handleCommand(`cd ${cat}`)}
+                  onClick={(e) => { e.stopPropagation(); handleCommand(`cd ${cat}`); }}
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group"
                 >
                   <FaFolder className="group-hover:scale-110 transition-transform" />
@@ -171,7 +171,7 @@ export default function Project() {
               {filtered.map(p => (
                 <button
                   key={p.slug}
-                  onClick={() => handleCommand(`cat ${p.slug}`)}
+                  onClick={(e) => { e.stopPropagation(); handleCommand(`cat ${p.slug}`); }}
                   className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors cursor-pointer group"
                 >
                   <FaFileCode className="group-hover:scale-110 transition-transform" />
@@ -427,7 +427,7 @@ export default function Project() {
         <div
           ref={scrollRef}
           className="flex-1 overflow-y-auto p-4 sm:p-6 text-sm sm:text-base space-y-6 scrollbar-thin scrollbar-thumb-[#30363d] scrollbar-track-transparent"
-          onClick={() => inputRef.current?.focus()}
+          onClick={() => { if (window.innerWidth > 768) inputRef.current?.focus(); }}
         >
           {booting ? (
             <div className="flex items-center gap-3 text-blue-400 animate-pulse">
