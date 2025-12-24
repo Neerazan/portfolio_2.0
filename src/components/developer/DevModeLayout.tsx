@@ -1,6 +1,5 @@
 "use client";
 
-import { projects } from "@/src/data/projects";
 import type { GithubData } from "@/src/lib/github.types";
 
 import DeveloperAbout from "@/src/components/developer/About";
@@ -36,11 +35,7 @@ export default function DevModeLayout({ githubData }: DevModeLayoutProps) {
       <DeveloperWorkExperience />
 
       <DeveloperTitle title="Some featured projects" id="projects" className={undefined} />
-      <div className="flex flex-col gap-12 sm:gap-16">
-        {projects.map((project, index) => (
-          <DeveloperProject key={index} {...project} />
-        ))}
-      </div>
+      <DeveloperProject />
       <DeveloperTitle
         title="Have an idea?"
         id="contact"

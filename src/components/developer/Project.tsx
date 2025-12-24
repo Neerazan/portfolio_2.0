@@ -1,15 +1,22 @@
 "use client";
 
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import { IoClose } from 'react-icons/io5';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt, FaFileCode, FaFolder, FaGithub, FaLevelUpAlt, FaQuestionCircle, FaTerminal, FaTrashAlt } from 'react-icons/fa';
 
+import { projects } from "@/src/data/projects";
 import { ProjectProps } from "../../types";
 
-// Memoized static components
+// --- Types ---
+type HistoryItem = {
+  command: string;
+  output: React.ReactNode;
+  type?: 'command' | 'status' | 'error' | 'info';
+};
+
+// --- Mock Terminal Components ---
 const TerminalDots = () => (
   <div className="flex items-center gap-2">
     <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-black/10"></div>
@@ -46,399 +53,418 @@ const GridOverlay = () => (
   />
 );
 
-export default function Project({
-  title,
-  number,
-  description,
-  technologies,
-  images = [],
-  demoLink,
-  githubLink
-}: ProjectProps) {
+// --- Main Component ---
+export default function Project() {
+  const [currentPath, setCurrentPath] = useState("~/projects");
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [activeProject, setActiveProject] = useState<ProjectProps | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [timestamp, setTimestamp] = useState("00:00:00");
-  const [isInView, setIsInView] = useState(false);
+  const [booting, setBooting] = useState(true);
 
-  // Memoize slug to prevent recalculation
-  const slug = useMemo(() => title.toLowerCase().replace(/\s+/g, '-'), [title]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Intersection Observer for entrance animation
+  // Memoize categories and projects for efficient lookup
+  const categories = useMemo(() => Array.from(new Set(projects.map(p => p.category))), []);
+  const slugifiedProjects = useMemo(() =>
+    projects.map(p => ({
+      ...p,
+      slug: p.title.toLowerCase().replace(/\s+/g, '-')
+    })),
+    []);
+
+  // --- Terminal Logic ---
+
+  const scrollToBottom = useCallback(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, []);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect(); // Only animate once
-        }
-      },
-      { threshold: 0.1 }
-    );
+    scrollToBottom();
+  }, [history, activeProject, scrollToBottom]);
 
-    const element = document.getElementById(`project-${number}`);
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [number]);
-
-  // Simulate load time - only once
   useEffect(() => {
+    // Initial boot sequence
     const timer = setTimeout(() => {
-      setTimestamp(new Date().toLocaleTimeString());
-    }, 300);
+      setBooting(false);
+      setHistory([
+        {
+          command: "system --init",
+          output: (
+            <div className="text-[#8b949e] space-y-1">
+              <p className="text-blue-400">Welcome to Project Explorer v2.0.0</p>
+              <p>Type <span className="text-white">help</span> to see available commands.</p>
+            </div>
+          ),
+          type: 'status'
+        }
+      ]);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Memoized callbacks for better performance
-  const nextImage = useCallback(() => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+  const handleCommand = (cmd: string) => {
+    const fullCmd = cmd.trim();
+    if (!fullCmd) return;
 
-  const prevImage = useCallback(() => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+    const [baseCmd, ...args] = fullCmd.toLowerCase().split(' ');
+    let output: React.ReactNode = null;
+    let type: HistoryItem['type'] = 'command';
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'Escape') setIsFullscreen(false);
-  }, [prevImage, nextImage]);
+    switch (baseCmd) {
+      case 'help':
+        output = (
+          <div className="grid grid-cols-[80px_1fr] gap-x-4 gap-y-1 text-sm">
+            <span className="text-green-400">ls</span> <span>List contents of current directory</span>
+            <span className="text-green-400">cd &lt;dir&gt;</span> <span>Change directory</span>
+            <span className="text-green-400">cat &lt;file&gt;</span> <span>View project details</span>
+            <span className="text-green-400">clear</span> <span>Clear terminal history</span>
+            <span className="text-green-400">help</span> <span>Show this help message</span>
+          </div>
+        );
+        break;
 
-  const toggleFullscreen = useCallback(() => setIsFullscreen(false), []);
+      case 'ls':
+        if (currentPath === "~/projects") {
+          output = (
+            <div className="flex flex-wrap gap-6">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => handleCommand(`cd ${cat}`)}
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer group"
+                >
+                  <FaFolder className="group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-dotted underline-offset-4">{cat}/</span>
+                </button>
+              ))}
+            </div>
+          );
+        } else {
+          const category = currentPath.split('/').pop();
+          const filtered = slugifiedProjects.filter(p => p.category === category);
+          output = (
+            <div className="flex flex-wrap gap-6">
+              {filtered.map(p => (
+                <button
+                  key={p.slug}
+                  onClick={() => handleCommand(`cat ${p.slug}`)}
+                  className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors cursor-pointer group"
+                >
+                  <FaFileCode className="group-hover:scale-110 transition-transform" />
+                  <span className="underline decoration-dotted underline-offset-4">{p.slug}.tsx</span>
+                </button>
+              ))}
+            </div>
+          );
+        }
+        break;
 
-  if (!images || images.length === 0) {
-    return null;
-  }
+      case 'cd':
+        const target = args[0];
+        if (!target || target === "~" || target === "~/projects") {
+          setCurrentPath("~/projects");
+          setActiveProject(null);
+        } else if (target === "..") {
+          if (currentPath !== "~/projects") {
+            setCurrentPath("~/projects");
+          }
+        } else if (categories.includes(target)) {
+          setCurrentPath(`~/projects/${target}`);
+        } else {
+          output = <span className="text-red-400">Directory not found: {target}</span>;
+          type = 'error';
+        }
+        break;
 
-  // Animation variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] // Custom easing
-      }
+      case 'cat':
+        const slug = args[0]?.replace('.tsx', '');
+        const project = slugifiedProjects.find(p => p.slug === slug);
+        if (project) {
+          setActiveProject(project);
+          setCurrentImageIndex(0);
+          output = (
+            <div className="text-blue-400 text-sm italic">
+              Opening {slug}.tsx...
+            </div>
+          );
+        } else {
+          output = <span className="text-red-400">File not found: {slug}</span>;
+          type = 'error';
+        }
+        break;
+
+      case 'clear':
+        setHistory([]);
+        setInputValue("");
+        setActiveProject(null);
+        return;
+
+      default:
+        output = (
+          <div className="space-y-1">
+            <p className="text-red-400">Command not found: {baseCmd}</p>
+            <p className="text-xs text-[#8b949e]">Type &apos;help&apos; for available commands.</p>
+          </div>
+        );
+        type = 'error';
+    }
+
+    setHistory(prev => [...prev, { command: fullCmd, output, type }]);
+    setInputValue("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleCommand(inputValue);
     }
   };
 
-  const headerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { delay: 0.2, duration: 0.4 }
-    }
-  };
+  // --- Sub-components for Project Details ---
 
-  const contentVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { delay: 0.3, duration: 0.5 }
-    }
+  const renderProjectDetail = () => {
+    if (!activeProject) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-8 border border-[#30363d] rounded-xl overflow-hidden bg-[#0D1117] shadow-2xl"
+      >
+        <div className="grid lg:grid-cols-[1.2fr_1fr]">
+          {/* Image Panel */}
+          <div className="relative aspect-video bg-black overflow-hidden group">
+            <ScanlineEffect />
+            <div className="absolute top-4 left-4 z-20 text-[10px] text-[#8b949e] font-mono flex flex-col gap-1 opacity-60">
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">➜</span>
+                <span>cat images.log</span>
+              </div>
+              <div>FRAME_{currentImageIndex + 1}_BUFFERING...</div>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="relative w-full h-full flex items-center justify-center p-8"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={activeProject.images[currentImageIndex]}
+                    alt={activeProject.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <GridOverlay />
+              </motion.div>
+            </AnimatePresence>
+
+            {activeProject.images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-30">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + activeProject.images.length) % activeProject.images.length); }}
+                  className="p-2 bg-black/50 rounded-full hover:bg-black transition-colors text-white/50 hover:text-white"
+                >
+                  <FaChevronLeft size={10} />
+                </button>
+                <div className="flex gap-1">
+                  {activeProject.images.map((_, i) => (
+                    <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? 'bg-blue-400 scale-125' : 'bg-gray-600'}`} />
+                  ))}
+                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % activeProject.images.length); }}
+                  className="p-2 bg-black/50 rounded-full hover:bg-black transition-colors text-white/50 hover:text-white"
+                >
+                  <FaChevronRight size={10} />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Info Panel */}
+          <div className="p-6 sm:p-8 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[#30363d]">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-white tracking-tight">{activeProject.title}</h3>
+                <div className="px-2 py-0.5 bg-blue-400/10 border border-blue-400/20 rounded text-[10px] text-blue-400 font-bold uppercase">
+                  {activeProject.category}
+                </div>
+              </div>
+
+              <p className="text-[#8b949e] text-sm leading-relaxed mb-8 pl-4 border-l-2 border-[#30363d]">
+                {activeProject.description}
+              </p>
+
+              <div className="space-y-4 mb-8">
+                <div className="text-[10px] text-[#8b949e] uppercase font-bold tracking-widest">Stack Manifest</div>
+                <div className="flex flex-wrap gap-2">
+                  {activeProject.technologies?.map(tech => (
+                    <span key={tech} className="px-2 py-1 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] text-[11px] rounded hover:border-blue-400/50 transition-colors">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              {activeProject.demoLink && (
+                <Link
+                  href={activeProject.demoLink}
+                  target="_blank"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-bold rounded transition-colors"
+                >
+                  <FaExternalLinkAlt size={12} />
+                  Live Demo
+                </Link>
+              )}
+              {activeProject.githubLink && (
+                <Link
+                  href={activeProject.githubLink}
+                  target="_blank"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] hover:border-[#8b949e] text-sm font-bold rounded transition-colors"
+                >
+                  <FaGithub size={14} />
+                  Source Code
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
   };
 
   return (
-    <>
-      <motion.div
-        id={`project-${number}`}
-        className="relative mx-auto w-full max-w-7xl px-4 sm:px-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-      >
-        <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden hover:border-[#8b949e]/40 hover:shadow-[0_0_30px_rgba(48,54,61,0.2)] transition-all duration-300 shadow-2xl font-mono">
-          {/* Terminal-style Header */}
-          <motion.div
-            className="bg-[#161B22] px-4 sm:px-6 py-3 border-b border-[#30363d] flex items-center justify-between"
-            variants={headerVariants}
-          >
-            <div className="flex items-center gap-4">
-              <TerminalDots />
-              <div className="flex items-center gap-2 text-sm text-[#8b949e]">
-                <span className="opacity-50">/</span>
-                <span>projects</span>
-                <span className="opacity-50">/</span>
-                <span className="text-blue-400">{slug}.tsx</span>
-              </div>
+    <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-12 font-mono">
+      <div className="bg-[#0D1117] border border-[#30363d] rounded-xl overflow-hidden shadow-2xl flex flex-col h-[700px]">
+        {/* Terminal Header */}
+        <div className="bg-[#161B22] px-4 py-3 border-b border-[#30363d] flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-4">
+            <TerminalDots />
+            <div className="hidden sm:flex items-center gap-2 text-xs text-[#8b949e]">
+              <FaTerminal size={10} className="text-gray-500" />
+              <span>neerazan-dhakal@portfolio:</span>
+              <span className="text-blue-400">{currentPath}</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="text-[#8b949e]/60 hidden sm:inline">PID: {number}</span>
-              <div className="flex items-center gap-2 px-2 py-0.5 bg-[#238636]/10 border border-[#238636]/30 rounded">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#238636] animate-pulse"></div>
-                <span className="text-[#238636] font-bold text-[11px]">LIVE</span>
-              </div>
+          </div>
+          <div className="flex items-center gap-4 text-[10px] text-[#8b949e]">
+            <span className="hidden md:inline">PID: 4821</span>
+            <span className="px-1.5 py-0.5 bg-green-400/10 text-green-400 border border-green-400/20 rounded">SSH ACTIVE</span>
+          </div>
+        </div>
+
+        {/* Terminal Body */}
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-auto p-4 sm:p-6 text-sm sm:text-base space-y-6 scrollbar-thin scrollbar-thumb-[#30363d] scrollbar-track-transparent"
+          onClick={() => inputRef.current?.focus()}
+        >
+          {booting ? (
+            <div className="flex items-center gap-3 text-blue-400 animate-pulse">
+              <FaTerminal />
+              <span>Initializing secure connection...</span>
             </div>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-[1.6fr_1fr]">
-            {/* Terminal Output Area (Image Carousel) */}
-            <div className="relative aspect-video lg:aspect-auto lg:h-full lg:min-h-[420px] border-b lg:border-b-0 lg:border-r border-[#30363d] bg-black overflow-hidden group">
-              <ScanlineEffect />
-
-              {/* Terminal prompt overlay */}
-              <motion.div
-                className="absolute top-4 left-4 z-20 text-xs text-[#8b949e] font-mono flex flex-col gap-1"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">➜</span>
-                  <span className="text-blue-400">~/projects</span>
-                  <span className="text-white">cat render_view.log</span>
-                </div>
-                <div className="text-[#8b949e]/50 pl-4">
-                  [ {timestamp} ] RENDERED FRAME_{currentImageIndex + 1}
-                </div>
-              </motion.div>
-
-              <div className="relative w-full h-full overflow-hidden">
-                <motion.div
-                  className="flex w-full h-full"
-                  animate={{ x: `-${currentImageIndex * 100}%` }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.22, 1, 0.36, 1],
-                    type: "tween"
-                  }}
-                >
-                  {images.map((image, index) => (
-                    <div key={index} className="w-full h-full shrink-0 relative flex items-center justify-center p-8 bg-[#0D1117]">
-                      <div className="relative w-full h-full max-w-2xl">
-                        <Image
-                          src={image}
-                          alt={`${title} screenshot ${index + 1}`}
-                          fill
-                          className="object-contain transition-opacity duration-700 opacity-90 group-hover:opacity-100"
-                          priority={index === 0}
-                          loading={index === 0 ? "eager" : "lazy"}
-                        />
+          ) : (
+            <>
+              {/* History */}
+              <div className="space-y-6">
+                {history.map((item, i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-green-400">➜</span>
+                      <span className="text-blue-400">~/projects</span>
+                      <span className="text-white">{item.command}</span>
+                    </div>
+                    {item.output && (
+                      <div className="pl-6 animate-in fade-in slide-in-from-left-2 duration-300">
+                        {item.output}
                       </div>
-                      <GridOverlay />
-                    </div>
-                  ))}
-                </motion.div>
-
-                {/* Enhanced Image Indicators */}
-                {images.length > 1 && (
-                  <motion.div
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-2.5 bg-[#161B22]/90 backdrop-blur-md rounded-full border border-[#30363d] z-20 shadow-2xl"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.4 }}
-                  >
-                    <button
-                      onClick={prevImage}
-                      className="text-[#8b949e] hover:text-white transition-colors cursor-pointer"
-                      aria-label="Previous"
-                    >
-                      <FaChevronLeft size={12} />
-                    </button>
-                    <div className="flex gap-1.5 items-center">
-                      {images.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`h-1 rounded-full transition-all duration-500 cursor-pointer ${index === currentImageIndex
-                            ? 'w-6 bg-blue-400'
-                            : 'w-1 bg-[#30363d] hover:bg-[#8b949e]'
-                            }`}
-                          aria-label={`Go to image ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      onClick={nextImage}
-                      className="text-[#8b949e] hover:text-white transition-colors cursor-pointer"
-                      aria-label="Next"
-                    >
-                      <FaChevronRight size={12} />
-                    </button>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            {/* System Logs / Details Panel */}
-            <motion.div
-              className="p-8 flex flex-col justify-between h-full bg-[#0D1117] relative"
-              variants={contentVariants}
-            >
-              <div>
-                {/* Log Header */}
-                <div className="flex items-center gap-3 mb-6 pb-2 border-b border-[#30363d]">
-                  <span className="text-blue-400 text-sm font-bold">INFO</span>
-                  <span className="text-[#8b949e] text-xs uppercase tracking-[0.2em] font-bold">Project_Specification</span>
-                  <div className="flex-1"></div>
-                </div>
-
-                <div className="mb-6 space-y-1">
-                  <div className="flex items-center gap-2 text-[#8b949e] text-xs">
-                    <span className="text-green-400">➜</span>
-                    <span>TITLE:</span>
+                    )}
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                    {title}
-                  </h2>
-                </div>
-
-                <div className="mb-8 group">
-                  <div className="inline-flex items-center gap-2 text-[#8b949e] text-xs mb-3 bg-[#30363d]/30 px-2 py-0.5 rounded">
-                    <span className="text-orange-400 font-bold">DESCRIPTION</span>
-                    <span className="opacity-10">|</span>
-                    <span>markdown</span>
-                  </div>
-                  <p className="text-[#8b949e] text-base leading-relaxed pl-4 border-l-2 border-[#30363d] group-hover:border-blue-400/50 transition-colors duration-500">
-                    {description}
-                  </p>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-center gap-2 text-[#8b949e] text-xs mb-4">
-                    <span className="text-purple-400 font-bold">TECH_STACK_MANIFEST</span>
-                    <span className="opacity-20">::</span>
-                    <span className="text-[10px]">v2.4.0</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-3 pl-4 border-l border-[#30363d]/50">
-                    {technologies?.map((tech, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-2 group/item"
-                      >
-                        <span className="text-xs text-[#8b949e]/30 font-mono">{(i + 1).toString().padStart(2, '0')}</span>
-                        <span className="text-[#8b949e] text-xs">::</span>
-                        <span className="text-[#c9d1d9] text-sm font-medium group-hover/item:text-blue-400 transition-colors cursor-default">
-                          {tech}
-                        </span>
-                        <div className="h-px flex-1 bg-[#30363d]/20 group-hover/item:bg-blue-400/20 transition-colors" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
 
-              {/* Command Line Actions */}
-              <div className="space-y-3 mt-8 pt-8 border-t border-[#30363d]">
-                <div className="text-xs text-[#8b949e] mb-2 px-1 font-bold">AVAILABLE ACTIONS:</div>
-                {demoLink && (
-                  <Link
-                    href={demoLink}
-                    target="_blank"
-                    className="group relative w-full px-4 py-3 bg-[#161B22] border border-[#30363d] text-[#c9d1d9] hover:border-blue-400 hover:text-blue-400 transition-all duration-300 flex items-center justify-between rounded-lg overflow-hidden"
-                  >
-                    <div className="flex items-center gap-3 text-sm">
-                      <span className="text-blue-400 font-bold opacity-0 group-hover:opacity-100 transition-all -ml-2 group-hover:ml-0">{'>'}</span>
-                      <span className="font-medium">Open Live Deployment</span>
-                    </div>
-                    <FaExternalLinkAlt size={12} className="opacity-40 group-hover:opacity-100" />
-                    <div className="absolute inset-0 bg-blue-400/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                  </Link>
-                )}
-                {githubLink && (
-                  <Link
-                    href={githubLink}
-                    target="_blank"
-                    className="group w-full px-4 py-3 bg-transparent border border-[#30363d] text-[#8b949e] hover:border-[#8b949e] hover:text-[#c9d1d9] transition-all duration-300 flex items-center justify-between rounded-lg text-sm"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span>View Source Code</span>
-                    </div>
-                    <FaGithub size={16} className="opacity-40 group-hover:opacity-100" />
-                  </Link>
-                )}
-              </div>
-            </motion.div >
-          </div >
+              {/* Active Project View */}
+              {renderProjectDetail()}
 
-          {/* Footer status bar */}
-          <div className="bg-[#161B22] px-6 py-2 border-t border-[#30363d] flex items-center justify-between text-xs text-[#8b949e] font-mono" >
-            <div className="flex items-center gap-6">
-              <div className="hidden sm:flex items-center gap-2">
-                <span className="opacity-40">Load:</span>
-                <span className="text-green-400">0.02, 0.05, 0.08</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="hidden sm:inline opacity-40">UTF-8</span>
-              <div className="flex items-center gap-2 px-2 py-0.5 bg-[#30363d]/50 rounded">
-                <span className="text-blue-400">main</span>
-                <span className="text-orange-400">!</span>
-              </div>
-            </div>
-          </div >
-        </div >
-      </motion.div >
-
-      {/* Fullscreen Modal */}
-      <AnimatePresence>
-        {
-          isFullscreen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 bg-black flex items-center justify-center p-4"
-              onClick={toggleFullscreen}
-            >
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ delay: 0.1 }}
-                onClick={toggleFullscreen}
-                className="absolute top-6 right-6 p-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded border border-blue-500/30 transition-all z-50 shadow-2xl cursor-pointer"
-              >
-                <IoClose size={24} />
-              </motion.button>
-
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="relative w-full h-full max-w-7xl max-h-[90vh]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Image
-                  src={images[currentImageIndex]}
-                  alt={`${title} fullscreen`}
-                  fill
-                  className="object-contain"
+              {/* Input Line */}
+              <div className="flex items-center gap-2 group">
+                <span className="text-green-400">➜</span>
+                <span className="text-blue-400 shrink-0">{currentPath.split('/').pop()}</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="flex-1 bg-transparent border-none outline-hidden text-white caret-blue-400"
+                  spellCheck={false}
+                  autoComplete="off"
+                  autoFocus
                 />
+              </div>
+            </>
+          )}
+        </div>
 
-                {images.length > 1 && (
-                  <>
-                    <motion.button
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 }}
-                      onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-4 bg-black/80 text-blue-400 rounded-full border border-white/5 hover:bg-blue-500/10 hover:border-blue-400/30 transition-all backdrop-blur-md cursor-pointer"
-                    >
-                      <FaChevronLeft size={20} />
-                    </motion.button>
-                    <motion.button
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 }}
-                      onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-4 bg-black/80 text-blue-400 rounded-full border border-white/5 hover:bg-blue-500/10 hover:border-blue-400/30 transition-all backdrop-blur-md cursor-pointer"
-                    >
-                      <FaChevronRight size={20} />
-                    </motion.button>
-                  </>
-                )}
-              </motion.div>
-            </motion.div>
-          )
-        }
-      </AnimatePresence >
-    </>
+        {/* Terminal Footer / Shortcut Bar (Mobile Focused) */}
+        <div className="bg-[#161B22] border-t border-[#30363d] px-4 py-3 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar shrink-0">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleCommand('ls')}
+              className="px-3 py-1.5 bg-[#30363d]/50 hover:bg-[#30363d] text-[#8b949e] hover:text-white rounded text-xs flex items-center gap-2 transition-colors shrink-0"
+              title="List files"
+            >
+              <FaTerminal size={10} />
+              ls
+            </button>
+            <button
+              onClick={() => handleCommand('cd ..')}
+              className="px-3 py-1.5 bg-[#30363d]/50 hover:bg-[#30363d] text-[#8b949e] hover:text-white rounded text-xs flex items-center gap-2 transition-colors shrink-0"
+              title="Back"
+            >
+              <FaLevelUpAlt size={10} />
+              cd ..
+            </button>
+            <button
+              onClick={() => handleCommand('clear')}
+              className="px-3 py-1.5 bg-[#30363d]/50 hover:bg-[#30363d] text-[#8b949e] hover:text-white rounded text-xs flex items-center gap-2 transition-colors shrink-0"
+              title="Clear"
+            >
+              <FaTrashAlt size={10} />
+              clear
+            </button>
+            <button
+              onClick={() => handleCommand('help')}
+              className="px-3 py-1.5 bg-[#30363d]/50 hover:bg-[#30363d] text-[#8b949e] hover:text-white rounded text-xs flex items-center gap-2 transition-colors shrink-0"
+              title="Help"
+            >
+              <FaQuestionCircle size={10} />
+              help
+            </button>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-4 text-[10px] text-[#8b949e] uppercase tracking-widest whitespace-nowrap">
+            <span className="opacity-40">Status:</span>
+            <span className="text-blue-400">Project_Shell_Active</span>
+            <span className="opacity-40">|</span>
+            <span>V_2.4.0</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Background Ambience */}
+      <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+    </div>
   );
 }

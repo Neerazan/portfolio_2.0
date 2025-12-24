@@ -21,7 +21,8 @@ export const projects: ProjectProps[] = [
       "/assets/projects/tishy-1.png",
       "/assets/projects/tishy-2.png",
     ],
-    demoLink: "https://tishyandco.com.au/"
+    demoLink: "https://tishyandco.com.au/",
+    category: "company-projects"
   },
   {
     title: "Polar Treks",
@@ -40,7 +41,8 @@ export const projects: ProjectProps[] = [
       "/assets/projects/polar-1.png",
       "/assets/projects/polar-2.png",
     ],
-    demoLink: "https://polartreks.com/"
+    demoLink: "https://polartreks.com/",
+    category: "company-projects"
   },
   {
     title: "Kirana Pasal",
@@ -59,7 +61,8 @@ export const projects: ProjectProps[] = [
       "/assets/projects/kirana-2.png",
       "/assets/projects/kirana-3.png",
     ],
-    demoLink: "https://www.kiranapasal.shop"
+    demoLink: "https://www.kiranapasal.shop",
+    category: "freelance-projects"
   },
   {
     title: "Right4Children",
@@ -79,6 +82,7 @@ export const projects: ProjectProps[] = [
       "/assets/projects/r4c-2.png",
     ],
     demoLink: "https://right4children.org/",
-    githubLink: "https://github.com/nirajan-dhakal/right4children"
+    githubLink: "https://github.com/nirajan-dhakal/right4children",
+    category: "company-projects"
   }
 ];

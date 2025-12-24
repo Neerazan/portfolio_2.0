@@ -14,6 +14,7 @@ export interface ProjectProps {
   images: string[];
   demoLink?: string;
   githubLink?: string;
+  category: string;
 }
 
 export interface ContactFormState {
