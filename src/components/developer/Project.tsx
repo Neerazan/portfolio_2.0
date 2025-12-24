@@ -296,9 +296,9 @@ export default function Project() {
         animate={{ opacity: 1, y: 0 }}
         className="mt-8 border border-[#30363d] rounded-xl overflow-hidden bg-[#0D1117] shadow-2xl"
       >
-        <div className="grid lg:grid-cols-[1.2fr_1fr]">
+        <div className="grid lg:grid-cols-[1.4fr_1fr] items-center">
           {/* Image Panel */}
-          <div className="relative aspect-video bg-black overflow-hidden group">
+          <div className="relative aspect-video bg-[#0D1117] overflow-hidden group flex items-center justify-center">
             <ScanlineEffect />
             <AnimatePresence mode="wait">
               <motion.div
@@ -307,7 +307,7 @@ export default function Project() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="relative w-full h-full flex items-center justify-center p-8"
+                className="relative w-full h-full flex items-center justify-center p-8 lg:p-4"
               >
                 <div className="relative w-full h-full">
                   <Image
@@ -322,25 +322,33 @@ export default function Project() {
             </AnimatePresence>
 
             {activeProject.images.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-30">
+              <>
+                {/* Navigation Arrows */}
                 <button
                   onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + activeProject.images.length) % activeProject.images.length); }}
-                  className="p-2 bg-black/50 rounded-full hover:bg-black transition-colors text-white/50 hover:text-white"
+                  className="absolute cursor-pointer md:left-6 left-9 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all text-white/50 hover:text-white border border-white/5 md:opacity-0 md:group-hover:opacity-100"
+                  aria-label="Previous image"
                 >
-                  <FaChevronLeft size={10} />
+                  <FaChevronLeft size={14} />
                 </button>
-                <div className="flex gap-1">
-                  {activeProject.images.map((_, i) => (
-                    <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? 'bg-blue-400 scale-125' : 'bg-gray-600'}`} />
-                  ))}
-                </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % activeProject.images.length); }}
-                  className="p-2 bg-black/50 rounded-full hover:bg-black transition-colors text-white/50 hover:text-white"
+                  className="absolute cursor-pointer md:right-6 right-9 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all text-white/50 hover:text-white border border-white/5 md:opacity-0 md:group-hover:opacity-100"
+                  aria-label="Next image"
                 >
-                  <FaChevronRight size={10} />
+                  <FaChevronRight size={14} />
                 </button>
-              </div>
+
+                {/* Indicators */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-30 bg-black/20 backdrop-blur-xs px-2 py-1 rounded-full">
+                  {activeProject.images.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1 rounded-full transition-all duration-300 ${i === currentImageIndex ? 'w-4 bg-blue-400' : 'w-1 bg-white/20'}`}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </div>
 
