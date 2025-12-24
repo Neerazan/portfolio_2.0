@@ -12,6 +12,13 @@ const ASCII_404 = `    _  _    ___  _  _
       |_|  \\___/   |_|  
 `;
 
+// Optimized color determination
+const getLineColor = (line: string): string => {
+  if (line.includes("Error")) return "text-red-400";
+  if (line.includes("Complete") || line.includes("operational") || line.includes("safety")) return "text-green-400";
+  return "text-yellow-400";
+};
+
 export default function NotFoundDeveloper() {
   const [currentLine, setCurrentLine] = useState(0);
 
@@ -31,10 +38,10 @@ export default function NotFoundDeveloper() {
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [currentLine]);
+  }, [currentLine, lines.length]);
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-black text-gray-300 font-mono flex items-center justify-center p-4 sm:p-6 md:p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,7 +49,7 @@ export default function NotFoundDeveloper() {
         className="w-full max-w-4xl"
       >
         {/* Terminal Header */}
-        <div className="bg-[#161B22] backdrop-blur-sm rounded-t-lg border border-white/10 px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+        <div className="bg-[#161B22] rounded-t-lg border border-white/10 px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
           <div className="flex items-center gap-1.5 sm:gap-2">
             <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" />
             <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
@@ -55,7 +62,7 @@ export default function NotFoundDeveloper() {
         </div>
 
         {/* Terminal Body */}
-        <div className="bg-[#0D1117] backdrop-blur-sm rounded-b-lg border-x border-b border-white/10 p-4 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-x-auto">
+        <div className="bg-[#0D1117] rounded-b-lg border-x border-b border-white/10 p-4 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-x-auto">
           <div className="text-[10px] sm:text-xs md:text-sm leading-relaxed">
             <div className="text-blue-400 mb-3 sm:mb-4">➜ ~ cat /var/log/last_visit.log</div>
 
@@ -69,9 +76,9 @@ export default function NotFoundDeveloper() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mb-1 sm:mb-2 wrap-break-words"
+                className={`mb-1 sm:mb-2 wrap-break-words ${getLineColor(line)}`}
               >
-                <span className="text-gray-500 text-[9px] sm:text-[10px]">
+                <span className="text-gray-500 text-[9px] sm:text-[10px] opacity-50">
                   [{new Date().toLocaleTimeString()}]
                 </span>{" "}
                 {line}
@@ -82,12 +89,12 @@ export default function NotFoundDeveloper() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="mb-1 sm:mb-2 wrap-break-words"
+                className="mb-1 sm:mb-2"
               >
-                <span className="text-gray-500 text-[9px] sm:text-[10px]">
+                <span className="text-gray-500 text-[9px] sm:text-[10px] opacity-50">
                   [{new Date().toLocaleTimeString()}]
                 </span>
-                <span className="animate-pulse"> ▊</span>
+                <span className="animate-pulse text-gray-400"> ▊</span>
               </motion.div>
             )}
 
@@ -115,7 +122,7 @@ export default function NotFoundDeveloper() {
                     <motion.div
                       whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full px-4 sm:px-6 py-2 sm:py-2.5 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-xs sm:text-sm transition-colors cursor-pointer"
+                      className="w-full px-4 sm:px-6 py-2 sm:py-2.5 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-xs sm:text-sm transition-colors cursor-pointer hover:border-white/20"
                     >
                       <IoHome className="shrink-0" />
                       <span>--home</span>
@@ -126,7 +133,7 @@ export default function NotFoundDeveloper() {
                     onClick={() => window.history.back()}
                     whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 px-4 sm:px-6 py-2 sm:py-2.5 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-xs sm:text-sm transition-colors cursor-pointer"
+                    className="flex-1 px-4 sm:px-6 py-2 sm:py-2.5 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-xs sm:text-sm transition-colors cursor-pointer hover:border-white/20"
                   >
                     <IoArrowBack className="shrink-0" />
                     <span>--back</span>
