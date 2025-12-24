@@ -143,7 +143,7 @@ export default function NotFoundDeveloper() {
           transition={{ delay: 1 }}
           className="mt-3 sm:mt-4 text-center text-[10px] sm:text-xs text-gray-600"
         >
-          Antigravity Recovery Mode v4.0.4 - Unauthorized Access is a Feature
+          Dhakal Recovery Mode v4.0.4 - Unauthorized Access is a Feature
         </motion.div>
       </motion.div>
     </div>
