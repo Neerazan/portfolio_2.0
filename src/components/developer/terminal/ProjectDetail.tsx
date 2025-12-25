@@ -29,13 +29,28 @@ export const ProjectDetailView = memo(({ project, category }: { project: Slugifi
         {/* Image Panel */}
         <div className="relative aspect-video bg-[#0D1117] overflow-hidden group flex items-center justify-center">
           <ScanlineEffect />
-          <AnimatePresence mode="wait">
+
+          {/* Preload Next/Prev Images */}
+          <div className="hidden pointer-events-none" aria-hidden="true">
+            {project.images.map((img) => (
+              <Image
+                key={`${img}-preload`}
+                src={img}
+                alt="preload"
+                width={10}
+                height={10}
+                priority
+              />
+            ))}
+          </div>
+
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={currentImageIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               className="relative w-full h-full flex items-center justify-center p-8 lg:p-4"
             >
               <div className="relative w-full h-full">
@@ -44,6 +59,7 @@ export const ProjectDetailView = memo(({ project, category }: { project: Slugifi
                   alt={`${project.title} - Screenshot ${currentImageIndex + 1}`}
                   fill
                   className="object-contain"
+                  priority={currentImageIndex === 0}
                 />
               </div>
               <GridOverlay />
