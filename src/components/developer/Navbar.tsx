@@ -35,7 +35,7 @@ export default function Navbar() {
               section.id === 'about' ? '/system' :
                 section.id === 'skills' ? '/dependencies' :
                   section.id === 'work' ? '/var/log' :
-                    section.id === 'projects' ? '/deployments' : `/${section.id}`}
+                    section.id === 'projects' ? '/projects' : `/${section.id}`}
           </Navitem>
         ))}
       </nav>
