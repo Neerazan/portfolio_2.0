@@ -80,6 +80,7 @@ export default function Project() {
       setHistory([
         {
           command: "system --init",
+          path: ROOT_PATH,
           output: (
             <div className="text-[#8b949e] space-y-1">
               <p className="text-blue-400">Welcome to Project Explorer v2.0.0</p>
@@ -107,9 +108,9 @@ export default function Project() {
     }
 
     const { output, type } = executeCommand(fullCmd);
-    setHistory(prev => [...prev.slice(-(MAX_HISTORY - 1)), { command: fullCmd, output, type }]);
+    setHistory(prev => [...prev.slice(-(MAX_HISTORY - 1)), { command: fullCmd, output, type, path: currentPath }]);
     setInputValue("");
-  }, [executeCommand]);
+  }, [executeCommand, currentPath]);
 
   // Update the ref whenever handleCommand is recreated
   useEffect(() => {
@@ -231,7 +232,7 @@ export default function Project() {
                   <div key={i} className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="text-green-400">➜</span>
-                      <span className="text-blue-400">{ROOT_PATH}</span>
+                      <span className="text-blue-400">{item.path}</span>
                       <span className="text-white">{item.command}</span>
                     </div>
                     {item.output && (
@@ -246,7 +247,7 @@ export default function Project() {
               {/* Input Line */}
               <div className="flex items-center gap-2">
                 <span className="text-green-400">➜</span>
-                <span className="text-blue-400 shrink-0">{currentPath.split('/').pop()}</span>
+                <span className="text-blue-400 shrink-0">{currentPath}</span>
                 <input
                   ref={inputRef}
                   type="text"

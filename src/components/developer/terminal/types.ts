@@ -4,6 +4,7 @@ import { ProjectProps } from "../../../types";
 export type HistoryItem = {
   command: string;
   output: ReactNode;
+  path: string;
   type?: "command" | "status" | "error" | "info";
 };
 
