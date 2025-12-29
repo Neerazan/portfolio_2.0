@@ -22,7 +22,7 @@ export const projects: ProjectProps[] = [
       "/assets/projects/tishy-2.png",
     ],
     demoLink: "https://tishyandco.com.au/",
-    category: "commercial-projects"
+    category: "professional-projects"
   },
   {
     title: "Polar Treks",
@@ -42,7 +42,7 @@ export const projects: ProjectProps[] = [
       "/assets/projects/polar-2.png",
     ],
     demoLink: "https://polartreks.com/",
-    category: "commercial-projects"
+    category: "professional-projects"
   },
   {
     title: "Kirana Pasal",
@@ -83,6 +83,6 @@ export const projects: ProjectProps[] = [
     ],
     demoLink: "https://right4children.org/",
     githubLink: "https://github.com/nirajan-dhakal/right4children",
-    category: "company-projects"
+    category: "professional-projects"
   }
 ];
