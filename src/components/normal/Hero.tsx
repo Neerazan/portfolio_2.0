@@ -32,6 +32,34 @@ export default function NormalHero() {
       />
 
       <div className="flex flex-col lg:flex-row flex-1 relative z-10 container mx-auto px-0 lg:px-0">
+        {/* Desktop Social Panel */}
+        <aside className="hidden lg:flex flex-col justify-between items-center w-20 h-screen fixed left-0 top-0 border-r z-40 py-10 transition-colors duration-500 border-indigo-500/15 bg-[#151520]/95 backdrop-blur-sm">
+          <div className="w-px h-16 bg-linear-to-b from-transparent via-indigo-400/20 to-transparent" />
+
+          <div className="flex flex-col gap-6">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-2.5 transition-all duration-300 text-indigo-200/70 hover:text-white"
+                style={{ animationDelay: `${index * 50}ms` }}
+                aria-label={social.label}
+              >
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 transition-all group-hover:h-full opacity-0 group-hover:opacity-100 rounded-r-md bg-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.35)]" />
+                <social.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+
+                <span className="absolute left-full ml-4 top-1/2 -translate-y-1/2 px-2 py-1 rounded opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap bg-[#1f1f2b]/95 border border-indigo-500/30 text-indigo-100/90 text-[11px] shadow-sm">
+                  {social.label}
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="w-px h-16 bg-linear-to-b from-transparent via-indigo-400/20 to-transparent" />
+        </aside>
+
         <main className="flex-1 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 sm:px-12 lg:pl-28 lg:pr-12 w-full pt-20 lg:pt-0">
 
           {/* Text Section */}
