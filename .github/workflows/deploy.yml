@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: Deploy to VPS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Deploy to EC2
+    name: Build & Deploy to VPS
     runs-on: ubuntu-latest
     steps:
       # --------------------------
@@ -67,7 +67,7 @@ jobs:
       # --------------------------
       # 6. Deploy on Server
       # --------------------------
-      - name: Deploy on EC2 server
+      - name: Deploy on VPS server
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
@@ -83,9 +83,9 @@ jobs:
 
             # Stop the app first to free up memory for pnpm install
             # 1GB RAM is often not enough for both the app and the install process
-            if pm2 describe portfolio > /dev/null 2>&1; then
+            if pm2 describe nirajan-portfolio > /dev/null 2>&1; then
                 echo "Stopping application to free up memory..."
-                pm2 stop portfolio
+                pm2 stop nirajan-portfolio
             fi
 
             # Check if pnpm is installed, if not install it
@@ -99,12 +99,12 @@ jobs:
             pnpm install --prod --frozen-lockfile
 
             # Start or restart PM2
-            if pm2 describe portfolio > /dev/null 2>&1; then
+            if pm2 describe nirajan-portfolio > /dev/null 2>&1; then
               echo "Restarting application..."
-              pm2 restart portfolio --update-env
+              pm2 restart nirajan-portfolio --update-env
             else
               echo "Starting application..."
-              pm2 start pnpm --name "portfolio" -- start
+              pm2 start pnpm --name "nirajan-portfolio" -- start
             fi
 
             # Save PM2 process list
