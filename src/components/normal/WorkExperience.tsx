@@ -7,7 +7,7 @@ const workExperiences = [
   {
     title: "3P Trades LLC (Remote)",
     position: "Software Engineer",
-    period: "February 2025 - Present",
+    period: "February 2025 - February 2026",
     details: [
       "Contributed to Materiel Insights, a platform for BOM and Aircraft lifecycle management.",
       "Developed and optimized full-stack applications using Next.js, TypeScript, Node.js, ZenStack, and Vercel AI SDK.",

@@ -6,7 +6,7 @@ const workExperiences = [
   {
     company: "3P Trades LLC",
     role: "Software Engineer",
-    period: "Feb 2025 - Present",
+    period: "Feb 2025 - Feb 2026",
     commitHash: "3p-8a2f9c",
     type: "feat",
     details: [
