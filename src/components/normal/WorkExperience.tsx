@@ -11,9 +11,9 @@ const workExperiences = [
     details: [
       "Contributed to Materiel Insights, a platform for BOM and Aircraft lifecycle management.",
       "Developed and optimized full-stack applications using Next.js, TypeScript, Node.js, ZenStack, and Vercel AI SDK.",
-      "Implemented RAG (Retrieval-Augmented Generation) for AI-powered natural language database querying.",
-      "Deployed and managed infrastructure on AWS EC2, RDS, and DynamoDB using a Serverless architecture.",
-      "Configured CloudFront for efficient content delivery and enhanced system performance.",
+      "Built a RAG system for document analysis, enabling semantic search and chat over unstructured text data.",
+      "Implemented AI-powered natural language database querying to convert user queries into structured database operations.",
+      "Managed infrastructure on AWS EC2, RDS, and DynamoDB using a Serverless architecture.",
     ],
     icon: (
       <Image

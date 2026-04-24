@@ -19,6 +19,7 @@ import {
   SiRedux,
   SiTailwindcss,
   SiTypescript,
+  SiLangchain
 } from "react-icons/si";
 import { VscClose, VscJson } from "react-icons/vsc";
 
@@ -54,6 +55,7 @@ const techStack: DependencyGroup[] = [
       { name: "django", icon: SiDjango, version: "^5.0.3" },
       { name: "fastapi", icon: SiFastapi, version: "^0.110.0" },
       { name: "nestjs", icon: SiNestjs, version: "^10.3.0" },
+      { name: "LangChain", icon: SiLangchain, version: "^1.1.0"},
       { name: "postgresql", icon: SiPostgresql, version: "^16.2" },
       { name: "redis", icon: DiRedis, version: "^7.2.0" },
     ],

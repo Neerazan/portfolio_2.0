@@ -17,7 +17,8 @@ import {
   SiPostgresql,
   SiRedux,
   SiTailwindcss,
-  SiTypescript
+  SiTypescript,
+  SiLangchain
 } from 'react-icons/si';
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
@@ -53,6 +54,7 @@ const technologies: Tech[] = [
       { name: "Django", icon: SiDjango, type: "primary" },
       { name: "FastAPI", icon: SiFastapi, type: "primary" },
       { name: "Nest.js", icon: SiNestjs, type: "primary" },
+      { name: "LangChain", icon: SiLangchain, type: "primary"},
       { name: "PostgreSQL", icon: SiPostgresql, type: "secondary" },
     ]
   },

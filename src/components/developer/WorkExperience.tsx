@@ -10,10 +10,11 @@ const workExperiences = [
     commitHash: "3p-8a2f9c",
     type: "feat",
     details: [
-      "Contributed to Materiel Insights platform",
-      "Developed full-stack Next.js/Node.js apps",
-      "Implemented RAG for AI querying",
-      "Deployed Serverless architecture on AWS",
+      "Contributed to Materiel Insights (BOM/Aircraft lifecycle)",
+      "Full-stack Next.js/Node.js & ZenStack apps",
+      "Built RAG system for semantic search & chat",
+      "Implemented NL-to-DB AI querying engine",
+      "Managed Serverless AWS (EC2, RDS, DynamoDB)",
     ],
   },
   {
@@ -21,7 +22,7 @@ const workExperiences = [
     role: "Full Stack Developer",
     period: "Jun 2024 - Feb 2025",
     commitHash: "airc-7b3d1",
-    type: "fix",
+    type: "feat",
     details: [
       "Developed RESTful APIs with Django/DRF",
       "Integrated Stripe payments & Celery tasks",
