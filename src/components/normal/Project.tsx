@@ -16,7 +16,8 @@ export default function Project({
   technologies,
   images = [],
   demoLink,
-  githubLink
+  githubLink,
+  category
 }: ProjectProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { elementRef, isVisible } = useScrollReveal();
@@ -65,7 +66,13 @@ export default function Project({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative flex w-full flex-col items-start justify-center gap-5 sm:gap-6 bg-[#151520]/95 p-4 sm:p-6 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl">
+      <div className="relative flex w-full flex-col items-start justify-center gap-5 sm:gap-6 bg-[#151520]/95 p-4 sm:p-6 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl overflow-hidden">
+        {/* Category Tag */}
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
+          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400/90 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20 backdrop-blur-sm">
+            {category?.replace(/-/g, ' ')}
+          </span>
+        </div>
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
           <motion.div
             initial={false}
