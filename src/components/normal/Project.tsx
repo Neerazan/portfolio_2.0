@@ -67,13 +67,16 @@ export default function Project({
       tabIndex={0}
     >
       <div className="relative flex w-full flex-col items-start justify-center gap-5 sm:gap-6 bg-[#151520]/95 p-4 sm:p-6 rounded-2xl border border-white/5 md:flex-row hover:border-indigo-500/30 transition-colors duration-300 shadow-2xl overflow-hidden">
-        {/* Category Tag */}
-        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
-          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400/90 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20 backdrop-blur-sm">
-            {category?.replace(/-/g, ' ')}
-          </span>
-        </div>
+
         <div className="relative w-full overflow-hidden rounded-lg md:w-1/2 aspect-video group/project">
+          {/* Category Tag */}
+          {category && (
+            <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-30">
+              <span className="inline-flex items-center justify-center whitespace-nowrap text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-300 bg-[#151520]/90 px-2.5 py-1 rounded-full border border-indigo-500/30 backdrop-blur-md shadow-lg">
+                {category.replace(/-/g, ' ')}
+              </span>
+            </div>
+          )}
           <motion.div
             initial={false}
             animate={{ x: `-${currentImageIndex * 100}%` }}
