@@ -106,12 +106,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
 };
 
 // JSON-LD Structured Data
