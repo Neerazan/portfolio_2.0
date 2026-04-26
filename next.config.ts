@@ -15,8 +15,7 @@ const nextConfig: NextConfig = {
     ],
   },
   // Reduce production bundle size
-  productionBrowserSourceMaps: false,
-  allowedDevOrigins: ['192.168.1.71']
+  productionBrowserSourceMaps: false
 };
 
 export default nextConfig;

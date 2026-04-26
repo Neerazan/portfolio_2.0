@@ -72,12 +72,12 @@ export function NavButton({ className, setIsMenuOpen, isMenuOpen }: NavButtonPro
       {/* Full Screen Menu Overlay - Portalled to body to escape parent stacking context */}
       {mounted && createPortal(
         <div
-          className={`fixed inset-0 z-[1110 bg-linear-to-br from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f] flex flex-col items-center justify-center lg:hidden overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}
+          className={`fixed inset-0 z-[1110] bg-linear-to-br from-[#0a0a0f] via-[#0f0f1a] to-[#0a0a0f] flex flex-col items-center justify-center lg:hidden overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}
         >
           {/* Close Button inside Portal */}
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-3 right-4 z-1120] p-2 text-white/50 hover:text-white transition-colors duration-300 transform hover:rotate-90"
+            className="absolute top-3 right-4 z-[1120] p-2 text-white/50 hover:text-white transition-colors duration-300 transform hover:rotate-90"
             aria-label="Close menu"
           >
             <HiX className="w-8 h-8" />
