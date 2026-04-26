@@ -64,7 +64,7 @@ export default function NormalHero() {
 
           {/* Text Section */}
           <div className="lg:w-1/2 max-w-2xl">
-            <div className="flex items-center gap-3 mb-4 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
+            <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-10 bg-gray-500" />
               <span className="text-gray-400 font-medium tracking-[0.2em] uppercase text-xs sm:text-sm">
                 Full Stack Developer
@@ -80,7 +80,7 @@ export default function NormalHero() {
               </span>
             </h1>
 
-            <div className="max-w-lg animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+            <div className="max-w-lg">
               <p className="text-base sm:text-lg lg:text-xl text-gray-400 font-light font-display leading-relaxed mb-8">
                 Hi, I&apos;m <span className="text-white font-medium">Nirajan Dhakal</span> a full-stack developer focused on building <span className="text-gray-200">maintainable backends</span>, <span className="text-gray-200">clean APIs</span>, and production-ready web applications.
               </p>
