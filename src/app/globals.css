@@ -162,6 +162,26 @@ img {
   transform: translateY(0);
 }
 
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left.active,
+.reveal-slide-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Staggered reveal delays for multiple items */
 .reveal-delay-1 {
   transition-delay: 0.1s;

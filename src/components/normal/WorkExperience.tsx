@@ -81,7 +81,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
     <div
       ref={elementRef}
       style={{ willChange: "transform, opacity" }}
-      className={`reveal ${isVisible ? "active" : ""} relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
+      className={`${isEven ? "reveal-slide-left" : "reveal-slide-right"} ${isVisible ? "active" : ""} relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
         } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
     >
       <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
