@@ -1,50 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FaBolt, FaCode, FaCubes, FaGraduationCap, FaRocket, FaUsers } from "react-icons/fa";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 export default function About() {
   const { elementRef, isVisible } = useScrollReveal();
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: 0.2 + (i * 0.1),
-        duration: 0.4,
-        type: "spring" as const,
-        stiffness: 150
-      }
-    })
-  };
-
   return (
     <div className="mx-auto max-w-6xl px-6 bg-transparent text-gray-300 relative">
       <div className="max-w-4xl mx-auto sm:px-6 mb-10 sm:mb-20 z-10">
-        <motion.div
+        <div
           ref={elementRef}
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-          variants={containerVariants}
-          className="p-5 sm:p-6 md:p-8 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-colors duration-300"
+          className={`reveal ${isVisible ? "active" : ""} p-5 sm:p-6 md:p-8 bg-[#151520]/95 rounded-2xl shadow-2xl border border-white/5 hover:border-white/10 transition-colors duration-300`}
         >
           <div className="mb-6 sm:mb-10">
             <p className="text-base sm:text-lg text-gray-300">
@@ -78,13 +45,9 @@ export default function About() {
                 { name: "System Design", desc: "Architecting robust systems", icon: FaCubes },
                 { name: "Continuous Learning", desc: "Always improving my craft", icon: FaGraduationCap },
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  custom={index}
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate={isVisible ? "visible" : "hidden"}
-                  className="p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 group flex items-center gap-4 hover:bg-white/10"
+                  className={`reveal reveal-delay-${Math.min(index + 1, 4)} ${isVisible ? "active" : ""} p-3 sm:p-4 bg-[#151520]/95 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-colors duration-300 group flex items-center gap-4 hover:bg-white/10`}
                 >
                   <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 group-hover:text-indigo-400 transition-colors" />
                   <div>
@@ -95,11 +58,11 @@ export default function About() {
                       {item.desc}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
@@ -17,7 +16,7 @@ const workExperiences = [
     ],
     icon: (
       <Image
-        src={"/assets/projects/3p-logo.png"}
+        src={"/assets/projects/3p-logo.webp"}
         alt="3P Logo"
         width={300}
         height={300}
@@ -39,7 +38,7 @@ const workExperiences = [
     ],
     icon: (
       <Image
-        src={"/assets/projects/aarambha-logo.png"}
+        src={"/assets/projects/aarambha-logo.webp"}
         alt="Aarambha Logo"
         width={300}
         height={300}
@@ -57,7 +56,7 @@ const workExperiences = [
     ],
     icon: (
       <Image
-        src={"/assets/projects/pine.png"}
+        src={"/assets/projects/pine.webp"}
         alt="Pine Softwares Logo"
         width={300}
         height={300}
@@ -78,34 +77,11 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
 
   const isEven = index % 2 === 0;
 
-  const containerVariants = {
-    hidden: {
-      opacity: 0,
-      x: isEven ? -50 : 50,
-      y: 20
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-        delay: index * 0.15
-      }
-    }
-  };
-
   return (
-    <motion.div
+    <div
       ref={elementRef}
-      initial="hidden"
-      animate={isVisible ? "visible" : "hidden"}
-      variants={containerVariants}
       style={{ willChange: "transform, opacity" }}
-      className={`relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
+      className={`reveal ${isVisible ? "active" : ""} relative flex flex-col sm:flex-row ${isEven ? "sm:flex-row" : "sm:flex-row-reverse"
         } items-start gap-4 pl-8 sm:items-center sm:gap-8 sm:pl-0 md:gap-16`}
     >
       <div className="absolute top-1/2 -left-1.5 z-10 -translate-y-1/2 transform sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
@@ -143,7 +119,7 @@ function WorkExperienceItem({ item, index }: WorkExperienceItemProps) {
           ))}
         </ul>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

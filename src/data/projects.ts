@@ -18,10 +18,10 @@ It’s designed to save time while keeping things simple and you’re always in 
       "Oracle"
     ],
     images: [
-      "/assets/projects/email-1.png",
-      "/assets/projects/email-2.png",
-      "/assets/projects/email-3.png",
-      "/assets/projects/email-4.png",
+      "/assets/projects/email-1.webp",
+      "/assets/projects/email-2.webp",
+      "/assets/projects/email-3.webp",
+      "/assets/projects/email-4.webp",
     ],
     demoLink: "https://ai-email.dhakalnirajan.com.np",
     githubLink: "https://github.com/Neerazan/lca-email-assistant-api",
@@ -44,8 +44,8 @@ It’s designed to save time while keeping things simple and you’re always in 
       "R2"
     ],
     images: [
-      "/assets/projects/tishy-1.png",
-      "/assets/projects/tishy-2.png",
+      "/assets/projects/tishy-1.webp",
+      "/assets/projects/tishy-2.webp",
     ],
     demoLink: "https://tishyandco.com.au/",
     category: "professional-projects"
@@ -64,8 +64,8 @@ It’s designed to save time while keeping things simple and you’re always in 
       "Cloudflare",
     ],
     images: [
-      "/assets/projects/polar-1.png",
-      "/assets/projects/polar-2.png",
+      "/assets/projects/polar-1.webp",
+      "/assets/projects/polar-2.webp",
     ],
     demoLink: "https://polartreks.com/",
     category: "professional-projects"
@@ -83,9 +83,9 @@ It’s designed to save time while keeping things simple and you’re always in 
       "Nginx",
     ],
     images: [
-      "/assets/projects/kirana-1.png",
-      "/assets/projects/kirana-2.png",
-      "/assets/projects/kirana-3.png",
+      "/assets/projects/kirana-1.webp",
+      "/assets/projects/kirana-2.webp",
+      "/assets/projects/kirana-3.webp",
     ],
     demoLink: "https://www.kiranapasal.shop",
     category: "freelance-projects"
@@ -104,8 +104,8 @@ It’s designed to save time while keeping things simple and you’re always in 
       "Oracle",
     ],
     images: [
-      "/assets/projects/r4c-1.png",
-      "/assets/projects/r4c-2.png",
+      "/assets/projects/r4c-1.webp",
+      "/assets/projects/r4c-2.webp",
     ],
     demoLink: "https://right4children.org/",
     githubLink: "https://github.com/nirajan-dhakal/right4children",

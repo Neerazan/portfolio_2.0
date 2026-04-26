@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useContactForm } from '../../hooks/useContactForm';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
@@ -25,31 +24,11 @@ export default function ContactForm() {
 
   const { elementRef, isVisible } = useScrollReveal<HTMLFormElement>();
 
-  const formVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  };
-
   return (
-    <motion.form
+    <form
       ref={elementRef}
-      initial="hidden"
-      animate={isVisible ? "visible" : "hidden"}
-      variants={formVariants}
       onSubmit={handleSubmit}
-      className="space-y-4 sm:space-y-6 w-full"
+      className={`reveal ${isVisible ? "active" : ""} space-y-4 sm:space-y-6 w-full`}
     >
       <input
         type="text"
@@ -102,18 +81,15 @@ export default function ContactForm() {
       </button>
 
       {submitStatus && (
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className={`text-sm sm:text-base text-center mt-4 ${submitStatus === 'success' ? 'text-green-400' : 'text-red-400'
+        <p
+          className={`text-sm sm:text-base text-center mt-4 transition-opacity duration-300 ${submitStatus ? 'opacity-100' : 'opacity-0'} ${submitStatus === 'success' ? 'text-green-400' : 'text-red-400'
             }`}
         >
           {submitStatus === 'success'
             ? 'Message sent successfully!'
             : 'Failed to send message. Please try again.'}
-        </motion.p>
+        </p>
       )}
-    </motion.form>
+    </form>
   );
 }

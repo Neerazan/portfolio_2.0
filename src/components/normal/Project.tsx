@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -39,30 +38,10 @@ export default function Project({
     if (e.key === 'ArrowRight') nextImage();
   };
 
-  const containerVariants = {
-    hidden: {
-      opacity: 0,
-      y: 40
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  };
-
   return (
-    <motion.div
+    <div
       ref={elementRef}
-      initial="hidden"
-      animate={isVisible ? "visible" : "hidden"}
-      variants={containerVariants}
-      className="relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0"
+      className={`reveal ${isVisible ? "active" : ""} relative mx-auto mt-0 w-full sm:w-11/12 lg:w-14/20 px-4 sm:px-0`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
@@ -77,15 +56,14 @@ export default function Project({
               </span>
             </div>
           )}
-          <motion.div
-            initial={false}
-            animate={{ x: `-${currentImageIndex * 100}%` }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 25
-            }}
+
+          {/* CSS-based image carousel — no framer-motion */}
+          <div
             className="flex w-full h-full bg-[#05050a] transform-gpu will-change-transform"
+            style={{
+              transform: `translateX(-${currentImageIndex * 100}%)`,
+              transition: 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            }}
           >
             {images.map((image, index) => (
               <div key={index} className="relative w-full h-full shrink-0">
@@ -93,8 +71,9 @@ export default function Project({
                   src={image}
                   alt={`${title} screenshot ${index + 1}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                   className="object-contain"
-                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = 'https://placehold.co/1200x675/1c1c1c/7A87FB?text=Image+Not+Available';
@@ -103,7 +82,7 @@ export default function Project({
                 />
               </div>
             ))}
-          </motion.div>
+          </div>
 
           {images.length > 1 && (
             <>
@@ -207,7 +186,7 @@ export default function Project({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

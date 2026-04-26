@@ -1,13 +1,10 @@
 "use client";
 
-import { Satisfy } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
 import ModeToggle from "../shared/ModeToggle";
 import { NavButton } from "./NavButton";
 import Navbar from "./Navbar";
-
-const satisfy = Satisfy({ subsets: ["latin"], weight: ["400"] });
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,8 +14,10 @@ export default function Header() {
       <div className="mx-auto px-4 py-3 flex items-center justify-between lg:w-15/20">
         <div className="flex items-center justify-center gap-x-2">
           <Link href="/" className="px-2">
+            {/* Uses --font-satisfy CSS variable loaded server-side in layout.tsx */}
             <h1
-              className={`text-[24px] text-white ${satisfy.className}`}
+              className="text-[24px] text-white"
+              style={{ fontFamily: 'var(--font-satisfy), cursive' }}
             >
               Neerajan .
             </h1>
