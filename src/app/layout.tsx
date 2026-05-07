@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: 'Nirajan Dhakal — Backend & GenAI Engineer',
+    default: 'Nirajan Dhakal - Backend & GenAI Engineer',
     template: `%s | Nirajan Dhakal`,
   },
 
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   creator: 'Nirajan Dhakal',
 
   openGraph: {
-    title: 'Nirajan Dhakal — Backend & GenAI Engineer',
+    title: 'Nirajan Dhakal - Backend & GenAI Engineer',
     description: siteDescription,
     url: siteUrl,
     siteName,
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Nirajan Dhakal — Backend & GenAI Engineer',
+    title: 'Nirajan Dhakal - Backend & GenAI Engineer',
     description: siteDescription,
     images: [ogImage],
     creator: '@dhakalnirajan',
@@ -185,7 +185,7 @@ const jsonLd = {
       '@type': 'WebPage',
       '@id': siteUrl,
       url: siteUrl,
-      name: 'Nirajan Dhakal — Backend & GenAI Engineer',
+      name: 'Nirajan Dhakal - Backend & GenAI Engineer',
       isPartOf: {
         '@id': `${siteUrl}#website`,
       },
