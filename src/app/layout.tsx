@@ -91,6 +91,18 @@ export const metadata: Metadata = {
     creator: '@dhakalnirajan',
   },
 
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+
+  manifest: '/manifest.json',
+
   robots: {
     index: true,
     follow: true,
